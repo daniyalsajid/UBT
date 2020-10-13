@@ -74,7 +74,7 @@ class DaysResumeCard extends StatelessWidget {
                                   Container(
                                     height: 5,
                                   ),
-                                  Text('Steps',
+                                  Text('Distance',
                                       style: TextStyle(
                                         // color: CustomColors.white,
                                         fontSize: 13,

@@ -25,7 +25,7 @@ class DaysChartCard extends StatelessWidget {
             height: 115,
           ),
           Text(
-            'Steps',
+            'Distance',
             style: TextStyle(
               color: CustomColors.white,
               fontSize: 13,

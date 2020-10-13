@@ -29,7 +29,7 @@ class MainProgressText extends StatelessWidget {
           height: 5,
         ),
         Text(
-          '/ $goalStepsString\n Steps',
+          '/ $goalStepsString\n Distance',
           style: TextStyle(
             color: CustomColors.white,
             fontSize: 15,

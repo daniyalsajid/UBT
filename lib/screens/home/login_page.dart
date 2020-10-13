@@ -61,6 +61,7 @@ class SignInPage extends StatelessWidget {
                 MaterialButton(
                   minWidth: MediaQuery.of(context).size.width,
                   padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
+                  // color: Colors.green,
                   elevation: 5.0,
                   onPressed: () {
                     context.read<AuthenticationService>().signIn(
@@ -69,13 +70,13 @@ class SignInPage extends StatelessWidget {
                         );
                   },
                   child: Text(
-                    "Sign in",
+                    "Sign In",
                     textAlign: TextAlign.center,
-                    style: TextStyle(fontSize: 25),
+                    style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
                   ),
                 ),
                 SizedBox(
-                  height: size.height * 0.40,
+                  height: 100.0,
                   child: Image.asset('assets/images/ubt.png'),
                 ),
 

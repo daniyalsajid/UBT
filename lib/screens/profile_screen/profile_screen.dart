@@ -17,6 +17,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Profile Screen'),
+        centerTitle: true,
+        backgroundColor: Colors.green,
       ),
       body: Container(
         child: Center(

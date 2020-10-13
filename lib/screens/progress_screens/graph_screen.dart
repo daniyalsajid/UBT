@@ -20,17 +20,30 @@ class _GraphScreenState extends State<GraphScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Progress Screen'),
+        centerTitle: true,
+        backgroundColor: Colors.green,
       ),
       body: Container(
-        child: SizedBox(
-          width: 400.0,
-          height: 300.0,
-          child: PointsLineChart(_createSampleData()),
-        ),
+        child: Title(
+            color: Colors.blue,
+            child: SizedBox(
+              width: 400,
+              height: 300,
+              child: PointsLineChart(_createSampleData()),
+            )),
       ),
+
+      // body: Container(
+      //   child: SizedBox(
+      //     width: 400.0,
+      //     height: 300.0,
+      //     child: PointsLineChart(_createSampleData()),
+      //   ),
+      // ),
       floatingActionButton: FloatingActionButton(
         elevation: 10.0,
         child: Icon(Icons.edit),
+        backgroundColor: Colors.black,
         onPressed: () {
           Userdata();
         },
@@ -41,9 +54,11 @@ class _GraphScreenState extends State<GraphScreen> {
   static List<charts.Series<LinearSales, int>> _createSampleData() {
     final data = [
       new LinearSales(0, 5),
-      new LinearSales(1, 25),
-      new LinearSales(2, 200),
-      new LinearSales(3, 75),
+      new LinearSales(1, 10),
+      new LinearSales(2, 20),
+      new LinearSales(3, 18),
+      new LinearSales(4, 34),
+      new LinearSales(5, 55),
     ];
 
     return [

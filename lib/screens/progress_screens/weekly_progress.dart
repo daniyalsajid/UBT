@@ -7,12 +7,7 @@ import 'package:UBT/Widgets/DaysResumeCard.dart';
 import 'package:UBT/Utils/ChartUtils.dart' as ChartUtils;
 import 'package:UBT/Utils/CaloriesCalculator.dart' as CaloriesCalculator;
 
-class WeeklyProgress extends StatefulWidget {
-  @override
-  _WeeklyProgressState createState() => _WeeklyProgressState();
-}
-
-class _WeeklyProgressState extends State<WeeklyProgress> {
+class WeekReportSubPage extends StatelessWidget {
   final int goalSteps = 6000;
   final double height = 1.7;
   final String gender = Gender.MALE;
@@ -29,12 +24,12 @@ class _WeeklyProgressState extends State<WeeklyProgress> {
     'Saturday\nSep 27',
     'Sunday\nSep 28',
   ];
-  _WeeklyProgressState();
+  WeekReportSubPage();
+
   @override
   Widget build(BuildContext context) {
     var allSteps = this.daysSteps.reduce((curr, next) => curr + next);
     var totalTime = this.times.reduce((curr, next) => curr + next);
-
     List<Widget> widgetsList = <Widget>[
       DaysChartCard(
           chartItems: ChartUtils.daysListToChartItems(
@@ -59,6 +54,7 @@ class _WeeklyProgressState extends State<WeeklyProgress> {
         height: 10,
       )
     ];
+
     for (int i = 0; i < daysSteps.length; i++) {
       widgetsList.add(DaysResumeCard(
           distance: CaloriesCalculator.calculateStepToMeters(
@@ -79,14 +75,34 @@ class _WeeklyProgressState extends State<WeeklyProgress> {
       widgetsList.add(Container(
         height: 10,
       ));
-      return new Container(
-        child: Center(
-            child: ListView(
-          padding: const EdgeInsets.only(bottom: 20),
-          children: widgetsList,
-        )),
-        color: CustomColors.backgroundColor,
-      );
     }
+
+    return new Container(
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text('Weekly Progress'),
+          centerTitle: true,
+          backgroundColor: Colors.green,
+        ),
+        body: Container(
+            child: Center(
+              child: ListView(
+                padding: const EdgeInsets.only(bottom: 20),
+                children: widgetsList,
+              ),
+            ),
+            color: CustomColors.backgroundColor),
+      ),
+      color: Colors.green,
+    );
+
+    // return new Container(
+    //   child: Center(
+    //       child: ListView(
+    //     padding: const EdgeInsets.only(bottom: 20),
+    //     children: widgetsList,
+    //   )),
+    //   color: CustomColors.backgroundColor,
+    // );
   }
 }

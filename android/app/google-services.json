@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "538243409391",
+    "firebase_url": "https://ubt-running.firebaseio.com",
+    "project_id": "ubt-running",
+    "storage_bucket": "ubt-running.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:538243409391:android:b4fee21ca58daa6e11c21a",
+        "android_client_info": {
+          "package_name": "com.example.UBT"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "538243409391-i00b2q8vqh3lq4lerueoicn46a12a61b.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCoU5QmWsjZqHEhfQAn6A8KcnedxtxW-rs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "538243409391-i00b2q8vqh3lq4lerueoicn46a12a61b.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

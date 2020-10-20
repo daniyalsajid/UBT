@@ -1,12 +1,8 @@
-// import 'package:UBT/screens/progress_screens/user_entry.dart';
-// import 'package:charts_flutter/flutter.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:charts_flutter/flutter.dart' as charts;
 import 'package:flutter/material.dart';
-// import 'package:syncfusion_flutter_charts/charts.dart';
-import 'package:UBT/screens/progress_screens/user_entry.dart';
+
 import 'package:UBT/screens/progress_screens/progress_chart.dart';
-// import 'package:provider/single_child_widget.dart';
 
 class GraphScreen extends StatefulWidget {
   @override
@@ -40,14 +36,6 @@ class _GraphScreenState extends State<GraphScreen> {
       //     child: PointsLineChart(_createSampleData()),
       //   ),
       // ),
-      floatingActionButton: FloatingActionButton(
-        elevation: 10.0,
-        child: Icon(Icons.edit),
-        backgroundColor: Colors.black,
-        onPressed: () {
-          Userdata();
-        },
-      ),
     );
   }
 

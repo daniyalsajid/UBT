@@ -1,6 +1,7 @@
 import 'package:UBT/screens/profile_screen/profile_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:UBT/screens/progress_screens/weekly_progress.dart';
+import 'package:UBT/screens/progress_screens/user_entry.dart';
+import 'package:UBT/screens/progress_screens/week_progress.dart';
 import 'package:UBT/screens/progress_screens/graph_screen.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -10,8 +11,13 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   PageController _pageController = PageController();
-  List<Widget> _screens = [GraphScreen(), WeekReportSubPage(), ProfileScreen()];
-  // user_screen(),details_screen(),progress_screen()WeekReportSubPage()
+  List<Widget> _screens = [
+    GraphScreen(),
+    UserEntry(),
+    Weekprogress(),
+    ProfileScreen(),
+  ];
+  // user_screen(),details_screen(),progress_screen()WeekReportSubPage(),UserEntry(),
   void _onPageChanged(int index) {}
   void _onItemTapped(int selectedIndex) {
     _pageController.jumpToPage(selectedIndex);
@@ -30,7 +36,7 @@ class _HomeScreenState extends State<HomeScreen> {
         onTap: _onItemTapped,
         type: BottomNavigationBarType.fixed,
         iconSize: 40,
-        selectedItemColor: Colors.black,
+        selectedItemColor: Colors.green,
         unselectedItemColor: Colors.green,
 
         selectedFontSize: 20,
@@ -43,6 +49,10 @@ class _HomeScreenState extends State<HomeScreen> {
           BottomNavigationBarItem(
             icon: Icon(Icons.highlight),
             label: 'Verlauf',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.directions_run_outlined),
+            label: 'Activity',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.person),

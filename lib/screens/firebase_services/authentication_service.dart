@@ -1,13 +1,25 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 
 class AuthenticationService {
   final FirebaseAuth _firebaseAuth;
+
   String error;
 
   AuthenticationService(this._firebaseAuth);
+  // String uid = '';
 
   /// Changed to idTokenChanges as it updates depending on more cases.
+  ///
+  ///
   Stream<User> get authStateChanges => _firebaseAuth.idTokenChanges();
+
+  // Stream<User> get authStateChanges => _firebaseAuth.idTokenChanges().map((event) => CurrentUser.uid);
+
+  // //Get Id
+  // Future<String> getCurrentUID() async {
+  //   _
+  // }
 
   /// This won't pop routes so you could do something like
   /// Navigator.of(context).pushNamedAndRemoveUntil('/', (Route<dynamic> route) => false);
@@ -21,6 +33,22 @@ class AuthenticationService {
   /// use your own custom class that would take the exception and return better
   /// error messages. That way you can throw, return or whatever you prefer with that instead.
   // final form = form.Key.currentState;
+  // Future<AuthResultStatus> signIn({String email, String password}) async {
+  //   try {
+  //     final authResult = await _firebaseAuth.signInWithEmailAndPassword(
+  //         email: email, password: password);
+
+  //     if (authResult.user != null) {
+  //       _status = AuthResultStatus.successful;
+  //     } else {
+  //       _status = AuthResultStatus.undefined;
+  //     }
+  //   } catch (e) {
+  //     print('Exception @createAccount: $e');
+  //     _status = AuthExceptionHandler.handleException(e);
+  //   }
+  //   return _status;
+  // }
 
   Future<String> signIn({String email, String password}) async {
     try {

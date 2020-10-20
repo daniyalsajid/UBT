@@ -3,8 +3,18 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class SignInPage extends StatelessWidget {
+  // final formKey = new GlobalKey<FormState>();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
+
+  // void validateAndSave() {
+  //   // final form = formKey.currentState;
+  //   // if (form.validate()) {
+  //     print('Form is valid');
+  //   } else {
+  //     print('Form is invalid');
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -26,6 +36,7 @@ class SignInPage extends StatelessWidget {
                 ),
                 SizedBox(height: size.height * 0.03),
                 TextFormField(
+                  // key: formKey,
                   obscureText: false,
                   validator: EmailValidator.validate,
                   controller: emailController,
@@ -39,6 +50,7 @@ class SignInPage extends StatelessWidget {
                 ),
                 SizedBox(height: size.height * 0.03),
                 TextFormField(
+                  // key: formKey,
                   validator: PassValidator.validate,
                   controller: passwordController,
                   style: TextStyle(fontFamily: 'Montserrat', fontSize: 20.0),

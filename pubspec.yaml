@@ -31,12 +31,15 @@ dependencies:
   syncfusion_flutter_charts: ^18.3.38
   charts_flutter: ^0.9.0
   flutter_circular_chart: ^0.1.0
+  date_field: ^0.3.2
+  shared_preferences: ^0.5.12+2
+  implicitly_animated_reorderable_list: ^0.3.0
 
   #Firebase
   firebase_database: "^4.1.1"
   firebase_core: ^0.5.0+1
   cloud_firestore: ^0.14.1+2
-  firebase_auth: ^0.18.0+1
+  firebase_auth: ^0.18.1+2
 
 dev_dependencies:
   flutter_test:

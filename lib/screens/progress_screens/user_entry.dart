@@ -7,6 +7,7 @@ import 'package:date_field/date_field.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter/services.dart';
+import 'dart:math';
 
 // import 'package:firebase_database/firebase_database.dart';
 
@@ -18,6 +19,8 @@ class UserEntry extends StatefulWidget {
 class _UserEntryState extends State<UserEntry> {
   String distance, calories, heartrate, score;
   String minutes;
+  // var minutess = int.parse(minutes);
+  int pace;
   DateTime mydate = DateTime.now();
   // String userDistance;
 
@@ -36,8 +39,8 @@ class _UserEntryState extends State<UserEntry> {
     this.userUID = firebaseAuth.UserUID;
   }
 
-  // getUserDate(date) {
-  //   this.userDate = date;
+  // getUserDate(pace) {
+  //   this.pace = distance;
   // }
 
   // getUserDistance(distance) {
@@ -61,8 +64,25 @@ class _UserEntryState extends State<UserEntry> {
       'Calories': calories,
       'Date': formattedDate,
       'Distance': distance,
+      'pace': (int.parse(minutes) / int.parse(distance)),
+      'percent_max': (0.8 +
+          0.1894393 * (exp(-0.012778 * int.parse(minutes))) +
+          0.2989558 * (exp(-0.1932605 * int.parse(minutes)))),
+      'VO2': (-4.60 +
+          0.182258 * (int.parse(minutes) / int.parse(distance)) +
+          0.000104 * (pow(int.parse(minutes) / int.parse(distance), 2))),
+      'VO2 max': (-4.60 +
+              0.182258 * (int.parse(minutes) / int.parse(distance)) +
+              0.000104 * pow(int.parse(minutes) / int.parse(distance), 2)) /
+          (0.8 +
+              0.1894393 * (exp(-0.012778 * int.parse(minutes))) +
+              0.2989558 * (exp(-0.1932605 * int.parse(minutes)))),
     }).whenComplete(() => {print('$uploadAuth realtime created')});
   }
+
+  // isvalue() {
+  //   return pace = (distance * minutes.toInt());
+  // }
 
   readData() {}
 
@@ -158,6 +178,7 @@ class _UserEntryState extends State<UserEntry> {
                 onPressed: () {
                   // createData();
                   createData1();
+                  // isvalue();
                   // writeUserData(userDate, userDistance, userCalories);
                 },
               ),

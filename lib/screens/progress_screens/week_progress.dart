@@ -1,3 +1,4 @@
+import 'package:UBT/Utils/CaloriesCalculator.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'package:flutter/material.dart';
@@ -12,6 +13,7 @@ class Weekprogress extends StatefulWidget {
 class _WeekprogressState extends State<Weekprogress> {
   String userUID;
   final uploadAuth = FirebaseAuth.instance.currentUser.uid;
+  String pace;
 
   Query _ref;
 

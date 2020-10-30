@@ -14,11 +14,9 @@ class _HomeScreenState extends State<HomeScreen> {
   PageController _pageController = PageController();
   List<Widget> _screens = [
     GraphScreen(),
-    // UserEntry(),
     Userdata(),
-
     Weekprogress(),
-    ProfileScreen(),
+    UserEntry(),
   ];
   // user_screen(),details_screen(),progress_screen()WeekReportSubPage(),UserEntry(),
   void _onPageChanged(int index) {}

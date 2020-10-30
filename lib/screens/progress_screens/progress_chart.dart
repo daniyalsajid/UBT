@@ -3,7 +3,7 @@ import 'package:charts_flutter/flutter.dart' as charts;
 import 'package:flutter/material.dart';
 
 class PointsLineChart extends StatelessWidget {
-  final List<charts.Series> seriesList;
+  final List<charts.Series<LinearSales, int>> seriesList;
   final bool animate;
 
   PointsLineChart(this.seriesList, {this.animate});
@@ -20,11 +20,15 @@ class PointsLineChart extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return new charts.LineChart(seriesList,
+        // domainAxis: charts.DateTimeAxisSpec(
+        //     tickFormatterSpec: charts.AutoDateTimeTickFormatterSpec(
+        //         day: charts.TimeFormatterSpec(
+        //             format: 'dd', transitionFormat: 'dd MMM YYYY'))),
         animate: animate,
         defaultRenderer: new charts.LineRendererConfig(includePoints: true));
   }
 
-  /// Create one series with sample hard coded data.
+  // / Create one series with sample hard coded data.
   static List<charts.Series<LinearSales, int>> _createSampleData() {
     final data = [
       new LinearSales(0, 5),

@@ -39,7 +39,7 @@ class _GraphScreenState extends State<GraphScreen> {
     );
   }
 
-  static List<charts.Series<LinearSales, int>> _createSampleData() {
+  List<charts.Series<LinearSales, int>> _createSampleData() {
     final data = [
       new LinearSales(0, 5),
       new LinearSales(1, 10),
@@ -60,3 +60,10 @@ class _GraphScreenState extends State<GraphScreen> {
     ];
   }
 }
+
+// class LinearSales {
+//   final int year;
+//   final int sales;
+
+//   LinearSales(this.year, this.sales);
+// }

@@ -54,31 +54,47 @@ class _UserEntryState extends State<UserEntry> {
 //RealtimeDatabase
   createData1() {
     String formattedDate = DateFormat('yyyy-MM-dd').format(mydate);
+    String formattedDate1 = DateFormat('d').format(mydate);
     DatabaseReference databaseReference =
         FirebaseDatabase.instance.reference().child(uploadAuth);
+
+    // Map date_map = {'Day':formattedDate1,
+    // 'Mon':}
 
     databaseReference.child(formattedDate).set({
       // 'Date': formattedDate,
       'Minutes': minutes,
       'Heartrate': heartrate,
       'Calories': calories,
-      'Date': formattedDate,
+      'DateString': formattedDate,
+      // 'Date': date_map,
+      // 'Datenow': databaseReference
+      //     .child('Datenow')
+      //     .set('Daniyal')
+      //     .whenComplete(() => {print('$uploadAuth realtime created')}),
+
+      'DateWeek': formattedDate1,
       'Distance': distance,
       'pace': (int.parse(minutes) / int.parse(distance)),
       'percent_max': (0.8 +
           0.1894393 * (exp(-0.012778 * int.parse(minutes))) +
           0.2989558 * (exp(-0.1932605 * int.parse(minutes)))),
 
-      'VO2': (-4.60 +
-              0.182258 * (int.parse(distance) * 1000 / int.parse(minutes))) +
-          0.000104 * pow(int.parse(distance) * 1000 / int.parse(minutes), 2),
-      'VO2 max': (-4.60 +
-              0.182258 * (int.parse(distance) * 1000 / int.parse(minutes))) +
-          0.000104 *
-              pow((int.parse(distance) * 1000 / int.parse(minutes)), 2) /
-              (0.8 +
-                  0.1894393 * (exp(-0.012778 * int.parse(minutes))) +
-                  0.2989558 * (exp(-0.1932605 * int.parse(minutes)))),
+      'VO2': (((-4.60 +
+                  0.182258 *
+                      (int.parse(distance) * 1000 / int.parse(minutes))) +
+              0.000104 *
+                  pow(int.parse(distance) * 1000 / int.parse(minutes), 2)))
+          .toString(),
+      'VO2 max': ((-4.60 +
+                  0.182258 *
+                      (int.parse(distance) * 1000 / int.parse(minutes))) +
+              0.000104 *
+                  pow((int.parse(distance) * 1000 / int.parse(minutes)), 2) /
+                  (0.8 +
+                      0.1894393 * (exp(-0.012778 * int.parse(minutes))) +
+                      0.2989558 * (exp(-0.1932605 * int.parse(minutes)))))
+          .toString(),
     }).whenComplete(() => {print('$uploadAuth realtime created')});
   }
 
@@ -86,7 +102,7 @@ class _UserEntryState extends State<UserEntry> {
   //   return pace = (distance * minutes.toInt());
   // }
 
-  readData() {}
+  // readData() {}
 
   @override
   Widget build(BuildContext context) {
@@ -103,6 +119,7 @@ class _UserEntryState extends State<UserEntry> {
             onDateSelected: (DateTime date) {
               setState(() {
                 mydate = date;
+                // print(mydate);
               });
             },
             lastDate: DateTime(2025),

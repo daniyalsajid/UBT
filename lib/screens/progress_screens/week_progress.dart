@@ -64,7 +64,7 @@ class _WeekprogressState extends State<Weekprogress> {
                 width: 30,
               ),
               Text(
-                userdata['Heartrate'.toString()],
+                userdata['Calories'.toString()],
                 style: TextStyle(
                     color: Colors.green[900],
                     fontSize: 22,

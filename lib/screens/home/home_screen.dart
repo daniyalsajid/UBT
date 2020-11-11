@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:UBT/screens/progress_screens/user_entry.dart';
 import 'package:UBT/screens/progress_screens/week_progress.dart';
 import 'package:UBT/screens/progress_screens/graph_screen.dart';
-import 'package:UBT/screens/progress_screens/user_data.dart';
+import 'package:UBT/screens/progress_screens/user_data1.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -13,10 +13,10 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   PageController _pageController = PageController();
   List<Widget> _screens = [
-    GraphScreen(),
     Userdata(),
     Weekprogress(),
     UserEntry(),
+    ProfileScreen(),
   ];
   // user_screen(),details_screen(),progress_screen()WeekReportSubPage(),UserEntry(),
   void _onPageChanged(int index) {}

@@ -6,6 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'dart:async';
 import 'dart:collection';
+import 'package:intl/intl.dart';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -16,9 +17,10 @@ class Weekprogress extends StatefulWidget {
 }
 
 class _WeekprogressState extends State<Weekprogress> {
+  Card userentry;
   String userUID;
   final uploadAuth = FirebaseAuth.instance.currentUser.uid;
-  String pace;
+  String pace, month;
   Item selectedUser;
   List<Item> users = <Item>[
     const Item(
@@ -102,6 +104,11 @@ class _WeekprogressState extends State<Weekprogress> {
     super.initState();
     _ref =
         FirebaseDatabase.instance.reference().child(uploadAuth).child('2020');
+
+    var now = new DateTime.now();
+    var formatter = new DateFormat('MM');
+    month = formatter.format(now);
+    print('current month $month');
   }
 
   Widget _buildUseritem({Map userdata}) {
@@ -168,7 +175,7 @@ class _WeekprogressState extends State<Weekprogress> {
     );
   }
 
-  Card userentry;
+  // Card userentry;
 
   chart(String month) {
     _ref = FirebaseDatabase.instance
@@ -300,80 +307,95 @@ class _WeekprogressState extends State<Weekprogress> {
                   hint: Text('Select Month'),
                   value: selectedUser,
                   onChanged: (Item value) {
-                    setState(
-                      () {
-                        selectedUser = value;
+                    // setState(
+                    //   () {
+                    selectedUser = value;
 
-                        String m = selectedUser.name;
-                        // print(selectedUser.name);
+                    String m = selectedUser.name;
 
-                        switch (m) {
-                          case 'Jan':
-                            {
-                              // Chart('1');
-                              userentry = chart('1');
-                            }
-                            break;
-                          case 'Feb':
-                            {
-                              userentry = chart('2');
-                            }
-                            // return Expanded(child: Container(child: userentry));
+                    // print(selectedUser.name);
 
-                            break;
-                          case 'Mar':
-                            {
-                              userentry = chart('3');
-                            }
-                            break;
-                          case 'Apr':
-                            {
-                              userentry = chart('4');
-                            }
-                            break;
-                          case 'May':
-                            {
-                              userentry = chart('5');
-                            }
-                            break;
-                          case 'Jun':
-                            {
-                              userentry = chart('6');
-                            }
-                            break;
-                          case 'Jul':
-                            {
-                              userentry = chart('7');
-                            }
-                            break;
-                          case 'Aug':
-                            {
-                              userentry = chart('8');
-                            }
-                            break;
-                          case 'Sep':
-                            {
-                              userentry = chart('9');
-                            }
-                            break;
-                          case 'Oct':
-                            {
-                              userentry = chart('10');
-                            }
-                            break;
-                          case 'Nov':
-                            {
-                              userentry = chart('11');
-                            }
-                            break;
-                          case 'Dec':
-                            {
-                              userentry = chart('12');
-                            }
-                            break;
+                    switch (m) {
+                      case 'Jan':
+                        {
+                          // Chart('1');
+                          setState(() {
+                            userentry = chart('1');
+                            print("Selected Month Jan");
+                          });
+                          // Fluttertoast.showToast(
+                          //     msg: "This is Center Short Toast",
+                          //     toastLength: Toast.LENGTH_SHORT,
+                          //     gravity: ToastGravity.CENTER,
+                          //     timeInSecForIosWeb: 1,
+                          //     backgroundColor: Colors.red,
+                          //     textColor: Colors.white,
+                          //     fontSize: 16.0);
                         }
-                      },
-                    );
+                        break;
+                      case 'Feb':
+                        {
+                          setState(() {
+                            userentry = chart('2');
+                            print("Selected Month Fab");
+                          });
+                        }
+                        // return Expanded(child: Container(child: userentry));
+
+                        break;
+                      case 'Mar':
+                        {
+                          userentry = chart('3');
+                        }
+                        break;
+                      case 'Apr':
+                        {
+                          userentry = chart('4');
+                        }
+                        break;
+                      case 'May':
+                        {
+                          userentry = chart('5');
+                        }
+                        break;
+                      case 'Jun':
+                        {
+                          userentry = chart('6');
+                        }
+                        break;
+                      case 'Jul':
+                        {
+                          userentry = chart('7');
+                        }
+                        break;
+                      case 'Aug':
+                        {
+                          userentry = chart('8');
+                        }
+                        break;
+                      case 'Sep':
+                        {
+                          userentry = chart('9');
+                        }
+                        break;
+                      case 'Oct':
+                        {
+                          userentry = chart('10');
+                        }
+                        break;
+                      case 'Nov':
+                        {
+                          userentry = chart('11');
+                        }
+                        break;
+                      case 'Dec':
+                        {
+                          userentry = chart('12');
+                        }
+                        break;
+                    }
+                    // },
+                    // );
                   },
                   items: users.map((Item user) {
                     return DropdownMenuItem<Item>(
@@ -390,16 +412,23 @@ class _WeekprogressState extends State<Weekprogress> {
                             user.name,
                             style: TextStyle(color: Colors.black),
                           ),
+                          //
                         ],
                       ),
                     );
                   }).toList(),
                 ),
+                // Row(
+                //   children: [
+                //     FloatingActionButton(onPressed: () {}),
+                //   ],
+                // ),
 
                 Expanded(
-                    child: Card(
+                  // child: Card(
                   child: userentry,
-                ))
+                  // )
+                )
 
                 // Expanded(child: Container(child: userentry))
               ],

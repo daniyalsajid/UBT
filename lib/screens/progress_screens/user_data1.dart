@@ -265,15 +265,15 @@ class UserdataState extends State<Userdata> {
   Future<List> getData() async {
     final databaseReference = FirebaseDatabase.instance.reference();
     _ref = FirebaseDatabase.instance.reference().child(uploadAuth);
-    Map<dynamic, dynamic> map;
-    await databaseReference
-        .child(uploadAuth)
-        .child('2020')
-        .child('10')
-        .once()
-        .then((DataSnapshot snapshot) {
-      map = snapshot.value;
-    });
+    // Map<dynamic, dynamic> map;
+    // await databaseReference
+    //     .child(uploadAuth)
+    //     .child('2020')
+    //     .child('10')
+    //     .once()
+    //     .then((DataSnapshot snapshot) {
+    //   map = snapshot.value;
+    // });
 
     // List lists = [];
     // List d = [];
@@ -316,27 +316,25 @@ class UserdataState extends State<Userdata> {
   // }
 
   List<charts.Series<LinearSales, int>> _createSampleData(graphlist, d) {
-
-
     final data = [
       // for (var i = 0; i < lists.length; i++)
       //   {
       //     new LinearSales(int.parse(d[i]), int.parse(lists[i].toString())),
       //   }
-      new LinearSales(int.parse(d[0]), int.parse(graphlists[0].toString())),
-      new LinearSales(int.parse(d[1]), int.parse(graphlists[1].toString())),
+      // new LinearSales(int.parse(d[0]), int.parse(graphlists[0].toString())),
+      // new LinearSales(int.parse(d[1]), int.parse(graphlists[1].toString())),
 
       new LinearSales(int.parse(d[2]), int.parse(graphlists[2].toString())),
-      new LinearSales(int.parse(d[3]), int.parse(graphlists[3].toString())),
-      new LinearSales(int.parse(d[4]), int.parse(graphlists[4].toString())),
-      new LinearSales(int.parse(d[5]), int.parse(graphlists[5].toString())),
-      new LinearSales(int.parse(d[6]), int.parse(graphlists[6].toString())),
+      // new LinearSales(int.parse(d[3]), int.parse(graphlists[3].toString())),
+      // new LinearSales(int.parse(d[4]), int.parse(graphlists[4].toString())),
+      // new LinearSales(int.parse(d[5]), int.parse(graphlists[5].toString())),
+      // new LinearSales(int.parse(d[6]), int.parse(graphlists[6].toString())),
 
-      new LinearSales(int.parse(d[7]), int.parse(graphlists[7].toString())),
-      new LinearSales(int.parse(d[8]), int.parse(graphlists[8].toString())),
-      new LinearSales(int.parse(d[9]), int.parse(graphlists[9].toString())),
-      new LinearSales(int.parse(d[10]), int.parse(graphlists[10].toString())),
-      new LinearSales(int.parse(d[11]), int.parse(graphlists[11].toString())),
+      // new LinearSales(int.parse(d[7]), int.parse(graphlists[7].toString())),
+      // new LinearSales(int.parse(d[8]), int.parse(graphlists[8].toString())),
+      // new LinearSales(int.parse(d[9]), int.parse(graphlists[9].toString())),
+      // new LinearSales(int.parse(d[10]), int.parse(graphlists[10].toString())),
+      // new LinearSales(int.parse(d[11]), int.parse(graphlists[11].toString())),
 
       // new LinearSales(int.parse(d[12]), int.parse(lists[12].toString())),
       // new LinearSales(int.parse(d[13]), int.parse(lists[13].toString())),
@@ -401,6 +399,22 @@ class UserdataState extends State<Userdata> {
                                 {
                                   userentry = chart('2');
                                 }
+                                break;
+                              case 'Mar':
+                                {
+                                  userentry = chart('3');
+                                }
+                                break;
+                              case 'Apr':
+                                {
+                                  userentry = chart('4');
+                                }
+                                break;
+                              case 'May':
+                                {
+                                  userentry = chart('5');
+                                }
+                                break;
                             }
                           });
                         },

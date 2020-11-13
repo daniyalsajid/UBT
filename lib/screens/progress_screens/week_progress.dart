@@ -20,7 +20,7 @@ class _WeekprogressState extends State<Weekprogress> {
   Card userentry;
   String userUID;
   final uploadAuth = FirebaseAuth.instance.currentUser.uid;
-  String pace, month;
+  String pace, monthnow;
   Item selectedUser;
   List<Item> users = <Item>[
     const Item(
@@ -107,8 +107,8 @@ class _WeekprogressState extends State<Weekprogress> {
 
     var now = new DateTime.now();
     var formatter = new DateFormat('MM');
-    month = formatter.format(now);
-    print('current month $month');
+    monthnow = formatter.format(now);
+    print('current month $monthnow');
   }
 
   Widget _buildUseritem({Map userdata}) {
@@ -183,104 +183,105 @@ class _WeekprogressState extends State<Weekprogress> {
         .child(uploadAuth)
         .child('2020')
         .child(month);
+
     return Card(
-        child: Column(children: [
-      Row(
-        children: [
-          SizedBox(
-            width: 05,
-          ),
-          Align(
-              alignment: Alignment.centerLeft,
-              child: Icon(
-                Icons.date_range_rounded,
-                size: 50,
-              )),
-          SizedBox(
-            width: 30,
-          ),
-          Align(
-              alignment: Alignment.center,
-              child: Icon(
-                Icons.trending_up_outlined,
-                size: 50,
-              )),
-          SizedBox(
-            width: 30,
-          ),
-          Align(
-              alignment: Alignment.center,
-              child: Icon(
-                Icons.access_time,
-                size: 50,
-              )),
-          SizedBox(
-            width: 30,
-          ),
-          Align(
-              alignment: Alignment.center,
-              child: Icon(
-                Icons.speed_rounded,
-                size: 50,
-              )),
-          SizedBox(
-            width: 30,
-          ),
-          Align(
-              alignment: Alignment.centerRight,
-              child: Icon(
-                Icons.score_outlined,
-                size: 50,
-              )),
-        ],
-      ),
-      Row(
-        children: [
-          SizedBox(
-            width: 10,
-          ),
-          Text('Date'),
-          SizedBox(
-            width: 40,
-          ),
-          Text('Distance'),
-          SizedBox(
-            width: 30,
-          ),
-          Text('Minutes'),
-          SizedBox(
-            width: 40,
-          ),
-          Text('Pace'),
-          SizedBox(
-            width: 45,
-          ),
-          Text('Score'),
-        ],
-      ),
-      Expanded(
-        child: Container(
-            child: Center(
-              child: FirebaseAnimatedList(
-                  scrollDirection: Axis.vertical,
-                  padding: const EdgeInsets.only(bottom: 20),
-                  query: _ref,
-                  itemBuilder: (BuildContext context, DataSnapshot snapshot,
-                      Animation<double> animation, int index) {
-                    // position:
-                    // animation.drive(_offset);
-                    Map userdata = snapshot.value;
-                    // print(userdata);
-
-                    return _buildUseritem(userdata: userdata);
-                  }),
+      child: Column(children: [
+        Row(
+          children: [
+            SizedBox(
+              width: 05,
             ),
-            color: Colors.white)
+            Align(
+                alignment: Alignment.centerLeft,
+                child: Icon(
+                  Icons.date_range_rounded,
+                  size: 50,
+                )),
+            SizedBox(
+              width: 30,
+            ),
+            Align(
+                alignment: Alignment.center,
+                child: Icon(
+                  Icons.trending_up_outlined,
+                  size: 50,
+                )),
+            SizedBox(
+              width: 30,
+            ),
+            Align(
+                alignment: Alignment.center,
+                child: Icon(
+                  Icons.access_time,
+                  size: 50,
+                )),
+            SizedBox(
+              width: 30,
+            ),
+            Align(
+                alignment: Alignment.center,
+                child: Icon(
+                  Icons.speed_rounded,
+                  size: 50,
+                )),
+            SizedBox(
+              width: 30,
+            ),
+            Align(
+                alignment: Alignment.centerRight,
+                child: Icon(
+                  Icons.score_outlined,
+                  size: 50,
+                )),
+          ],
+        ),
+        Row(
+          children: [
+            SizedBox(
+              width: 10,
+            ),
+            Text('Date'),
+            SizedBox(
+              width: 40,
+            ),
+            Text('Distance'),
+            SizedBox(
+              width: 30,
+            ),
+            Text('Minutes'),
+            SizedBox(
+              width: 40,
+            ),
+            Text('Pace'),
+            SizedBox(
+              width: 45,
+            ),
+            Text('Score'),
+          ],
+        ),
+        Expanded(
+            child: Container(
+                child: Center(
+                  child: FirebaseAnimatedList(
+                      scrollDirection: Axis.vertical,
+                      padding: const EdgeInsets.only(bottom: 20),
+                      query: _ref,
+                      itemBuilder: (BuildContext context, DataSnapshot snapshot,
+                          Animation<double> animation, int index) {
+                        // position:
+                        // animation.drive(_offset);
+                        Map userdata = snapshot.value;
+                        // print(userdata);
 
-        //
-        ,
-      )
-    ]));
+                        return _buildUseritem(userdata: userdata);
+                      }),
+                ),
+                color: Colors.white)
+
+            //
+            )
+      ]),
+    );
   }
 
   @override
@@ -307,95 +308,89 @@ class _WeekprogressState extends State<Weekprogress> {
                   hint: Text('Select Month'),
                   value: selectedUser,
                   onChanged: (Item value) {
-                    // setState(
-                    //   () {
-                    selectedUser = value;
+                    setState(
+                      () {
+                        selectedUser = value;
 
-                    String m = selectedUser.name;
+                        String m = selectedUser.name;
 
-                    // print(selectedUser.name);
+                        switch (m) {
+                          case 'Jan':
+                            {
+                              // Chart('1');
 
-                    switch (m) {
-                      case 'Jan':
-                        {
-                          // Chart('1');
-                          setState(() {
-                            userentry = chart('1');
-                            print("Selected Month Jan");
-                          });
-                          // Fluttertoast.showToast(
-                          //     msg: "This is Center Short Toast",
-                          //     toastLength: Toast.LENGTH_SHORT,
-                          //     gravity: ToastGravity.CENTER,
-                          //     timeInSecForIosWeb: 1,
-                          //     backgroundColor: Colors.red,
-                          //     textColor: Colors.white,
-                          //     fontSize: 16.0);
-                        }
-                        break;
-                      case 'Feb':
-                        {
-                          setState(() {
-                            userentry = chart('2');
-                            print("Selected Month Fab");
-                          });
-                        }
-                        // return Expanded(child: Container(child: userentry));
+                              userentry = chart('1');
 
-                        break;
-                      case 'Mar':
-                        {
-                          userentry = chart('3');
+                              // Fluttertoast.showToast(
+                              //     msg: "This is Center Short Toast",
+                              //     toastLength: Toast.LENGTH_SHORT,
+                              //     gravity: ToastGravity.CENTER,
+                              //     timeInSecForIosWeb: 1,
+                              //     backgroundColor: Colors.red,
+                              //     textColor: Colors.white,
+                              //     fontSize: 16.0);
+                            }
+                            break;
+                          case 'Feb':
+                            {
+                              userentry = chart('2');
+                            }
+                            // return Expanded(child: Container(child: userentry));
+
+                            break;
+                          case 'Mar':
+                            {
+                              userentry = chart('3');
+                            }
+                            break;
+                          case 'Apr':
+                            {
+                              userentry = chart('4');
+                            }
+                            break;
+                          case 'May':
+                            {
+                              userentry = chart('5');
+                            }
+                            break;
+                          case 'Jun':
+                            {
+                              userentry = chart('6');
+                            }
+                            break;
+                          case 'Jul':
+                            {
+                              userentry = chart('7');
+                            }
+                            break;
+                          case 'Aug':
+                            {
+                              userentry = chart('8');
+                            }
+                            break;
+                          case 'Sep':
+                            {
+                              userentry = chart('9');
+                            }
+                            break;
+                          case 'Oct':
+                            {
+                              userentry = chart('10');
+                            }
+                            break;
+                          case 'Nov':
+                            {
+                              userentry = chart('11');
+                            }
+                            break;
+                          case 'Dec':
+                            {
+                              userentry = chart('12');
+                            }
+                            break;
                         }
-                        break;
-                      case 'Apr':
-                        {
-                          userentry = chart('4');
-                        }
-                        break;
-                      case 'May':
-                        {
-                          userentry = chart('5');
-                        }
-                        break;
-                      case 'Jun':
-                        {
-                          userentry = chart('6');
-                        }
-                        break;
-                      case 'Jul':
-                        {
-                          userentry = chart('7');
-                        }
-                        break;
-                      case 'Aug':
-                        {
-                          userentry = chart('8');
-                        }
-                        break;
-                      case 'Sep':
-                        {
-                          userentry = chart('9');
-                        }
-                        break;
-                      case 'Oct':
-                        {
-                          userentry = chart('10');
-                        }
-                        break;
-                      case 'Nov':
-                        {
-                          userentry = chart('11');
-                        }
-                        break;
-                      case 'Dec':
-                        {
-                          userentry = chart('12');
-                        }
-                        break;
-                    }
-                    // },
-                    // );
+                      },
+                    );
                   },
                   items: users.map((Item user) {
                     return DropdownMenuItem<Item>(

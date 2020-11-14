@@ -1,4 +1,5 @@
 // import 'package:UBT/Utils/CaloriesCalculator.dart';
+import 'package:UBT/screens/progress_screens/user_data1.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'package:flutter/material.dart';
@@ -17,10 +18,10 @@ class Weekprogress extends StatefulWidget {
 }
 
 class _WeekprogressState extends State<Weekprogress> {
-  Container userentry;
   String userUID;
   final uploadAuth = FirebaseAuth.instance.currentUser.uid;
   String pace, monthnow;
+  int n;
   Item selectedUser;
   List<Item> users = <Item>[
     const Item(
@@ -102,18 +103,57 @@ class _WeekprogressState extends State<Weekprogress> {
   @override
   void initState() {
     super.initState();
-    // _ref1 =
-    //     FirebaseDatabase.instance.reference().child(uploadAuth).child('2020');
+    _ref =
+        FirebaseDatabase.instance.reference().child(uploadAuth).child('2020');
 
     var now = new DateTime.now();
     var formatter = new DateFormat('MM');
     monthnow = formatter.format(now);
-    print('current month $monthnow');
+    // userentry = chart(monthnow);
+    // print('current month $monthnow');
+  }
+
+  Container userentry;
+
+  //
+  // Card userentry;
+
+  chart(String month) {
+    _ref = FirebaseDatabase.instance
+        .reference()
+        .child(uploadAuth)
+        .child('2020')
+        .child(month);
+
+    return Container(
+      child: Column(children: [
+        Expanded(
+            child: FirebaseAnimatedList(
+                scrollDirection: Axis.vertical,
+                padding: const EdgeInsets.only(bottom: 20),
+                query: _ref,
+                itemBuilder: (BuildContext context, DataSnapshot snapshot,
+                    Animation<double> animation, int index) {
+                  // position:
+                  // animation.drive(_offset);
+                  Map userdata = snapshot.value;
+                  // print(userdata);
+
+                  return _buildUseritem(userdata: userdata);
+                })
+
+            //
+            )
+      ]),
+    );
   }
 
   Widget _buildUseritem({Map userdata}) {
     return Container(
+      height: 50,
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
             children: [
@@ -175,38 +215,6 @@ class _WeekprogressState extends State<Weekprogress> {
     );
   }
 
-  // Card userentry;
-
-  chart(String month) {
-    _ref = FirebaseDatabase.instance
-        .reference()
-        .child(uploadAuth)
-        .child('2020')
-        .child(month);
-
-    return Container(
-      child: Column(children: [
-        Expanded(
-            child: FirebaseAnimatedList(
-                scrollDirection: Axis.vertical,
-                padding: const EdgeInsets.only(bottom: 20),
-                query: _ref,
-                itemBuilder: (BuildContext context, DataSnapshot snapshot,
-                    Animation<double> animation, int index) {
-                  // position:
-                  // animation.drive(_offset);
-                  Map userdata = snapshot.value;
-                  // print(userdata);
-
-                  return _buildUseritem(userdata: userdata);
-                })
-
-            //
-            )
-      ]),
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -237,6 +245,7 @@ class _WeekprogressState extends State<Weekprogress> {
                         selectedUser = value;
 
                         String m = selectedUser.name;
+                        print(m);
                         if (m == null) {}
 
                         switch (m) {
@@ -245,6 +254,8 @@ class _WeekprogressState extends State<Weekprogress> {
                               // Chart('1');
 
                               userentry = chart('1');
+                              // n = 1;
+                              // print(n);
 
                               // Fluttertoast.showToast(
                               //     msg: "This is Center Short Toast",
@@ -259,6 +270,8 @@ class _WeekprogressState extends State<Weekprogress> {
                           case 'Feb':
                             {
                               userentry = chart('2');
+                              // n = 2;
+                              // print(n);
                             }
                             // return Expanded(child: Container(child: userentry));
 
@@ -411,18 +424,6 @@ class _WeekprogressState extends State<Weekprogress> {
                     Text('Score'),
                   ],
                 ),
-
-                // Row(
-                //   children: [
-                //     FloatingActionButton(onPressed: () {}),
-                //   ],
-                // ),
-
-                // Expanded(
-                //   // child: Card(
-                //   child: userentry,
-                //   // )
-                // )
 
                 Expanded(child: Container(child: userentry))
               ],

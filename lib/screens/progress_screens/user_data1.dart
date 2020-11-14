@@ -19,6 +19,8 @@ class Userdata extends StatefulWidget {
 
 class UserdataState extends State<Userdata> {
   String userUID;
+  Card userentry;
+  String n;
   //y axis
   List graphlists = [];
   // x axis
@@ -248,14 +250,15 @@ class UserdataState extends State<Userdata> {
   //     .then((DataSnapshot snapshot) {
   //   map = snapshot.value;
   // });
-  String month;
-  Card userentry;
+
   chart(String month) {
     _ref = FirebaseDatabase.instance
         .reference()
         .child(uploadAuth)
         .child('2020')
         .child(month);
+
+    n = (month);
 
     return Card(
       child: PointsLineChart(_createSampleData(graphlists, keysList)),
@@ -264,12 +267,12 @@ class UserdataState extends State<Userdata> {
 
   Future<List> getData() async {
     final databaseReference = FirebaseDatabase.instance.reference();
-    _ref = FirebaseDatabase.instance.reference().child(uploadAuth);
+    // _ref = FirebaseDatabase.instance.reference().child(uploadAuth);
     // Map<dynamic, dynamic> map;
     // await databaseReference
     //     .child(uploadAuth)
     //     .child('2020')
-    //     .child('10')
+    //     .child(n)
     //     .once()
     //     .then((DataSnapshot snapshot) {
     //   map = snapshot.value;
@@ -283,12 +286,12 @@ class UserdataState extends State<Userdata> {
     databaseReference
       ..child(uploadAuth)
           .child('2020')
-          .child('1')
+          .child('11')
           .once()
           .then((DataSnapshot snapshot) {
         //print('Data : ${snapshot.value}');
         abc = snapshot.value;
-        print(abc);
+        // print(abc);
         // print(abc);
         len = (snapshot.value.length);
 
@@ -296,13 +299,13 @@ class UserdataState extends State<Userdata> {
 
         d.clear();
         graphlists.clear();
-        // for (int i = 0; i < len; i++) {
-        //   s = (abc[keysList[i]]['Score']);
-        //   c = s.truncate();
+        for (int i = 0; i < len; i++) {
+          s = (abc[keysList[i]]['Score']);
+          c = s.truncate();
 
-        //   d.add(keysList[i]);
-        //   graphlists.add(c);
-        // }
+          d.add(keysList[i]);
+          graphlists.add(c);
+        }
         // return Container();
 
         // print(d);
@@ -327,8 +330,8 @@ class UserdataState extends State<Userdata> {
       // new LinearSales(int.parse(d[0]), int.parse(graphlists[0].toString())),
       // new LinearSales(int.parse(d[1]), int.parse(graphlists[1].toString())),
 
-      new LinearSales(int.parse(d[0]), int.parse(graphlists[0].toString())),
       new LinearSales(int.parse(d[1]), int.parse(graphlists[1].toString())),
+      new LinearSales(int.parse(d[2]), int.parse(graphlists[2].toString())),
       // new LinearSales(int.parse(d[4]), int.parse(graphlists[4].toString())),
       // new LinearSales(int.parse(d[5]), int.parse(graphlists[5].toString())),
       // new LinearSales(int.parse(d[6]), int.parse(graphlists[6].toString())),
@@ -369,80 +372,74 @@ class UserdataState extends State<Userdata> {
               body: Column(
                 // mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      SizedBox(
-                        width: 10,
-                        height: 10,
-                      ),
-                      // Text(
-                      //   'Month Progress',
-                      //   textAlign: TextAlign.center,
-                      //   style: TextStyle(
-                      //     fontSize: 24,
-                      //     fontWeight: FontWeight.bold,
-                      //   ),
-                      // ),
-                      DropdownButton(
-                        hint: Text(' Month'),
-                        value: selectedUser,
-                        onChanged: (Item value) {
-                          setState(() {
-                            selectedUser = value;
-                            String m = selectedUser.name;
+                  SizedBox(
+                    width: 10,
+                    height: 10,
+                  ),
+                  // Text(
+                  //   'Month Progress',
+                  //   textAlign: TextAlign.center,
+                  //   style: TextStyle(
+                  //     fontSize: 24,
+                  //     fontWeight: FontWeight.bold,
+                  //   ),
+                  // ),
+                  DropdownButton(
+                    hint: Text(' Month'),
+                    value: selectedUser,
+                    onChanged: (Item value) {
+                      setState(() {
+                        selectedUser = value;
+                        String m = selectedUser.name;
 
-                            switch (m) {
-                              case 'Jan':
-                                {
-                                  userentry = chart('1');
-                                }
-                                break;
-                              case 'Feb':
-                                {
-                                  userentry = chart('2');
-                                }
-                                break;
-                              case 'Mar':
-                                {
-                                  userentry = chart('3');
-                                }
-                                break;
-                              case 'Apr':
-                                {
-                                  userentry = chart('4');
-                                }
-                                break;
-                              case 'May':
-                                {
-                                  userentry = chart('5');
-                                }
-                                break;
+                        switch (m) {
+                          case 'Jan':
+                            {
+                              userentry = chart('1');
                             }
-                          });
-                        },
-                        items: users.map((Item user) {
-                          return DropdownMenuItem<Item>(
-                            value: user,
+                            break;
+                          case 'Feb':
+                            {
+                              userentry = chart('2');
+                            }
+                            break;
+                          case 'Mar':
+                            {
+                              userentry = chart('3');
+                            }
+                            break;
+                          case 'Apr':
+                            {
+                              userentry = chart('4');
+                            }
+                            break;
+                          case 'May':
+                            {
+                              userentry = chart('5');
+                            }
+                            break;
+                        }
+                      });
+                    },
+                    items: users.map((Item user) {
+                      return DropdownMenuItem<Item>(
+                        value: user,
 
-                            // Row to Cloumn
-                            child: Row(
-                              children: <Widget>[
-                                user.icon,
-                                SizedBox(
-                                  width: 10,
-                                ),
-                                Text(
-                                  user.name,
-                                  style: TextStyle(color: Colors.black),
-                                ),
-                              ],
+                        // Row to Cloumn
+                        child: Row(
+                          children: <Widget>[
+                            user.icon,
+                            SizedBox(
+                              width: 10,
                             ),
-                          );
-                        }).toList(),
-                      ),
-                      // Expanded(child: userentry)
-                    ],
+                            Text(
+                              user.name,
+                              style: TextStyle(color: Colors.black),
+                            ),
+                          ],
+                        ),
+                      );
+                    }).toList(),
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -452,17 +449,15 @@ class UserdataState extends State<Userdata> {
                           Container(
                             decoration: BoxDecoration(
                                 border: Border.all(color: Colors.green)),
-                            child: Title(
-                                color: Colors.blue,
-                                child: SizedBox(
-                                  width: 380,
-                                  height: 280,
+                            child: SizedBox(
+                              width: 380,
+                              height: 280,
 
-                                  child: userentry,
+                              child: userentry,
 
-                                  // child: PointsLineChart(
-                                  //     _createSampleData(graphlists, keysList)),
-                                )),
+                              // child: PointsLineChart(
+                              //     _createSampleData(graphlists, keysList)),
+                            ),
                           )
                         ],
                       )
@@ -602,7 +597,7 @@ class UserdataState extends State<Userdata> {
                                       ),
                                       onPressed: () {
                                         createData1();
-                                        print(score);
+                                        // print(score);
                                       },
                                     ),
 

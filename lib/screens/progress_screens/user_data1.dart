@@ -283,24 +283,27 @@ class UserdataState extends State<Userdata> {
     databaseReference
       ..child(uploadAuth)
           .child('2020')
-          .child('10')
+          .child('1')
           .once()
           .then((DataSnapshot snapshot) {
         //print('Data : ${snapshot.value}');
         abc = snapshot.value;
+        print(abc);
         // print(abc);
         len = (snapshot.value.length);
+
         keysList = abc.keys.toList();
+
         d.clear();
         graphlists.clear();
-        for (int i = 0; i < len; i++) {
-          s = (abc[keysList[i]]['Score']);
-          c = s.truncate();
+        // for (int i = 0; i < len; i++) {
+        //   s = (abc[keysList[i]]['Score']);
+        //   c = s.truncate();
 
-          d.add(keysList[i]);
-          graphlists.add(c);
-        }
-        return Container();
+        //   d.add(keysList[i]);
+        //   graphlists.add(c);
+        // }
+        // return Container();
 
         // print(d);
         // return _ref;
@@ -324,8 +327,8 @@ class UserdataState extends State<Userdata> {
       // new LinearSales(int.parse(d[0]), int.parse(graphlists[0].toString())),
       // new LinearSales(int.parse(d[1]), int.parse(graphlists[1].toString())),
 
-      new LinearSales(int.parse(d[2]), int.parse(graphlists[2].toString())),
-      // new LinearSales(int.parse(d[3]), int.parse(graphlists[3].toString())),
+      new LinearSales(int.parse(d[0]), int.parse(graphlists[0].toString())),
+      new LinearSales(int.parse(d[1]), int.parse(graphlists[1].toString())),
       // new LinearSales(int.parse(d[4]), int.parse(graphlists[4].toString())),
       // new LinearSales(int.parse(d[5]), int.parse(graphlists[5].toString())),
       // new LinearSales(int.parse(d[6]), int.parse(graphlists[6].toString())),
@@ -454,6 +457,7 @@ class UserdataState extends State<Userdata> {
                                 child: SizedBox(
                                   width: 380,
                                   height: 280,
+
                                   child: userentry,
 
                                   // child: PointsLineChart(

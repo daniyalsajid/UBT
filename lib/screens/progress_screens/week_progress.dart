@@ -17,7 +17,7 @@ class Weekprogress extends StatefulWidget {
 }
 
 class _WeekprogressState extends State<Weekprogress> {
-  Card userentry;
+  Container userentry;
   String userUID;
   final uploadAuth = FirebaseAuth.instance.currentUser.uid;
   String pace, monthnow;
@@ -102,8 +102,8 @@ class _WeekprogressState extends State<Weekprogress> {
   @override
   void initState() {
     super.initState();
-    _ref =
-        FirebaseDatabase.instance.reference().child(uploadAuth).child('2020');
+    // _ref1 =
+    //     FirebaseDatabase.instance.reference().child(uploadAuth).child('2020');
 
     var now = new DateTime.now();
     var formatter = new DateFormat('MM');
@@ -132,7 +132,7 @@ class _WeekprogressState extends State<Weekprogress> {
                 width: 40,
               ),
               Text(
-                userdata['Distance'.toString()],
+                userdata['Distance'.toString()].substring(0, 1),
                 style: TextStyle(
                     color: Colors.green[900],
                     fontSize: 22,
@@ -152,7 +152,7 @@ class _WeekprogressState extends State<Weekprogress> {
                 width: 55,
               ),
               Text(
-                userdata['Pace'].toString().substring(0, 2),
+                userdata['Pace'].toString().substring(0, 1),
                 style: TextStyle(
                     color: Colors.green[900],
                     fontSize: 22,
@@ -184,99 +184,22 @@ class _WeekprogressState extends State<Weekprogress> {
         .child('2020')
         .child(month);
 
-    return Card(
+    return Container(
       child: Column(children: [
-        Row(
-          children: [
-            SizedBox(
-              width: 05,
-            ),
-            Align(
-                alignment: Alignment.centerLeft,
-                child: Icon(
-                  Icons.date_range_rounded,
-                  size: 50,
-                )),
-            SizedBox(
-              width: 30,
-            ),
-            Align(
-                alignment: Alignment.center,
-                child: Icon(
-                  Icons.trending_up_outlined,
-                  size: 50,
-                )),
-            SizedBox(
-              width: 30,
-            ),
-            Align(
-                alignment: Alignment.center,
-                child: Icon(
-                  Icons.access_time,
-                  size: 50,
-                )),
-            SizedBox(
-              width: 30,
-            ),
-            Align(
-                alignment: Alignment.center,
-                child: Icon(
-                  Icons.speed_rounded,
-                  size: 50,
-                )),
-            SizedBox(
-              width: 30,
-            ),
-            Align(
-                alignment: Alignment.centerRight,
-                child: Icon(
-                  Icons.score_outlined,
-                  size: 50,
-                )),
-          ],
-        ),
-        Row(
-          children: [
-            SizedBox(
-              width: 10,
-            ),
-            Text('Date'),
-            SizedBox(
-              width: 40,
-            ),
-            Text('Distance'),
-            SizedBox(
-              width: 30,
-            ),
-            Text('Minutes'),
-            SizedBox(
-              width: 40,
-            ),
-            Text('Pace'),
-            SizedBox(
-              width: 45,
-            ),
-            Text('Score'),
-          ],
-        ),
         Expanded(
-            child: Container(
-                child: Center(
-                  child: FirebaseAnimatedList(
-                      scrollDirection: Axis.vertical,
-                      padding: const EdgeInsets.only(bottom: 20),
-                      query: _ref,
-                      itemBuilder: (BuildContext context, DataSnapshot snapshot,
-                          Animation<double> animation, int index) {
-                        // position:
-                        // animation.drive(_offset);
-                        Map userdata = snapshot.value;
-                        // print(userdata);
+            child: FirebaseAnimatedList(
+                scrollDirection: Axis.vertical,
+                padding: const EdgeInsets.only(bottom: 20),
+                query: _ref,
+                itemBuilder: (BuildContext context, DataSnapshot snapshot,
+                    Animation<double> animation, int index) {
+                  // position:
+                  // animation.drive(_offset);
+                  Map userdata = snapshot.value;
+                  // print(userdata);
 
-                        return _buildUseritem(userdata: userdata);
-                      }),
-                ),
-                color: Colors.white)
+                  return _buildUseritem(userdata: userdata);
+                })
 
             //
             )
@@ -302,6 +225,7 @@ class _WeekprogressState extends State<Weekprogress> {
                   height: 5,
                   width: 50,
                 ),
+
                 // Row(),
 
                 DropdownButton(
@@ -313,6 +237,7 @@ class _WeekprogressState extends State<Weekprogress> {
                         selectedUser = value;
 
                         String m = selectedUser.name;
+                        if (m == null) {}
 
                         switch (m) {
                           case 'Jan':
@@ -413,19 +338,93 @@ class _WeekprogressState extends State<Weekprogress> {
                     );
                   }).toList(),
                 ),
+                Row(
+                  children: [
+                    SizedBox(
+                      width: 05,
+                    ),
+                    Align(
+                        alignment: Alignment.centerLeft,
+                        child: Icon(
+                          Icons.date_range_rounded,
+                          size: 50,
+                        )),
+                    SizedBox(
+                      width: 30,
+                    ),
+                    Align(
+                        alignment: Alignment.center,
+                        child: Icon(
+                          Icons.trending_up_outlined,
+                          size: 50,
+                        )),
+                    SizedBox(
+                      width: 30,
+                    ),
+                    Align(
+                        alignment: Alignment.center,
+                        child: Icon(
+                          Icons.access_time,
+                          size: 50,
+                        )),
+                    SizedBox(
+                      width: 30,
+                    ),
+                    Align(
+                        alignment: Alignment.center,
+                        child: Icon(
+                          Icons.speed_rounded,
+                          size: 50,
+                        )),
+                    SizedBox(
+                      width: 30,
+                    ),
+                    Align(
+                        alignment: Alignment.centerRight,
+                        child: Icon(
+                          Icons.score_outlined,
+                          size: 50,
+                        )),
+                  ],
+                ),
+                Row(
+                  children: [
+                    SizedBox(
+                      width: 10,
+                    ),
+                    Text('Date'),
+                    SizedBox(
+                      width: 40,
+                    ),
+                    Text('Distance'),
+                    SizedBox(
+                      width: 30,
+                    ),
+                    Text('Minutes'),
+                    SizedBox(
+                      width: 40,
+                    ),
+                    Text('Pace'),
+                    SizedBox(
+                      width: 45,
+                    ),
+                    Text('Score'),
+                  ],
+                ),
+
                 // Row(
                 //   children: [
                 //     FloatingActionButton(onPressed: () {}),
                 //   ],
                 // ),
 
-                Expanded(
-                  // child: Card(
-                  child: userentry,
-                  // )
-                )
+                // Expanded(
+                //   // child: Card(
+                //   child: userentry,
+                //   // )
+                // )
 
-                // Expanded(child: Container(child: userentry))
+                Expanded(child: Container(child: userentry))
               ],
             ),
           ),

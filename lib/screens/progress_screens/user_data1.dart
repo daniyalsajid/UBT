@@ -19,7 +19,7 @@ class Userdata extends StatefulWidget {
 
 class UserdataState extends State<Userdata> {
   String userUID;
-  Card userentry;
+  Container userentry;
   String n;
   //y axis
   List graphlists = [];
@@ -33,6 +33,7 @@ class UserdataState extends State<Userdata> {
   int totaldistance;
   String distance;
   double score;
+  String monthnow;
 
   double s; //score
   // C for rounding score values
@@ -41,6 +42,7 @@ class UserdataState extends State<Userdata> {
   Map abc;
   var valuesList, keysList;
   final uploadAuth = FirebaseAuth.instance.currentUser.uid;
+  final databaseReference = FirebaseDatabase.instance.reference();
   // List<Map> lists = [];
   Item selectedUser;
   List<Item> users = <Item>[
@@ -125,6 +127,11 @@ class UserdataState extends State<Userdata> {
     super.initState();
     // readData();
     _ref = FirebaseDatabase.instance.reference().child(uploadAuth);
+
+    var now = new DateTime.now();
+    var formatter = new DateFormat('MM');
+    monthnow = formatter.format(now);
+    // print(monthnow);
   }
 
   createData1() {
@@ -239,87 +246,34 @@ class UserdataState extends State<Userdata> {
     return Container();
   }
 
-  // Future<List> readData() async {
-  // final databaseReference = FirebaseDatabase.instance.reference();
-  // Map<dynamic, dynamic> map;
-  // await databaseReference
-  //     .child(uploadAuth)
-  //     .child('2020')
-  //     .child('10')
-  //     .once()
-  //     .then((DataSnapshot snapshot) {
-  //   map = snapshot.value;
-  // });
-
   chart(String month) {
-    _ref = FirebaseDatabase.instance
-        .reference()
-        .child(uploadAuth)
-        .child('2020')
-        .child(month);
-
-    n = (month);
-
-    return Card(
-      child: PointsLineChart(_createSampleData(graphlists, keysList)),
-    );
-  }
-
-  Future<List> getData() async {
     final databaseReference = FirebaseDatabase.instance.reference();
-    // _ref = FirebaseDatabase.instance.reference().child(uploadAuth);
-    // Map<dynamic, dynamic> map;
-    // await databaseReference
-    //     .child(uploadAuth)
-    //     .child('2020')
-    //     .child(n)
-    //     .once()
-    //     .then((DataSnapshot snapshot) {
-    //   map = snapshot.value;
-    // });
 
-    // List lists = [];
-    // List d = [];
-    // int len;
-    // double s; //score
-    // Map abc;
     databaseReference
       ..child(uploadAuth)
           .child('2020')
-          .child('11')
+          .child(n)
           .once()
           .then((DataSnapshot snapshot) {
         //print('Data : ${snapshot.value}');
         abc = snapshot.value;
-        // print(abc);
-        // print(abc);
         len = (snapshot.value.length);
-
         keysList = abc.keys.toList();
-
         d.clear();
+        print(abc);
         graphlists.clear();
         for (int i = 0; i < len; i++) {
           s = (abc[keysList[i]]['Score']);
           c = s.truncate();
-
           d.add(keysList[i]);
           graphlists.add(c);
+          // print(c);
         }
-        // return Container();
 
-        // print(d);
-        // return _ref;
+        //
+        return PointsLineChart(_createSampleData(graphlists, keysList));
       });
   }
-
-  // getData();
-
-  // keysList = map.keys.toList();
-  // valuesList = map.values.toList();
-  // return keysList;
-  // return null;
-  // }
 
   List<charts.Series<LinearSales, int>> _createSampleData(graphlist, d) {
     final data = [
@@ -329,11 +283,32 @@ class UserdataState extends State<Userdata> {
       //   }
       // new LinearSales(int.parse(d[0]), int.parse(graphlists[0].toString())),
       // new LinearSales(int.parse(d[1]), int.parse(graphlists[1].toString())),
+      new LinearSales(1, 5),
+      new LinearSales(2, 7),
+      new LinearSales(3, 10),
+      new LinearSales(4, 11),
+      new LinearSales(5, 8),
+      new LinearSales(6, 9),
+      new LinearSales(7, 3),
+      new LinearSales(8, 8),
+      new LinearSales(9, 8),
+      new LinearSales(10, 9),
+      new LinearSales(11, 3),
+      new LinearSales(12, 8),
+      new LinearSales(13, 8),
+      new LinearSales(14, 9),
+      new LinearSales(15, 3),
+      new LinearSales(16, 8),
+      new LinearSales(17, 8),
+      new LinearSales(18, 9),
+      new LinearSales(19, 3),
+      new LinearSales(20, 8),
+      new LinearSales(30, 9),
 
-      new LinearSales(int.parse(d[1]), int.parse(graphlists[1].toString())),
-      new LinearSales(int.parse(d[2]), int.parse(graphlists[2].toString())),
+      // new LinearSales(int.parse(d[1]), int.parse(graphlists[1].toString())),
+      // new LinearSales(int.parse(d[2]), int.parse(graphlists[2].toString())),
+      // new LinearSales(int.parse(d[3]), int.parse(graphlists[3].toString())),
       // new LinearSales(int.parse(d[4]), int.parse(graphlists[4].toString())),
-      // new LinearSales(int.parse(d[5]), int.parse(graphlists[5].toString())),
       // new LinearSales(int.parse(d[6]), int.parse(graphlists[6].toString())),
 
       // new LinearSales(int.parse(d[7]), int.parse(graphlists[7].toString())),
@@ -360,52 +335,73 @@ class UserdataState extends State<Userdata> {
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder(
-        future: getData(),
-        builder: (ctx, snapshot) {
-          return Scaffold(
-              appBar: AppBar(
-                title: Text('Progress Screen'),
-                centerTitle: true,
-                backgroundColor: Colors.green,
-              ),
-              body: Column(
-                // mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  SizedBox(
-                    width: 10,
-                    height: 10,
-                  ),
-                  // Text(
-                  //   'Month Progress',
-                  //   textAlign: TextAlign.center,
-                  //   style: TextStyle(
-                  //     fontSize: 24,
-                  //     fontWeight: FontWeight.bold,
-                  //   ),
-                  // ),
-                  DropdownButton(
-                    hint: Text(' Month'),
-                    value: selectedUser,
-                    onChanged: (Item value) {
-                      setState(() {
+    return Scaffold(
+        appBar: AppBar(
+          title: Text('Progress Screen'),
+          centerTitle: true,
+          backgroundColor: Colors.green,
+        ),
+        body: Column(
+          // mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                DropdownButton(
+                  hint: Text('Select Month'),
+                  value: selectedUser,
+                  onChanged: (Item value) {
+                    setState(
+                      () {
                         selectedUser = value;
+
                         String m = selectedUser.name;
+                        String n = selectedUser.name;
+                        // print(n);
+                        print(n);
+                        switch (n) {
+                          case '1':
+                            {
+                              n = '1';
+                            }
+                            break;
+                          case '2':
+                            {
+                              n = '2';
+                            }
+                        }
 
                         switch (m) {
                           case 'Jan':
                             {
+                              // Chart('1');
+
                               userentry = chart('1');
+
+                              // Fluttertoast.showToast(
+                              //     msg: "This is Center Short Toast",
+                              //     toastLength: Toast.LENGTH_SHORT,
+                              //     gravity: ToastGravity.CENTER,
+                              //     timeInSecForIosWeb: 1,
+                              //     backgroundColor: Colors.red,
+                              //     textColor: Colors.white,
+                              //     fontSize: 16.0);
                             }
                             break;
                           case 'Feb':
                             {
                               userentry = chart('2');
+
+                              // print(monthnow);
                             }
+                            // return Expanded(child: Container(child: userentry));
+
                             break;
+
                           case 'Mar':
                             {
                               userentry = chart('3');
+                              // print(n);
                             }
                             break;
                           case 'Apr':
@@ -418,202 +414,228 @@ class UserdataState extends State<Userdata> {
                               userentry = chart('5');
                             }
                             break;
+                          case 'Jun':
+                            {
+                              userentry = chart('6');
+                            }
+                            break;
+                          case 'Jul':
+                            {
+                              userentry = chart('7');
+                            }
+                            break;
+                          case 'Aug':
+                            {
+                              userentry = chart('8');
+                            }
+                            break;
+                          case 'Sep':
+                            {
+                              userentry = chart('9');
+                            }
+                            break;
+                          case 'Oct':
+                            {
+                              userentry = chart('10');
+                            }
+                            break;
+                          case 'Nov':
+                            {
+                              userentry = chart('11');
+                            }
+                            break;
+                          case 'Dec':
+                            {
+                              userentry = chart('12');
+                            }
+                            break;
                         }
-                      });
-                    },
-                    items: users.map((Item user) {
-                      return DropdownMenuItem<Item>(
-                        value: user,
+                      },
+                    );
+                  },
+                  items: users.map((Item user) {
+                    return DropdownMenuItem<Item>(
+                      value: user,
 
-                        // Row to Cloumn
-                        child: Row(
-                          children: <Widget>[
-                            user.icon,
-                            SizedBox(
-                              width: 10,
-                            ),
+                      // Row to Cloumn
+                      child: Row(
+                        children: <Widget>[
+                          user.icon,
+                          SizedBox(
+                            width: 10,
+                          ),
+                          Text(
+                            user.name,
+                            style: TextStyle(color: Colors.black),
+                          ),
+                          //
+                        ],
+                      ),
+                    );
+                  }).toList(),
+                ),
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                Column(
+                  children: [
+                    Container(
+                      width: 380,
+                      height: 280,
+                      decoration: BoxDecoration(
+                          border: Border.all(color: Colors.green)),
+                      child: PointsLineChart(_createSampleData(graphlists, d)),
+                    )
+                  ],
+                )
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                Container(
+                  decoration:
+                      BoxDecoration(border: Border.all(color: Colors.green)),
+                  child: SizedBox(
+                    width: 380,
+                    height: 250,
+                    child: Column(
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
                             Text(
-                              user.name,
-                              style: TextStyle(color: Colors.black),
+                              'What is your goal?',
+                              style: TextStyle(
+                                  height: 1.5,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 22),
                             ),
                           ],
                         ),
-                      );
-                    }).toList(),
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      Column(
-                        children: [
-                          Container(
-                            decoration: BoxDecoration(
-                                border: Border.all(color: Colors.green)),
-                            child: SizedBox(
-                              width: 380,
-                              height: 280,
-
-                              child: userentry,
-
-                              // child: PointsLineChart(
-                              //     _createSampleData(graphlists, keysList)),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              'Think of a certain distance that you would \n like to run in a certain time, \n in one or two months fom now?',
+                              textAlign: TextAlign.center,
+                              overflow: TextOverflow.ellipsis,
+                              style: TextStyle(
+                                  height: 1,
+                                  // fontWeight: FontWeight.bold,
+                                  fontSize: 18),
                             ),
-                          )
-                        ],
-                      )
-                    ],
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      Container(
-                        decoration: BoxDecoration(
-                            border: Border.all(color: Colors.green)),
-                        child: SizedBox(
-                          width: 380,
-                          height: 250,
-                          child: Column(
-                            children: [
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
-                                children: [
-                                  Text(
-                                    'What is your goal?',
-                                    style: TextStyle(
-                                        height: 1.5,
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 22),
-                                  ),
-                                ],
-                              ),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Text(
-                                    'Think of a certain distance that you would \n like to run in a certain time, \n in one or two months fom now?',
-                                    textAlign: TextAlign.center,
-                                    overflow: TextOverflow.ellipsis,
-                                    style: TextStyle(
-                                        height: 1,
-                                        // fontWeight: FontWeight.bold,
-                                        fontSize: 18),
-                                  ),
-                                ],
-                              ),
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
-                                children: <Widget>[
-                                  Icon(
-                                    Icons.trending_up_outlined,
-                                    color: Colors.black,
-                                    size: 36.0,
-                                    semanticLabel:
-                                        'Text to announce in accessibility modes',
-                                  ),
-                                  Icon(
-                                    Icons.access_time,
-                                    color: Colors.blue,
-                                    size: 36.0,
-                                  ),
-                                ],
-                              ),
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
-                                children: [
-                                  Padding(
-                                    padding: EdgeInsets.all(8.0),
-                                    child: RaisedButton(
-                                      color: Colors.white,
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(18.0),
-                                      ),
-                                      child: Text(
-                                        "Distance".toUpperCase(),
-                                        style: TextStyle(
-                                          fontSize: 14.0,
-                                          color: Colors.green,
-                                        ),
-                                      ),
-                                      onPressed: () {
-                                        onTab();
-                                      },
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: EdgeInsets.all(8.0),
-                                    child: RaisedButton(
-                                      color: Colors.white,
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(18.0),
-                                      ),
-                                      child: Text(
-                                        "Minutes".toUpperCase(),
-                                        style: TextStyle(
-                                          fontSize: 14.0,
-                                          color: Colors.green,
-                                        ),
-                                      ),
-                                      onPressed: () {
-                                        onTap();
-                                      },
-                                    ),
-                                  ),
-                                  // TextFormField(
-                                  //   keyboardType: TextInputType.number,
-                                  //   decoration: InputDecoration(
-                                  //       labelText: 'Distance',
-                                  //       fillColor: Colors.white,
-                                  //       focusedBorder: OutlineInputBorder(
-                                  //           borderSide: BorderSide(
-                                  //               color: Colors.blue,
-                                  //               width: 2.0))),
-                                  //   onChanged: (String dist) {
-                                  //     // distance = dist;
-                                  //   },
-                                  // ),
-                                ],
-                              ),
-                              Row(
-                                children: [
-                                  Padding(
-                                    padding: EdgeInsets.fromLTRB(145, 0, 0, 0),
-                                    child: RaisedButton(
-                                      color: Colors.white,
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(8.0),
-                                      ),
-                                      child: Text(
-                                        "Score: $score".toUpperCase(),
-                                        style: TextStyle(
-                                          fontSize: 14.0,
-                                          color: Colors.green,
-                                        ),
-                                      ),
-                                      onPressed: () {
-                                        createData1();
-                                        // print(score);
-                                      },
-                                    ),
-
-                                    // Text('Goal Score: $score'),
-                                  ),
-                                ],
-                              )
-                            ],
-                          ),
+                          ],
                         ),
-                      ),
-                    ],
-                  )
-                ],
-              ));
-        });
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: <Widget>[
+                            Icon(
+                              Icons.trending_up_outlined,
+                              color: Colors.black,
+                              size: 36.0,
+                              semanticLabel:
+                                  'Text to announce in accessibility modes',
+                            ),
+                            Icon(
+                              Icons.access_time,
+                              color: Colors.blue,
+                              size: 36.0,
+                            ),
+                          ],
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Padding(
+                              padding: EdgeInsets.all(8.0),
+                              child: RaisedButton(
+                                color: Colors.white,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(18.0),
+                                ),
+                                child: Text(
+                                  "Distance".toUpperCase(),
+                                  style: TextStyle(
+                                    fontSize: 14.0,
+                                    color: Colors.green,
+                                  ),
+                                ),
+                                onPressed: () {
+                                  onTab();
+                                },
+                              ),
+                            ),
+                            Padding(
+                              padding: EdgeInsets.all(8.0),
+                              child: RaisedButton(
+                                color: Colors.white,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(18.0),
+                                ),
+                                child: Text(
+                                  "Minutes".toUpperCase(),
+                                  style: TextStyle(
+                                    fontSize: 14.0,
+                                    color: Colors.green,
+                                  ),
+                                ),
+                                onPressed: () {
+                                  onTap();
+                                },
+                              ),
+                            ),
+                            // TextFormField(
+                            //   keyboardType: TextInputType.number,
+                            //   decoration: InputDecoration(
+                            //       labelText: 'Distance',
+                            //       fillColor: Colors.white,
+                            //       focusedBorder: OutlineInputBorder(
+                            //           borderSide: BorderSide(
+                            //               color: Colors.blue,
+                            //               width: 2.0))),
+                            //   onChanged: (String dist) {
+                            //     // distance = dist;
+                            //   },
+                            // ),
+                          ],
+                        ),
+                        Row(
+                          children: [
+                            Padding(
+                              padding: EdgeInsets.fromLTRB(145, 0, 0, 0),
+                              child: RaisedButton(
+                                color: Colors.white,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(8.0),
+                                ),
+                                child: Text(
+                                  "Score: $score".toUpperCase(),
+                                  style: TextStyle(
+                                    fontSize: 14.0,
+                                    color: Colors.green,
+                                  ),
+                                ),
+                                onPressed: () {
+                                  createData1();
+                                  // print(score);
+                                },
+                              ),
+
+                              // Text('Goal Score: $score'),
+                            ),
+                          ],
+                        )
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            )
+          ],
+        ));
   }
 }
 

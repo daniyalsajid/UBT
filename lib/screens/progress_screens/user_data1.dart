@@ -47,73 +47,73 @@ class UserdataState extends State<Userdata> {
     const Item(
         'Jan',
         Icon(
-          Icons.calendar_today_rounded,
+          Icons.calendar_today,
           color: const Color(0xFF167F67),
         )),
     const Item(
         'Feb',
         Icon(
-          Icons.calendar_today_rounded,
+          Icons.calendar_today,
           color: const Color(0xFF167F67),
         )),
     const Item(
         'Mar',
         Icon(
-          Icons.calendar_today_rounded,
+          Icons.calendar_today,
           color: const Color(0xFF167F67),
         )),
     const Item(
         'Apr',
         Icon(
-          Icons.calendar_today_rounded,
+          Icons.calendar_today,
           color: const Color(0xFF167F67),
         )),
     const Item(
         'May',
         Icon(
-          Icons.calendar_today_rounded,
+          Icons.calendar_today,
           color: const Color(0xFF167F67),
         )),
     const Item(
         'Jun',
         Icon(
-          Icons.calendar_today_rounded,
+          Icons.calendar_today,
           color: const Color(0xFF167F67),
         )),
     const Item(
         'Jul',
         Icon(
-          Icons.calendar_today_rounded,
+          Icons.calendar_today,
           color: const Color(0xFF167F67),
         )),
     const Item(
         'Aug',
         Icon(
-          Icons.calendar_today_rounded,
+          Icons.calendar_today,
           color: const Color(0xFF167F67),
         )),
     const Item(
         'Sep',
         Icon(
-          Icons.calendar_today_rounded,
+          Icons.calendar_today,
           color: const Color(0xFF167F67),
         )),
     const Item(
         'Oct',
         Icon(
-          Icons.calendar_today_rounded,
+          Icons.calendar_today,
           color: const Color(0xFF167F67),
         )),
     const Item(
         'Nov',
         Icon(
-          Icons.calendar_today_rounded,
+          Icons.calendar_today,
           color: const Color(0xFF167F67),
         )),
     const Item(
         'Dec',
         Icon(
-          Icons.calendar_today_rounded,
+          Icons.calendar_today,
           color: const Color(0xFF167F67),
         )),
   ];
@@ -446,17 +446,19 @@ class UserdataState extends State<Userdata> {
                     children: [
                       Column(
                         children: [
-                          Container(
-                            decoration: BoxDecoration(
-                                border: Border.all(color: Colors.green)),
-                            child: SizedBox(
-                              width: 380,
-                              height: 280,
+                          Flexible(
+                            child: Container(
+                              decoration: BoxDecoration(
+                                  border: Border.all(color: Colors.green)),
+                              child: SizedBox(
+                                width: 380,
+                                height: 280,
 
-                              child: userentry,
+                                child: userentry,
 
-                              // child: PointsLineChart(
-                              //     _createSampleData(graphlists, keysList)),
+                                // child: PointsLineChart(
+                                //     _createSampleData(graphlists, keysList)),
+                              ),
                             ),
                           )
                         ],
@@ -466,146 +468,149 @@ class UserdataState extends State<Userdata> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                      Container(
-                        decoration: BoxDecoration(
-                            border: Border.all(color: Colors.green)),
-                        child: SizedBox(
-                          width: 380,
-                          height: 250,
-                          child: Column(
-                            children: [
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
-                                children: [
-                                  Text(
-                                    'What is your goal?',
-                                    style: TextStyle(
-                                        height: 1.5,
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 22),
-                                  ),
-                                ],
-                              ),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Text(
-                                    'Think of a certain distance that you would \n like to run in a certain time, \n in one or two months fom now?',
-                                    textAlign: TextAlign.center,
-                                    overflow: TextOverflow.ellipsis,
-                                    style: TextStyle(
-                                        height: 1,
-                                        // fontWeight: FontWeight.bold,
-                                        fontSize: 18),
-                                  ),
-                                ],
-                              ),
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
-                                children: <Widget>[
-                                  Icon(
-                                    Icons.trending_up_outlined,
-                                    color: Colors.black,
-                                    size: 36.0,
-                                    semanticLabel:
-                                        'Text to announce in accessibility modes',
-                                  ),
-                                  Icon(
-                                    Icons.access_time,
-                                    color: Colors.blue,
-                                    size: 36.0,
-                                  ),
-                                ],
-                              ),
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
-                                children: [
-                                  Padding(
-                                    padding: EdgeInsets.all(8.0),
-                                    child: RaisedButton(
-                                      color: Colors.white,
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(18.0),
-                                      ),
-                                      child: Text(
-                                        "Distance".toUpperCase(),
-                                        style: TextStyle(
-                                          fontSize: 14.0,
-                                          color: Colors.green,
-                                        ),
-                                      ),
-                                      onPressed: () {
-                                        onTab();
-                                      },
+                      Flexible(
+                        child: Container(
+                          decoration: BoxDecoration(
+                              border: Border.all(color: Colors.green)),
+                          child: SizedBox(
+                            width: 380,
+                            height: 250,
+                            child: Column(
+                              children: [
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceEvenly,
+                                  children: [
+                                    Text(
+                                      'What is your goal?',
+                                      style: TextStyle(
+                                          height: 1.5,
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 22),
                                     ),
-                                  ),
-                                  Padding(
-                                    padding: EdgeInsets.all(8.0),
-                                    child: RaisedButton(
-                                      color: Colors.white,
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(18.0),
-                                      ),
-                                      child: Text(
-                                        "Minutes".toUpperCase(),
-                                        style: TextStyle(
-                                          fontSize: 14.0,
-                                          color: Colors.green,
-                                        ),
-                                      ),
-                                      onPressed: () {
-                                        onTap();
-                                      },
+                                  ],
+                                ),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      'Think of a certain distance that you would \n like to run in a certain time, \n in one or two months fom now?',
+                                      textAlign: TextAlign.center,
+                                      overflow: TextOverflow.ellipsis,
+                                      style: TextStyle(
+                                          height: 1,
+                                          // fontWeight: FontWeight.bold,
+                                          fontSize: 18),
                                     ),
-                                  ),
-                                  // TextFormField(
-                                  //   keyboardType: TextInputType.number,
-                                  //   decoration: InputDecoration(
-                                  //       labelText: 'Distance',
-                                  //       fillColor: Colors.white,
-                                  //       focusedBorder: OutlineInputBorder(
-                                  //           borderSide: BorderSide(
-                                  //               color: Colors.blue,
-                                  //               width: 2.0))),
-                                  //   onChanged: (String dist) {
-                                  //     // distance = dist;
-                                  //   },
-                                  // ),
-                                ],
-                              ),
-                              Row(
-                                children: [
-                                  Padding(
-                                    padding: EdgeInsets.fromLTRB(145, 0, 0, 0),
-                                    child: RaisedButton(
-                                      color: Colors.white,
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(8.0),
-                                      ),
-                                      child: Text(
-                                        "Score: $score".toUpperCase(),
-                                        style: TextStyle(
-                                          fontSize: 14.0,
-                                          color: Colors.green,
-                                        ),
-                                      ),
-                                      onPressed: () {
-                                        createData1();
-                                        // print(score);
-                                      },
+                                  ],
+                                ),
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceEvenly,
+                                  children: <Widget>[
+                                    Icon(
+                                      Icons.trending_down,
+                                      color: Colors.black,
+                                      size: 36.0,
+                                      semanticLabel:
+                                          'Text to announce in accessibility modes',
                                     ),
+                                    Icon(
+                                      Icons.access_time,
+                                      color: Colors.blue,
+                                      size: 36.0,
+                                    ),
+                                  ],
+                                ),
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceEvenly,
+                                  children: [
+                                    Padding(
+                                      padding: EdgeInsets.all(8.0),
+                                      child: RaisedButton(
+                                        color: Colors.white,
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(18.0),
+                                        ),
+                                        child: Text(
+                                          "Distance".toUpperCase(),
+                                          style: TextStyle(
+                                            fontSize: 14.0,
+                                            color: Colors.green,
+                                          ),
+                                        ),
+                                        onPressed: () {
+                                          onTab();
+                                        },
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: EdgeInsets.all(8.0),
+                                      child: RaisedButton(
+                                        color: Colors.white,
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(18.0),
+                                        ),
+                                        child: Text(
+                                          "Minutes".toUpperCase(),
+                                          style: TextStyle(
+                                            fontSize: 14.0,
+                                            color: Colors.green,
+                                          ),
+                                        ),
+                                        onPressed: () {
+                                          onTap();
+                                        },
+                                      ),
+                                    ),
+                                    // TextFormField(
+                                    //   keyboardType: TextInputType.number,
+                                    //   decoration: InputDecoration(
+                                    //       labelText: 'Distance',
+                                    //       fillColor: Colors.white,
+                                    //       focusedBorder: OutlineInputBorder(
+                                    //           borderSide: BorderSide(
+                                    //               color: Colors.blue,
+                                    //               width: 2.0))),
+                                    //   onChanged: (String dist) {
+                                    //     // distance = dist;
+                                    //   },
+                                    // ),
+                                  ],
+                                ),
+                                Row(
+                                  children: [
+                                    Padding(
+                                      padding:
+                                          EdgeInsets.fromLTRB(145, 0, 0, 0),
+                                      child: RaisedButton(
+                                        color: Colors.white,
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(8.0),
+                                        ),
+                                        child: Text(
+                                          "Score: $score".toUpperCase(),
+                                          style: TextStyle(
+                                            fontSize: 14.0,
+                                            color: Colors.green,
+                                          ),
+                                        ),
+                                        onPressed: () {
+                                          createData1();
+                                          // print(score);
+                                        },
+                                      ),
 
-                                    // Text('Goal Score: $score'),
-                                  ),
-                                ],
-                              )
-                            ],
+                                      // Text('Goal Score: $score'),
+                                    ),
+                                  ],
+                                )
+                              ],
+                            ),
                           ),
                         ),
                       ),

@@ -45,19 +45,19 @@ class _HomeScreenState extends State<HomeScreen> {
         items: [
           BottomNavigationBarItem(
             icon: Icon(Icons.insert_chart),
-            label: 'Fortschritt',
+            title: Text('Fortschritt'),
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.highlight),
-            label: 'Verlauf',
+            title: Text('Verlauf'),
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.directions_run_outlined),
-            label: 'Activity',
+            icon: Icon(Icons.directions_run),
+            title: Text('Activity'),
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.person),
-            label: 'Profile',
+            title: Text('Profile'),
           ),
         ],
       ),

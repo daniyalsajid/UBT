@@ -29,7 +29,7 @@ class PointsLineChart extends StatelessWidget {
         behaviors: [
           new charts.RangeAnnotation([
             new charts.LineAnnotationSegment(
-                20, charts.RangeAnnotationAxisType.measure,
+                10, charts.RangeAnnotationAxisType.measure,
                 startLabel: 'Goal To Achieve',
                 // endLabel: 'Measure 1 End',
                 color: charts.MaterialPalette.gray.shade400),

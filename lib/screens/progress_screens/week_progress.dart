@@ -28,73 +28,73 @@ class _WeekprogressState extends State<Weekprogress> {
     const Item(
         'Jan',
         Icon(
-          Icons.calendar_today_rounded,
+          Icons.calendar_today,
           color: const Color(0xFF167F67),
         )),
     const Item(
         'Feb',
         Icon(
-          Icons.calendar_today_rounded,
+          Icons.calendar_today,
           color: const Color(0xFF167F67),
         )),
     const Item(
         'Mar',
         Icon(
-          Icons.calendar_today_rounded,
+          Icons.calendar_today,
           color: const Color(0xFF167F67),
         )),
     const Item(
         'Apr',
         Icon(
-          Icons.calendar_today_rounded,
+          Icons.calendar_today,
           color: const Color(0xFF167F67),
         )),
     const Item(
         'May',
         Icon(
-          Icons.calendar_today_rounded,
+          Icons.calendar_today,
           color: const Color(0xFF167F67),
         )),
     const Item(
         'Jun',
         Icon(
-          Icons.calendar_today_rounded,
+          Icons.calendar_today,
           color: const Color(0xFF167F67),
         )),
     const Item(
         'Jul',
         Icon(
-          Icons.calendar_today_rounded,
+          Icons.calendar_today,
           color: const Color(0xFF167F67),
         )),
     const Item(
         'Aug',
         Icon(
-          Icons.calendar_today_rounded,
+          Icons.calendar_today,
           color: const Color(0xFF167F67),
         )),
     const Item(
         'Sep',
         Icon(
-          Icons.calendar_today_rounded,
+          Icons.calendar_today,
           color: const Color(0xFF167F67),
         )),
     const Item(
         'Oct',
         Icon(
-          Icons.calendar_today_rounded,
+          Icons.calendar_today,
           color: const Color(0xFF167F67),
         )),
     const Item(
         'Nov',
         Icon(
-          Icons.calendar_today_rounded,
+          Icons.calendar_today,
           color: const Color(0xFF167F67),
         )),
     const Item(
         'Dec',
         Icon(
-          Icons.calendar_today_rounded,
+          Icons.calendar_today,
           color: const Color(0xFF167F67),
         )),
   ];
@@ -375,7 +375,7 @@ class _WeekprogressState extends State<Weekprogress> {
                 Align(
                     alignment: Alignment.centerLeft,
                     child: Icon(
-                      Icons.date_range_rounded,
+                      Icons.date_range,
                       size: 50,
                     )),
                 SizedBox(
@@ -384,7 +384,7 @@ class _WeekprogressState extends State<Weekprogress> {
                 Align(
                     alignment: Alignment.center,
                     child: Icon(
-                      Icons.trending_up_outlined,
+                      Icons.trending_up,
                       size: 50,
                     )),
                 SizedBox(
@@ -402,7 +402,7 @@ class _WeekprogressState extends State<Weekprogress> {
                 Align(
                     alignment: Alignment.center,
                     child: Icon(
-                      Icons.speed_rounded,
+                      Icons.shutter_speed,
                       size: 50,
                     )),
                 SizedBox(
@@ -411,7 +411,7 @@ class _WeekprogressState extends State<Weekprogress> {
                 Align(
                     alignment: Alignment.centerRight,
                     child: Icon(
-                      Icons.score_outlined,
+                      Icons.score,
                       size: 50,
                     )),
               ],

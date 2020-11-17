@@ -23,82 +23,23 @@ class _WeekprogressState extends State<Weekprogress> {
   String pace, monthnow;
   String n;
   Item selectedUser;
+  String userSelectedValue;
+  String selectedMonthNumber;
   // FirebaseAnimatedList userentry;
-  List<Item> users = <Item>[
-    const Item(
-        'Jan',
-        Icon(
-          Icons.calendar_today,
-          color: const Color(0xFF167F67),
-        )),
-    const Item(
-        'Feb',
-        Icon(
-          Icons.calendar_today,
-          color: const Color(0xFF167F67),
-        )),
-    const Item(
-        'Mar',
-        Icon(
-          Icons.calendar_today,
-          color: const Color(0xFF167F67),
-        )),
-    const Item(
-        'Apr',
-        Icon(
-          Icons.calendar_today,
-          color: const Color(0xFF167F67),
-        )),
-    const Item(
-        'May',
-        Icon(
-          Icons.calendar_today,
-          color: const Color(0xFF167F67),
-        )),
-    const Item(
-        'Jun',
-        Icon(
-          Icons.calendar_today,
-          color: const Color(0xFF167F67),
-        )),
-    const Item(
-        'Jul',
-        Icon(
-          Icons.calendar_today,
-          color: const Color(0xFF167F67),
-        )),
-    const Item(
-        'Aug',
-        Icon(
-          Icons.calendar_today,
-          color: const Color(0xFF167F67),
-        )),
-    const Item(
-        'Sep',
-        Icon(
-          Icons.calendar_today,
-          color: const Color(0xFF167F67),
-        )),
-    const Item(
-        'Oct',
-        Icon(
-          Icons.calendar_today,
-          color: const Color(0xFF167F67),
-        )),
-    const Item(
-        'Nov',
-        Icon(
-          Icons.calendar_today,
-          color: const Color(0xFF167F67),
-        )),
-    const Item(
-        'Dec',
-        Icon(
-          Icons.calendar_today,
-          color: const Color(0xFF167F67),
-        )),
+  List<String> users = <String>[
+    'Jan',
+    'Feb',
+    'Mar',
+    'Apr',
+    'May',
+    'Jun',
+    'Jul',
+    'Aug',
+    'Sep',
+    'Oct',
+    'Nov',
+    'Dec',
   ];
-
   Query _ref;
 
   @override
@@ -115,29 +56,25 @@ class _WeekprogressState extends State<Weekprogress> {
   }
 
   FirebaseAnimatedList userentry;
-
+  Map userdata;
   //
   // Card userentry;
 
   chart(String month) {
-    _ref = FirebaseDatabase.instance
-        .reference()
-        .child(uploadAuth)
-        .child('2020')
-        .child(monthnow);
-
     return FirebaseAnimatedList(
+        key: Key(DateTime.now().millisecondsSinceEpoch.toString()),
         scrollDirection: Axis.vertical,
         padding: const EdgeInsets.only(bottom: 20),
-        query: _ref,
+        query: FirebaseDatabase.instance
+            .reference()
+            .child(uploadAuth)
+            .child('2020')
+            .child(month),
+        sort: (DataSnapshot a, DataSnapshot b) => b.key.compareTo(a.key),
         itemBuilder: (BuildContext context, DataSnapshot snapshot,
             Animation<double> animation, int index) {
-          // position:
-          // animation.drive(_offset);
-          Map userdata = snapshot.value;
-          // print(userdata);
-
-          return _buildUseritem(userdata: userdata);
+          userdata = snapshot.value;
+          return _buildUseritem(userdata: snapshot.value);
         });
 
     // Container(
@@ -245,27 +182,27 @@ class _WeekprogressState extends State<Weekprogress> {
               children: [
                 DropdownButton(
                   hint: Text('Select Month'),
-                  value: selectedUser,
-                  onChanged: (Item value) {
+                  value: userSelectedValue,
+                  onChanged: (value) {
                     setState(
                       () {
-                        selectedUser = value;
+                        userSelectedValue = value;
 
-                        String m = selectedUser.name;
+                        // String m = selectedUser.name;
 
-                        String n;
+                        // String n;
 
-                        if (m == null) {}
+                        // if (m == null) {}
 
-                        switch (m) {
+                        switch (userSelectedValue) {
                           case 'Jan':
                             {
                               // Chart('1');
 
                               userentry = chart('1');
-
+                              selectedMonthNumber = "1";
                               //  monthnow = '1';
-                              print(monthnow);
+                              // print(monthnow);
                               // print(n);
 
                               // Fluttertoast.showToast(
@@ -280,83 +217,90 @@ class _WeekprogressState extends State<Weekprogress> {
                             break;
                           case 'Feb':
                             {
-                              setState(() {
-                                userentry = chart('2');
-                                monthnow = '2';
-                              });
-
-                              print(monthnow);
+                              userentry = chart('2');
+                              selectedMonthNumber = "2";
                             }
+                            break;
                             // return Expanded(child: Container(child: userentry));
 
                             break;
                           case 'Mar':
                             {
                               userentry = chart('3');
+                              selectedMonthNumber = "3";
                             }
                             break;
                           case 'Apr':
                             {
                               userentry = chart('4');
+                              selectedMonthNumber = "4";
                             }
                             break;
                           case 'May':
                             {
                               userentry = chart('5');
+                              selectedMonthNumber = "5";
                             }
                             break;
                           case 'Jun':
                             {
                               userentry = chart('6');
+                              selectedMonthNumber = "6";
                             }
                             break;
                           case 'Jul':
                             {
                               userentry = chart('7');
+                              selectedMonthNumber = "7";
                             }
                             break;
                           case 'Aug':
                             {
                               userentry = chart('8');
+                              selectedMonthNumber = "8";
                             }
                             break;
                           case 'Sep':
                             {
                               userentry = chart('9');
+                              selectedMonthNumber = "9";
                             }
                             break;
                           case 'Oct':
                             {
                               userentry = chart('10');
+                              selectedMonthNumber = "10";
                             }
                             break;
                           case 'Nov':
                             {
                               userentry = chart('11');
+                              selectedMonthNumber = "11";
                             }
                             break;
                           case 'Dec':
                             {
                               userentry = chart('12');
+                              selectedMonthNumber = "12";
                             }
                             break;
                         }
                       },
                     );
                   },
-                  items: users.map((Item user) {
-                    return DropdownMenuItem<Item>(
-                      value: user,
+                  items: users.map((String month) {
+                    return DropdownMenuItem<String>(
+                      value: month,
 
                       // Row to Cloumn
                       child: Row(
                         children: <Widget>[
-                          user.icon,
+                          Icon(Icons.calendar_today, color: Color(0xFF167F67)),
                           SizedBox(
                             width: 10,
                           ),
                           Text(
-                            user.name,
+                            month,
                             style: TextStyle(color: Colors.black),
                           ),
                           //
@@ -378,8 +322,10 @@ class _WeekprogressState extends State<Weekprogress> {
                       Icons.date_range,
                       size: 50,
                     )),
-                SizedBox(
-                  width: 30,
+                Flexible(
+                  child: SizedBox(
+                    width: 30,
+                  ),
                 ),
                 Align(
                     alignment: Alignment.center,
@@ -387,8 +333,10 @@ class _WeekprogressState extends State<Weekprogress> {
                       Icons.trending_up,
                       size: 50,
                     )),
-                SizedBox(
-                  width: 30,
+                Flexible(
+                  child: SizedBox(
+                    width: 30,
+                  ),
                 ),
                 Align(
                     alignment: Alignment.center,
@@ -396,8 +344,10 @@ class _WeekprogressState extends State<Weekprogress> {
                       Icons.access_time,
                       size: 50,
                     )),
-                SizedBox(
-                  width: 30,
+                Flexible(
+                  child: SizedBox(
+                    width: 30,
+                  ),
                 ),
                 Align(
                     alignment: Alignment.center,
@@ -405,8 +355,10 @@ class _WeekprogressState extends State<Weekprogress> {
                       Icons.shutter_speed,
                       size: 50,
                     )),
-                SizedBox(
-                  width: 30,
+                Flexible(
+                  child: SizedBox(
+                    width: 30,
+                  ),
                 ),
                 Align(
                     alignment: Alignment.centerRight,
@@ -416,39 +368,50 @@ class _WeekprogressState extends State<Weekprogress> {
                     )),
               ],
             ),
+            SizedBox(
+              height: 10,
+            ),
             Row(
               children: [
                 SizedBox(
                   width: 10,
                 ),
                 Text('Date'),
-                SizedBox(
-                  width: 40,
+                Flexible(
+                  child: SizedBox(
+                    width: 40,
+                  ),
                 ),
                 Text('Distance'),
-                SizedBox(
-                  width: 30,
+                Flexible(
+                  child: SizedBox(
+                    width: 30,
+                  ),
                 ),
                 Text('Minutes'),
-                SizedBox(
-                  width: 40,
+                Flexible(
+                  child: SizedBox(
+                    width: 40,
+                  ),
                 ),
                 Text('Pace'),
-                SizedBox(
-                  width: 45,
+                Flexible(
+                  child: SizedBox(
+                    width: 45,
+                  ),
                 ),
                 Text('Score'),
               ],
             ),
-            Row(
-              children: [
-                Container(
-                  height: 480,
-                  width: 360,
-                  child: chart(monthnow),
-                )
-              ],
-            ),
+            selectedMonthNumber != null
+                ? Flexible(
+                    child: Container(
+                      height: 480,
+                      width: 360,
+                      child: chart(selectedMonthNumber),
+                    ),
+                  )
+                : SizedBox(),
 
             // Container(
             //     height: 480, width: 400, child: chart(n.toString())),

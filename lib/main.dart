@@ -29,6 +29,7 @@ class MyApp extends StatelessWidget {
       ],
       child: MaterialApp(
         title: 'UBT-Running',
+        debugShowCheckedModeBanner: false,
         theme: ThemeData(
           primarySwatch: Colors.blue,
           visualDensity: VisualDensity.adaptivePlatformDensity,

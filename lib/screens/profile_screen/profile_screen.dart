@@ -24,15 +24,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
         child: Center(
             child: Column(
           children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Padding(
-                  padding: EdgeInsets.fromLTRB(0, 60, 0, 0),
-                  child: Text(
+            Padding(
+              padding: EdgeInsets.fromLTRB(0, 60, 0, 0),
+              child: Column(
+                children: [
+                  Text(
                     'Wir wollen dich dabei unterstützen \n regelmäßig körperlich aktiv zu sein.\n Indem wir deine Lauf-Aktivitätsdaten in \n einer für dich interessanten \n und wertvollen Weise darstellen \n und dir  nützliche Features bieten, hoffen wir dir \n eine kleine Motivationshilfe sein zu \n können.',
                     textAlign: TextAlign.center,
-                    overflow: TextOverflow.ellipsis,
+                    // overflow: TextOverflow.ellipsis,
                     style: TextStyle(
                         height: 1,
                         fontSize: 18,
@@ -40,8 +39,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         fontStyle: FontStyle.italic,
                         fontWeight: FontWeight.w800),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
             Row(
               children: [

@@ -270,6 +270,9 @@ class UserdataState extends State<Userdata> {
           .once()
           .then((DataSnapshot snapshot) {
         //print('Data : ${snapshot.value}');
+        snapshot.value.map((element) => {
+              if (element != null) {print("element: $element")}
+            });
         abc = snapshot.value;
         len = (snapshot.value.length);
         keysList = abc.keys.toList();

@@ -292,7 +292,7 @@ class UserdataState extends State<Userdata> {
           d = score;
         });
 
-        return PointsLineChart(_createSampleData(graphlists, keysList));
+        return PointsLineChart(_createSampleData(d, graphlists));
       });
   }
 
@@ -332,7 +332,10 @@ class UserdataState extends State<Userdata> {
     List<LinearSales> data = [];
     if (score.length != 0 && date.length != 0) {
       for (var i = 0; i < score.length; i++) {
-        data.add(new LinearSales(score[i], int.parse(date[i])));
+        data.add(new LinearSales(
+          int.parse(date[i]),
+          score[i],
+        ));
       }
     } else {
       data.add(new LinearSales(0, 0));
@@ -547,14 +550,16 @@ class UserdataState extends State<Userdata> {
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 Flexible(
-                  child: Container(
-                    width: 380,
-                    height: 280,
-                    decoration:
-                        BoxDecoration(border: Border.all(color: Colors.green)),
-                    child: PointsLineChart(_createSampleData(graphlists, d)),
-                  ),
-                )
+                    child: Container(
+                  width: 380,
+                  height: 280,
+                  decoration:
+                      BoxDecoration(border: Border.all(color: Colors.green)),
+                  child: PointsLineChart(_createSampleData(
+                    graphlists,
+                    d,
+                  )),
+                ))
               ],
             ),
             Row(

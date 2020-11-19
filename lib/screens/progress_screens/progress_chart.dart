@@ -21,10 +21,12 @@ class PointsLineChart extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return new charts.LineChart(seriesList,
+        // domainAxis: charts.AxisSpec<dynamic>(showAxisLine: true, renderSpec: RenderS),
         // domainAxis: charts.DateTimeAxisSpec(
         //     tickFormatterSpec: charts.AutoDateTimeTickFormatterSpec(
         //         day: charts.TimeFormatterSpec(
         //             format: 'dd', transitionFormat: 'dd MMM YYYY'))),
+
         animate: animate,
         behaviors: [
           new charts.RangeAnnotation([
@@ -45,7 +47,8 @@ class PointsLineChart extends StatelessWidget {
                 color: charts.MaterialPalette.gray.shade100),
           ])
         ],
-        defaultRenderer: new charts.LineRendererConfig(includePoints: true));
+        defaultRenderer: new charts.LineRendererConfig(
+            includePoints: true, includeArea: true, includeLine: true));
   }
 
   // / Create one series with sample hard coded data.

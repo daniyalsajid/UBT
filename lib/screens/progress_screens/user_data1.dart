@@ -283,7 +283,6 @@ class UserdataState extends State<Userdata> {
         } catch (_) {
           date = ["0"];
           score = [0];
-          print("abaababa");
         }
 
         setState(() {

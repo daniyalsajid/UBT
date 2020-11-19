@@ -39,7 +39,7 @@ class UserdataState extends State<Userdata> {
   // C for rounding score values
   int c;
 
-  Map abc;
+  var abc;
   var valuesList, keysList;
   final uploadAuth = FirebaseAuth.instance.currentUser.uid;
   final databaseReference = FirebaseDatabase.instance.reference();
@@ -269,35 +269,70 @@ class UserdataState extends State<Userdata> {
           .child(month)
           .once()
           .then((DataSnapshot snapshot) {
-        //print('Data : ${snapshot.value}');
-        // snapshot.value.map((element) => {
-        //       if (element != null) {print("element: $element")}
-        //     });
-        abc = snapshot.value;
-        len = (snapshot.value.length);
-        keysList = abc.keys.toList();
-        d.clear();
-        print(abc);
-        graphlists.clear();
-        for (int i = 0; i < len; i++) {
-          s = (abc[keysList[i]]['Score']);
-          c = s.truncate();
-          d.add(keysList[i]);
-          graphlists.add(c);
-          // print(c);
+        var date = [];
+        var score = [];
+        try {
+          snapshot.value.forEach((x) => {
+                if (x != null)
+                  {
+                    date.add(
+                        x["DateString"].substring(x["DateString"].length - 2)),
+                    score.add(x["Score"].truncate())
+                  }
+              });
+        } catch (_) {
+          date = ["0"];
+          score = [0];
+          print("abaababa");
         }
 
-        //
+        setState(() {
+          graphlists = date;
+          keysList = score;
+          d = score;
+        });
+
         return PointsLineChart(_createSampleData(graphlists, keysList));
       });
   }
 
-  List<charts.Series<LinearSales, int>> _createSampleData(graphlist, d) {
+  // chart(String month) {
+  //   final databaseReference = FirebaseDatabase.instance.reference();
+
+  //   databaseReference
+  //     ..child(uploadAuth)
+  //         .child('2020')
+  //         .child(month)
+  //         .once()
+  //         .then((DataSnapshot snapshot) {
+  //       //print('Data : ${snapshot.value}');
+  //       // snapshot.value.map((element) => {
+  //       //       if (element != null) {print("element: $element")}
+  //       //     });
+  //       abc = snapshot.value;
+  //       len = (snapshot.value.length);
+  //       keysList = abc.keys.toList();
+  //       d.clear();
+  //       print(abc);
+  //       graphlists.clear();
+  //       for (int i = 0; i < len; i++) {
+  //         s = (abc[keysList[i]]['Score']);
+  //         c = s.truncate();
+  //         d.add(keysList[i]);
+  //         graphlists.add(c);
+  //         // print(c);
+  //       }
+
+  //       //
+  //       return PointsLineChart(_createSampleData(graphlists, keysList));
+  //     });
+  // }
+
+  List<charts.Series<LinearSales, int>> _createSampleData(date, score) {
     List<LinearSales> data = [];
-    if (graphlist.length != 0) {
-      for (var i = 0; i < graphlist.length; i++) {
-        data.add(new LinearSales(
-            int.parse(d[i]), int.parse(graphlists[i].toString())));
+    if (score.length != 0 && date.length != 0) {
+      for (var i = 0; i < score.length; i++) {
+        data.add(new LinearSales(score[i], int.parse(date[i])));
       }
     } else {
       data.add(new LinearSales(0, 0));

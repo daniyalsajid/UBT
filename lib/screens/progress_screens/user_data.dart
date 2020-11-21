@@ -1,3 +1,4 @@
+import 'package:UBT/states/progress_screen_provider.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'package:flutter/material.dart';
@@ -7,7 +8,7 @@ import 'package:charts_flutter/flutter.dart' as charts;
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:UBT/screens/progress_screens/progress_chart.dart';
 import 'package:flutter_picker/flutter_picker.dart';
-
+import 'package:provider/provider.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter/services.dart';
 import 'dart:math';
@@ -29,7 +30,7 @@ class UserdataState extends State<Userdata> {
   // var d;
   int len;
   String minutes;
-  int totalminuites;
+  double totalminuites;
   int totaldistance;
   double distance;
   double score;
@@ -45,7 +46,7 @@ class UserdataState extends State<Userdata> {
   final databaseReference = FirebaseDatabase.instance.reference();
   // List<Map> lists = [];
   Item selectedUser;
-
+  var providerProgressScreen;
   List<String> users = <String>[
     'Jan',
     'Feb',
@@ -67,6 +68,8 @@ class UserdataState extends State<Userdata> {
   void initState() {
     super.initState();
     // readData();
+    providerProgressScreen =
+        Provider.of<ProgressScreenProvider>(context, listen: false);
     _ref = FirebaseDatabase.instance.reference().child(uploadAuth);
 
     var now = new DateTime.now();
@@ -79,8 +82,8 @@ class UserdataState extends State<Userdata> {
     double percentmax, vo2;
 
     percentmax = (0.8 +
-        0.1894393 * (exp(-0.012778 * int.parse(totalminuites.toString()))) +
-        0.2989558 * (exp(-0.1932605 * int.parse(totalminuites.toString()))));
+        0.1894393 * (exp(-0.012778 * double.parse(totalminuites.toString()))) +
+        0.2989558 * (exp(-0.1932605 * double.parse(totalminuites.toString()))));
 
     vo2 = ((-4.60 +
             0.182258 *
@@ -88,19 +91,21 @@ class UserdataState extends State<Userdata> {
 
                     // (int.parse(totaldistance.toString()) *
                     1000 /
-                    int.parse(totalminuites.toString()))) +
+                    double.parse(totalminuites.toString()))) +
         0.000104 *
             pow(
                 int.parse(totaldistance.toString()) *
                     1000 /
-                    int.parse(totalminuites.toString()),
+                    double.parse(totalminuites.toString()),
                 2));
+
     setState(() {
       score = vo2 / percentmax;
     });
 
-    // print(score);
-    return score;
+
+    providerProgressScreen.setScoreAndGoalToAchieve(score);
+    // return score;
   }
 
   Widget onTab() {
@@ -130,10 +135,12 @@ class UserdataState extends State<Userdata> {
         Duration _duration = Duration(
           hours: picker.getSelectedValues()[0],
         );
-        setState(() {
-          totaldistance = num.parse(hours1.toString().substring(0, 1));
-          print(totaldistance);
-        });
+
+        // String a = picker.getSelectedValues()[0].toString();
+        totaldistance = num.parse(picker.getSelectedValues()[0].toString());
+        providerProgressScreen.setTotalDistance(totaldistance);
+
+       
       },
     ).showDialog(context);
   }
@@ -149,7 +156,7 @@ class UserdataState extends State<Userdata> {
       delimiter: <PickerDelimiter>[
         PickerDelimiter(
           child: Container(
-            width: 30.0,
+            // width: 30.0,
             alignment: Alignment.center,
             child: Icon(Icons.more_vert),
           ),
@@ -162,22 +169,30 @@ class UserdataState extends State<Userdata> {
       title: const Text('Select Minutes'),
       selectedTextStyle: TextStyle(color: Colors.green),
       onConfirm: (Picker picker, List<int> value) {
-        Duration hours1 = Duration(hours: picker.getSelectedValues()[0]);
-        Duration minutes1 = Duration(minutes: picker.getSelectedValues()[1]);
 
-        // You get your duration here
+        // Duration hours1 = Duration(hours: picker.getSelectedValues()[0]);
+        // Duration minutes1 = Duration(minutes: picker.getSelectedValues()[1]);
+        // Duration seconds1 = Duration(seconds: picker.getSelectedValues()[2]);
+
+
+        // // You get your duration here
         Duration _duration = Duration(
           hours: picker.getSelectedValues()[0],
           minutes: picker.getSelectedValues()[1],
         );
 
-        int hoursnew = num.parse(hours1.toString().substring(0, 1)) * 60;
+        String timeForShow =
+            "0${picker.getSelectedValues()[0]}:${picker.getSelectedValues()[1].toString().length > 1 ? picker.getSelectedValues()[1] : (0.toString() + picker.getSelectedValues()[1].toString())}:${picker.getSelectedValues()[2].toString().length > 1 ? picker.getSelectedValues()[2] : (0.toString() + picker.getSelectedValues()[2].toString())}";
+        int hoursnew =
+            num.parse((picker.getSelectedValues()[1] * 60).toString());
 
-        int minutesnew = num.parse(minutes1.toString().substring(2, 4));
-        setState(() {
-          totalminuites = hoursnew + minutesnew;
-          print(totalminuites);
-        });
+        int minutesnew = num.parse(picker.getSelectedValues()[1].toString());
+        double seconds =
+            num.parse((picker.getSelectedValues()[2] / 60).toStringAsFixed(2));
+        totalminuites = (hoursnew + minutesnew + seconds).toDouble();
+        providerProgressScreen.setTotalHourAndMinutes(timeForShow);
+        return totalminuites;
+
       },
     ).showDialog(context);
   }
@@ -194,13 +209,11 @@ class UserdataState extends State<Userdata> {
         var date = [];
         var score = [];
         try {
-          snapshot.value.forEach((x) => {
-                if (x != null)
-                  {
-                    date.add(
-                        x["DateString"].substring(x["DateString"].length - 2)),
-                    score.add(x["Score"].truncate())
-                  }
+          Map snapshotData = snapshot.value;
+          snapshotData.forEach((key, value) => {
+                date.add(value["DateString"]
+                    .substring(value["DateString"].length - 2)),
+                score.add(value["Score"].truncate())
               });
         } catch (_) {
           date = ["0"];
@@ -414,55 +427,46 @@ class UserdataState extends State<Userdata> {
                   child: Container(
                     decoration:
                         BoxDecoration(border: Border.all(color: Colors.green)),
-                    child: SizedBox(
-                      width: 380,
-                      height: 250,
-                      child: Column(
-                        children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              Text(
-                                'What is your goal?',
-                                style: TextStyle(
-                                    height: 1.5,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 22),
-                              ),
-                            ],
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text(
-                                'Think of a certain distance that you would \n like to run in a certain time, \n in one or two months fom now?',
-                                textAlign: TextAlign.center,
-                                overflow: TextOverflow.ellipsis,
-                                style: TextStyle(
-                                    height: 1,
-                                    // fontWeight: FontWeight.bold,
-                                    fontSize: 18),
-                              ),
-                            ],
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: <Widget>[
-                              Icon(
-                                Icons.trending_up,
-                                color: Colors.black,
-                                size: 36.0,
-                                semanticLabel:
-                                    'Text to announce in accessibility modes',
-                              ),
-                              Icon(
-                                Icons.access_time,
-                                color: Colors.blue,
-                                size: 36.0,
-                              ),
-                            ],
-                          ),
-                          Row(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Text(
+                          'What is your goal?',
+                          style: TextStyle(
+                              height: 1.5,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 22),
+                        ),
+                        Text(
+                          'Think of a certain distance that you would \n like to run in a certain time, \n in one or two months fom now?',
+                          textAlign: TextAlign.center,
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyle(
+                              height: 1,
+                              // fontWeight: FontWeight.bold,
+                              fontSize: 18),
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: <Widget>[
+                            Icon(
+                              Icons.trending_up,
+                              color: Colors.black,
+                              size: 36.0,
+                              semanticLabel:
+                                  'Text to announce in accessibility modes',
+                            ),
+                            Icon(
+                              Icons.access_time,
+                              color: Colors.blue,
+                              size: 36.0,
+                            ),
+                          ],
+                        ),
+                        Consumer<ProgressScreenProvider>(
+                            builder: (context, consumer, childWidget) {
+                          return Row(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
                               Padding(
@@ -473,7 +477,12 @@ class UserdataState extends State<Userdata> {
                                     borderRadius: BorderRadius.circular(18.0),
                                   ),
                                   child: Text(
-                                    "Distance $totaldistance".toUpperCase(),
+
+                                    consumer.totaldistance == null
+                                        ? "SELECT  Distance".toUpperCase()
+                                        : consumer.totaldistance.toString() +
+                                            " Km",
+
                                     style: TextStyle(
                                       fontSize: 14.0,
                                       color: Colors.green,
@@ -494,7 +503,11 @@ class UserdataState extends State<Userdata> {
                                     borderRadius: BorderRadius.circular(18.0),
                                   ),
                                   child: Text(
-                                    "Minutes $totalminuites".toUpperCase(),
+
+                                    consumer.totalHourWithMinutes == null
+                                        ? "SELECT Minutes".toUpperCase()
+                                        : consumer.totalHourWithMinutes,
+
                                     style: TextStyle(
                                       fontSize: 14.0,
                                       color: Colors.green,
@@ -508,32 +521,38 @@ class UserdataState extends State<Userdata> {
                                 ),
                               ),
                             ],
-                          ),
-                          Row(
-                            children: [
-                              Padding(
-                                padding: EdgeInsets.fromLTRB(145, 0, 0, 0),
-                                child: RaisedButton(
-                                  color: Colors.white,
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(8.0),
-                                  ),
-                                  child: Text(
-                                    "Score: $score".toUpperCase(),
-                                    style: TextStyle(
-                                      fontSize: 14.0,
-                                      color: Colors.green,
-                                    ),
-                                  ),
-                                  onPressed: () {
-                                    createData1();
-                                  },
-                                ),
+                          );
+                        }),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            RaisedButton(
+                              color: Colors.white,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(8.0),
                               ),
-                            ],
-                          )
-                        ],
-                      ),
+                              child: Consumer<ProgressScreenProvider>(
+                                  builder: (context, consumer, childWidget) {
+                                return Text(
+                                  consumer.score != null &&
+                                          consumer.score.isFinite
+                                      ? "Score: ${consumer.score.toStringAsFixed(2)}"
+                                          .toUpperCase()
+                                      : "Calculate Score",
+                                  style: TextStyle(
+                                    fontSize: 14.0,
+                                    color: Colors.green,
+                                  ),
+                                );
+                              }),
+                              onPressed: () {
+                                createData1();
+                              },
+                            ),
+                          ],
+                        )
+                      ],
                     ),
                   ),
                 ),

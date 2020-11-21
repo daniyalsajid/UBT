@@ -1,3 +1,4 @@
+import 'package:UBT/states/progress_screen_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -25,7 +26,10 @@ class MyApp extends StatelessWidget {
         StreamProvider(
           create: (context) =>
               context.read<AuthenticationService>().authStateChanges,
-        )
+        ),
+        ChangeNotifierProvider(
+          create: (_) => ProgressScreenProvider(),
+        ),
       ],
       child: MaterialApp(
         title: 'UBT-Running',

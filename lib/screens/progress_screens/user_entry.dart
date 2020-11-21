@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_picker/flutter_picker.dart';
 import 'package:date_field/date_field.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter/services.dart';
 import 'dart:math';
@@ -15,40 +16,19 @@ class UserEntry extends StatefulWidget {
 class UserEntryState extends State<UserEntry> {
   String calories, heartrate;
   double pace, percentmax, vo2, score, distance;
-  // double distance;
+
   String minutes;
-  int totalminuites;
-  // var minutess = int.parse(minutes);
-  // int pace;
+  int totalminuites, height;
+
   DateTime mydate = DateTime.now();
   // String userDistance;
 
   String userUID;
   final uploadAuth = FirebaseAuth.instance.currentUser.uid;
 
-  // String postid = FieldPath.documentId(docid);
-  // final databaseReference = FirebaseDatabase.instance.reference();
-  // final DocumentReference = FirebaseFirestore.instance;
-
-  // getUserName(name) {
-  //   this.userName = name;
-  // }
-
   getUserUID(firebaseAuth) {
     this.userUID = firebaseAuth.UserUID;
   }
-
-  // getUserDate(pace) {
-  //   this.pace = distance;
-  // }
-
-  // getUserDistance(distance) {
-  //   this.userDistance = distance;
-  // }
-
-  // getUserCalories(calories) {
-  //   this.userCalories = calories;
-  // }
 
 //RealtimeDatabase
   createData1() {
@@ -83,9 +63,6 @@ class UserEntryState extends State<UserEntry> {
     DatabaseReference databaseReference =
         FirebaseDatabase.instance.reference().child(uploadAuth);
 
-    // Map date_map = {'Year':,'Mon':''Day':formattedDate1,
-    // }
-
     databaseReference
         .child(year.toString())
         .child(month.toString())
@@ -96,6 +73,7 @@ class UserEntryState extends State<UserEntry> {
       'Calories': calories,
       'DateString': formattedDate,
       'Distance': distance,
+      'Höhenunterschied': height,
       'Pace': pace,
       'Percent_max': percentmax,
       'VO2': vo2,
@@ -146,8 +124,10 @@ class UserEntryState extends State<UserEntry> {
         // print(_duration);
         // print(hoursnew);
         // print(minutesnew);
+        setState(() {
+          totalminuites = hoursnew + minutesnew + secondsnew;
+        });
 
-        totalminuites = hoursnew + minutesnew + secondsnew;
         // print(totalminuites);
 
         // + int.parse(secondsnew.toString());
@@ -211,21 +191,6 @@ class UserEntryState extends State<UserEntry> {
             },
             lastDate: DateTime(2025),
           ),
-
-          // Padding(
-          //   padding: EdgeInsets.all(8.0),
-          //   child: TextFormField(
-          //     keyboardType: TextInputType.number,
-          //     decoration: InputDecoration(
-          //         labelText: 'Minutes',
-          //         fillColor: Colors.white,
-          //         focusedBorder: OutlineInputBorder(
-          //             borderSide: BorderSide(color: Colors.blue, width: 2.0))),
-          //     onChanged: (String min) {
-          //       minutes = min;
-          //     },
-          //   ),
-          // ),
           Padding(
             padding: EdgeInsets.all(8.0),
             child: TextFormField(
@@ -260,6 +225,20 @@ class UserEntryState extends State<UserEntry> {
             child: TextFormField(
               keyboardType: TextInputType.number,
               decoration: InputDecoration(
+                  labelText: 'Höhenunterschied  ',
+                  fillColor: Colors.white,
+                  focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.green, width: 2.0))),
+              onChanged: (String hight) {
+                height = int.parse(hight);
+              },
+            ),
+          ),
+          Padding(
+            padding: EdgeInsets.all(8.0),
+            child: TextFormField(
+              keyboardType: TextInputType.number,
+              decoration: InputDecoration(
                   labelText: 'Calories',
                   fillColor: Colors.white,
                   focusedBorder: OutlineInputBorder(
@@ -285,36 +264,16 @@ class UserEntryState extends State<UserEntry> {
                 onPressed: () {
                   // createData();
                   createData1();
-                  // isvalue();
-                  // writeUserData(userDate, userDistance, userCalories);
+                  Fluttertoast.showToast(
+                      msg: "Data Is Stored",
+                      toastLength: Toast.LENGTH_SHORT,
+                      gravity: ToastGravity.CENTER,
+                      timeInSecForIosWeb: 1,
+                      backgroundColor: Colors.lightGreen,
+                      textColor: Colors.white,
+                      fontSize: 16.0);
                 },
               ),
-              // RaisedButton(
-              //   color: Colors.blue,
-              //   shape: RoundedRectangleBorder(
-              //       borderRadius: BorderRadius.circular(16)),
-              //   child: Text("Read"),
-              //   textColor: Colors.white,
-              //   onPressed: () {
-              //     readData();
-              //   },
-              // ),
-              // RaisedButton(
-              //   color: Colors.blue,
-              //   shape: RoundedRectangleBorder(
-              //       borderRadius: BorderRadius.circular(16)),
-              //   child: Text("Update"),
-              //   textColor: Colors.white,
-              //   onPressed: () {},
-              // ),
-              // RaisedButton(
-              //   color: Colors.blue,
-              //   shape: RoundedRectangleBorder(
-              //       borderRadius: BorderRadius.circular(16)),
-              //   child: Text("Delete"),
-              //   textColor: Colors.white,
-              //   onPressed: () {},
-              // )
             ],
           ),
         ],

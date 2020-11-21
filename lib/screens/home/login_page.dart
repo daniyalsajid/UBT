@@ -1,6 +1,7 @@
 import 'package:UBT/screens/firebase_services/authentication_service.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class SignInPage extends StatelessWidget {
   // final formKey = new GlobalKey<FormState>();
@@ -51,7 +52,12 @@ class SignInPage extends StatelessWidget {
                 SizedBox(height: size.height * 0.03),
                 TextFormField(
                   // key: formKey,
-                  validator: PassValidator.validate,
+                  validator: (value) {
+                    if (value.isEmpty) {
+                      return "Enter TExt";
+                    }
+                    return null;
+                  },
                   controller: passwordController,
                   style: TextStyle(fontFamily: 'Montserrat', fontSize: 20.0),
                   decoration: InputDecoration(
@@ -72,6 +78,14 @@ class SignInPage extends StatelessWidget {
                           email: emailController.text.trim(),
                           password: passwordController.text.trim(),
                         );
+                    Fluttertoast.showToast(
+                        msg: "Welcome",
+                        toastLength: Toast.LENGTH_SHORT,
+                        gravity: ToastGravity.TOP,
+                        timeInSecForIosWeb: 1,
+                        backgroundColor: Colors.lightGreen,
+                        textColor: Colors.white,
+                        fontSize: 16.0);
                   },
                   child: Text(
                     "Sign In",

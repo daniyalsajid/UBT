@@ -15,10 +15,10 @@ class UserEntry extends StatefulWidget {
 
 class UserEntryState extends State<UserEntry> {
   String calories, heartrate;
-  double pace, percentmax, vo2, score, distance;
+  double pace, percentmax, vo2, score, distance, height;
 
   String minutes;
-  int totalminuites, height;
+  int totalminuites;
 
   DateTime mydate = DateTime.now();
   // String userDistance;
@@ -192,6 +192,7 @@ class UserEntryState extends State<UserEntry> {
               },
               lastDate: DateTime(2025),
             ),
+
             Padding(
               padding: EdgeInsets.all(8.0),
               child: TextFormField(
@@ -206,6 +207,21 @@ class UserEntryState extends State<UserEntry> {
                   heartrate = ht;
                 },
               ),
+
+          ),
+          Padding(
+            padding: EdgeInsets.all(8.0),
+            child: TextFormField(
+              keyboardType: TextInputType.number,
+              decoration: InputDecoration(
+                  labelText: 'Höhenunterschied  ',
+                  fillColor: Colors.white,
+                  focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.green, width: 2.0))),
+              onChanged: (String hight) {
+                height = double.parse(hight);
+              },
+
             ),
             Padding(
               padding: EdgeInsets.all(8.0),

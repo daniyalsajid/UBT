@@ -98,8 +98,12 @@ class UserdataState extends State<Userdata> {
                     1000 /
                     double.parse(totalminuites.toString()),
                 2));
-    score = (vo2 / percentmax);
-    // print(score);
+
+    setState(() {
+      score = vo2 / percentmax;
+    });
+
+
     providerProgressScreen.setScoreAndGoalToAchieve(score);
     // return score;
   }
@@ -131,12 +135,14 @@ class UserdataState extends State<Userdata> {
         Duration _duration = Duration(
           hours: picker.getSelectedValues()[0],
         );
+
         // String a = picker.getSelectedValues()[0].toString();
         totaldistance = num.parse(picker.getSelectedValues()[0].toString());
         providerProgressScreen.setTotalDistance(totaldistance);
+
+       
       },
     ).showDialog(context);
-    return Container();
   }
 
   Widget onTap() {
@@ -163,16 +169,18 @@ class UserdataState extends State<Userdata> {
       title: const Text('Select Minutes'),
       selectedTextStyle: TextStyle(color: Colors.green),
       onConfirm: (Picker picker, List<int> value) {
+
         // Duration hours1 = Duration(hours: picker.getSelectedValues()[0]);
         // Duration minutes1 = Duration(minutes: picker.getSelectedValues()[1]);
         // Duration seconds1 = Duration(seconds: picker.getSelectedValues()[2]);
+
 
         // // You get your duration here
         Duration _duration = Duration(
           hours: picker.getSelectedValues()[0],
           minutes: picker.getSelectedValues()[1],
-          seconds: picker.getSelectedValues()[2],
         );
+
         String timeForShow =
             "0${picker.getSelectedValues()[0]}:${picker.getSelectedValues()[1].toString().length > 1 ? picker.getSelectedValues()[1] : (0.toString() + picker.getSelectedValues()[1].toString())}:${picker.getSelectedValues()[2].toString().length > 1 ? picker.getSelectedValues()[2] : (0.toString() + picker.getSelectedValues()[2].toString())}";
         int hoursnew =
@@ -184,9 +192,9 @@ class UserdataState extends State<Userdata> {
         totalminuites = (hoursnew + minutesnew + seconds).toDouble();
         providerProgressScreen.setTotalHourAndMinutes(timeForShow);
         return totalminuites;
+
       },
     ).showDialog(context);
-    return Container();
   }
 
   chart(String month) {
@@ -469,17 +477,21 @@ class UserdataState extends State<Userdata> {
                                     borderRadius: BorderRadius.circular(18.0),
                                   ),
                                   child: Text(
+
                                     consumer.totaldistance == null
                                         ? "SELECT  Distance".toUpperCase()
                                         : consumer.totaldistance.toString() +
                                             " Km",
+
                                     style: TextStyle(
                                       fontSize: 14.0,
                                       color: Colors.green,
                                     ),
                                   ),
                                   onPressed: () {
-                                    onTab();
+                                    setState(() {
+                                      onTab();
+                                    });
                                   },
                                 ),
                               ),
@@ -491,16 +503,20 @@ class UserdataState extends State<Userdata> {
                                     borderRadius: BorderRadius.circular(18.0),
                                   ),
                                   child: Text(
+
                                     consumer.totalHourWithMinutes == null
                                         ? "SELECT Minutes".toUpperCase()
                                         : consumer.totalHourWithMinutes,
+
                                     style: TextStyle(
                                       fontSize: 14.0,
                                       color: Colors.green,
                                     ),
                                   ),
                                   onPressed: () {
-                                    onTap();
+                                    setState(() {
+                                      onTap();
+                                    });
                                   },
                                 ),
                               ),

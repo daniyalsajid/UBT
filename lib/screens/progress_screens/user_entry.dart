@@ -156,127 +156,133 @@ class UserEntryState extends State<UserEntry> {
         centerTitle: true,
         backgroundColor: Colors.green,
       ),
-      body: Column(
-        children: <Widget>[
-          Padding(
-            padding: EdgeInsets.all(8.0),
-            child: RaisedButton(
-              color: Colors.white,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(18.0),
-              ),
-              child: Text(
-                "Select Duration".toUpperCase(),
-                style: TextStyle(
-                  fontSize: 14.0,
-                  color: Colors.green,
-                ),
-              ),
-              onPressed: () {
-                onTap();
-              },
-            ),
-          ),
-          Padding(
-            padding: EdgeInsets.all(8.0),
-            child: Text('Total Minutes: $totalminuites'),
-          ),
-          DateTimeField(
-            selectedDate: mydate,
-            onDateSelected: (DateTime date) {
-              setState(() {
-                mydate = date;
-                // print(mydate);
-              });
-            },
-            lastDate: DateTime(2025),
-          ),
-          Padding(
-            padding: EdgeInsets.all(8.0),
-            child: TextFormField(
-              keyboardType: TextInputType.number,
-              decoration: InputDecoration(
-                  labelText: 'Heart-Rate',
-                  fillColor: Colors.white,
-                  focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.green, width: 2.0))),
-              onChanged: (String ht) {
-                heartrate = ht;
-              },
-            ),
-          ),
-          Padding(
-            padding: EdgeInsets.all(8.0),
-            child: TextFormField(
-              keyboardType: TextInputType.number,
-              decoration: InputDecoration(
-                  labelText: 'Distance',
-                  fillColor: Colors.white,
-                  focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.green, width: 2.0))),
-              onChanged: (String dist) {
-                distance = double.parse(dist);
-                // distance = double.parse(dist);
-              },
-            ),
-          ),
-          Padding(
-            padding: EdgeInsets.all(8.0),
-            child: TextFormField(
-              keyboardType: TextInputType.number,
-              decoration: InputDecoration(
-                  labelText: 'Höhenunterschied  ',
-                  fillColor: Colors.white,
-                  focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.green, width: 2.0))),
-              onChanged: (String hight) {
-                height = int.parse(hight);
-              },
-            ),
-          ),
-          Padding(
-            padding: EdgeInsets.all(8.0),
-            child: TextFormField(
-              keyboardType: TextInputType.number,
-              decoration: InputDecoration(
-                  labelText: 'Calories',
-                  fillColor: Colors.white,
-                  focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.green, width: 2.0))),
-              // onChanged: (String calories) {
-              //   getUserCalories(calories);
-              // },
-              onChanged: (String cal) {
-                calories = cal;
-                //getUserCalories(calories);
-              },
-            ),
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: <Widget>[
-              RaisedButton(
-                color: Colors.green,
+      body: SingleChildScrollView(
+        child: Column(
+          children: <Widget>[
+            Padding(
+              padding: EdgeInsets.all(8.0),
+              child: RaisedButton(
+                color: Colors.white,
                 shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(16)),
-                child: Text("Create"),
-                textColor: Colors.white,
+                  borderRadius: BorderRadius.circular(18.0),
+                ),
+                child: Text(
+                  "Select Duration".toUpperCase(),
+                  style: TextStyle(
+                    fontSize: 14.0,
+                    color: Colors.green,
+                  ),
+                ),
                 onPressed: () {
-                  // createData();
-                  createData1();
-                  Fluttertoast.showToast(
-                      msg: "Data Is Stored",
-                      toastLength: Toast.LENGTH_SHORT,
-                      gravity: ToastGravity.CENTER,
-                      timeInSecForIosWeb: 1,
-                      backgroundColor: Colors.lightGreen,
-                      textColor: Colors.white,
-                      fontSize: 16.0);
+                  onTap();
                 },
               ),
-            ],
-          ),
-        ],
+            ),
+            Padding(
+              padding: EdgeInsets.all(8.0),
+              child: Text('Total Minutes: $totalminuites'),
+            ),
+            DateTimeField(
+              selectedDate: mydate,
+              onDateSelected: (DateTime date) {
+                setState(() {
+                  mydate = date;
+                  // print(mydate);
+                });
+              },
+              lastDate: DateTime(2025),
+            ),
+            Padding(
+              padding: EdgeInsets.all(8.0),
+              child: TextFormField(
+                keyboardType: TextInputType.number,
+                decoration: InputDecoration(
+                    labelText: 'Heart-Rate',
+                    fillColor: Colors.white,
+                    focusedBorder: OutlineInputBorder(
+                        borderSide:
+                            BorderSide(color: Colors.green, width: 2.0))),
+                onChanged: (String ht) {
+                  heartrate = ht;
+                },
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.all(8.0),
+              child: TextFormField(
+                keyboardType: TextInputType.number,
+                decoration: InputDecoration(
+                    labelText: 'Distance',
+                    fillColor: Colors.white,
+                    focusedBorder: OutlineInputBorder(
+                        borderSide:
+                            BorderSide(color: Colors.green, width: 2.0))),
+                onChanged: (String dist) {
+                  distance = double.parse(dist);
+                  // distance = double.parse(dist);
+                },
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.all(8.0),
+              child: TextFormField(
+                keyboardType: TextInputType.number,
+                decoration: InputDecoration(
+                    labelText: 'Höhenunterschied  ',
+                    fillColor: Colors.white,
+                    focusedBorder: OutlineInputBorder(
+                        borderSide:
+                            BorderSide(color: Colors.green, width: 2.0))),
+                onChanged: (String hight) {
+                  height = int.parse(hight);
+                },
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.all(8.0),
+              child: TextFormField(
+                keyboardType: TextInputType.number,
+                decoration: InputDecoration(
+                    labelText: 'Calories',
+                    fillColor: Colors.white,
+                    focusedBorder: OutlineInputBorder(
+                        borderSide:
+                            BorderSide(color: Colors.green, width: 2.0))),
+                // onChanged: (String calories) {
+                //   getUserCalories(calories);
+                // },
+                onChanged: (String cal) {
+                  calories = cal;
+                  //getUserCalories(calories);
+                },
+              ),
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: <Widget>[
+                RaisedButton(
+                  color: Colors.green,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(16)),
+                  child: Text("Create"),
+                  textColor: Colors.white,
+                  onPressed: () {
+                    // createData();
+                    createData1();
+                    Fluttertoast.showToast(
+                        msg: "Data Is Stored",
+                        toastLength: Toast.LENGTH_SHORT,
+                        gravity: ToastGravity.CENTER,
+                        timeInSecForIosWeb: 1,
+                        backgroundColor: Colors.lightGreen,
+                        textColor: Colors.white,
+                        fontSize: 16.0);
+                  },
+                ),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }

@@ -1,7 +1,10 @@
+import 'package:UBT/states/progress_screen_provider.dart';
+
 /// Line chart example
 import 'package:charts_flutter/flutter.dart' as charts;
 import 'package:flutter/material.dart';
 import 'package:UBT/screens/progress_screens/user_data.dart';
+import 'package:provider/provider.dart';
 
 class PointsLineChart extends StatelessWidget {
   final List<charts.Series<LinearSales, int>> seriesList;
@@ -20,35 +23,39 @@ class PointsLineChart extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return new charts.LineChart(seriesList,
-        // domainAxis: charts.AxisSpec<dynamic>(showAxisLine: true, renderSpec: RenderS),
-        // domainAxis: charts.DateTimeAxisSpec(
-        //     tickFormatterSpec: charts.AutoDateTimeTickFormatterSpec(
-        //         day: charts.TimeFormatterSpec(
-        //             format: 'dd', transitionFormat: 'dd MMM YYYY'))),
+    return Consumer<ProgressScreenProvider>(
+        builder: (context, consumer, childWidget) {
+      return new charts.LineChart(seriesList,
+          // domainAxis: charts.AxisSpec<dynamic>(showAxisLine: true, renderSpec: RenderS),
+          // domainAxis: charts.DateTimeAxisSpec(
+          //     tickFormatterSpec: charts.AutoDateTimeTickFormatterSpec(
+          //         day: charts.TimeFormatterSpec(
+          //             format: 'dd', transitionFormat: 'dd MMM YYYY'))),
 
-        animate: animate,
-        behaviors: [
-          new charts.RangeAnnotation([
-            new charts.LineAnnotationSegment(
-                30, charts.RangeAnnotationAxisType.measure,
-                startLabel: 'Goal To Achieve',
-                // endLabel: 'Measure 1 End',
-                color: charts.MaterialPalette.gray.shade400),
-            new charts.LineAnnotationSegment(
-                02, charts.RangeAnnotationAxisType.measure,
-                startLabel: 'Date',
-                // endLabel: 'Measure 1 End',
-                color: charts.MaterialPalette.gray.shade100),
-            new charts.LineAnnotationSegment(
-                0.0, charts.RangeAnnotationAxisType.domain,
-                startLabel: 'Score',
-                // endLabel: 'Measure 1 End',
-                color: charts.MaterialPalette.gray.shade100),
-          ])
-        ],
-        defaultRenderer: new charts.LineRendererConfig(
-            includePoints: true, includeArea: true, includeLine: true));
+          animate: animate,
+          behaviors: [
+            new charts.RangeAnnotation([
+              new charts.LineAnnotationSegment(
+                  consumer.score != null ? consumer.score.abs() : 20,
+                  charts.RangeAnnotationAxisType.measure,
+                  startLabel: 'Goal To Achieve',
+                  // endLabel: 'Measure 1 End',
+                  color: charts.MaterialPalette.gray.shade400),
+              new charts.LineAnnotationSegment(
+                  02, charts.RangeAnnotationAxisType.measure,
+                  startLabel: 'Date',
+                  // endLabel: 'Measure 1 End',
+                  color: charts.MaterialPalette.gray.shade100),
+              new charts.LineAnnotationSegment(
+                  0.0, charts.RangeAnnotationAxisType.domain,
+                  startLabel: 'Score',
+                  // endLabel: 'Measure 1 End',
+                  color: charts.MaterialPalette.gray.shade100),
+            ])
+          ],
+          defaultRenderer: new charts.LineRendererConfig(
+              includePoints: true, includeArea: true, includeLine: true));
+    });
   }
 
   // / Create one series with sample hard coded data.

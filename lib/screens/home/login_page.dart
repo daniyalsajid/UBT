@@ -1,6 +1,7 @@
 import 'package:UBT/screens/firebase_services/authentication_service.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class SignInPage extends StatelessWidget {
   // final formKey = new GlobalKey<FormState>();
@@ -51,7 +52,12 @@ class SignInPage extends StatelessWidget {
                 SizedBox(height: size.height * 0.03),
                 TextFormField(
                   // key: formKey,
-                  validator: PassValidator.validate,
+                  validator: (value) {
+                    if (value.isEmpty) {
+                      return "Enter TExt";
+                    }
+                    return null;
+                  },
                   controller: passwordController,
                   style: TextStyle(fontFamily: 'Montserrat', fontSize: 20.0),
                   decoration: InputDecoration(
@@ -61,14 +67,6 @@ class SignInPage extends StatelessWidget {
                         borderRadius: BorderRadius.circular(32.0)),
                   ),
                 ),
-
-                // RoundedInputField(
-                //   hintText: "Your Email",
-                //   onChanged: (value) {},
-                // ),
-                // RoundedPasswordField(
-                //   onChanged: (value) {},
-                // ),
                 SizedBox(height: size.height * 0.03),
                 MaterialButton(
                   minWidth: MediaQuery.of(context).size.width,
@@ -80,6 +78,14 @@ class SignInPage extends StatelessWidget {
                           email: emailController.text.trim(),
                           password: passwordController.text.trim(),
                         );
+                    Fluttertoast.showToast(
+                        msg: "Welcome",
+                        toastLength: Toast.LENGTH_SHORT,
+                        gravity: ToastGravity.TOP,
+                        timeInSecForIosWeb: 1,
+                        backgroundColor: Colors.lightGreen,
+                        textColor: Colors.white,
+                        fontSize: 16.0);
                   },
                   child: Text(
                     "Sign In",
@@ -91,42 +97,6 @@ class SignInPage extends StatelessWidget {
                   height: 100.0,
                   child: Image.asset('assets/images/ubt.png'),
                 ),
-
-                // AlreadyHaveAnAccountCheck(
-                //   login: true,
-                //   press: () {
-                //     Navigator.push(
-                //       context,
-                //       MaterialPageRoute(
-                //         builder: (context) {
-                //           return SignUpScreen();
-                //         },
-                //       ),
-                //     );
-                //   },
-                // ),
-                // RoundedButton(
-                //   text: "SIGN UP",
-                //   textColor: Colors.black,
-                //   press: () {
-                //     Navigator.push(
-                //       context,
-                //       MaterialPageRoute(
-                //         builder: (context) {
-                //           return SignUpScreen();
-                //         },
-                //       ),
-                //     );
-                //   },
-                // ),
-                // Positioned(
-                //   bottom: 0,
-                //   right: 0,
-                //   child: Image.asset(
-                //     "assets/ubt.png",
-                //     width: size.width * 0.4,
-                //   ),
-                // ),
               ],
             ),
           ),

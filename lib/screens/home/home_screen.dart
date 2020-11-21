@@ -2,8 +2,8 @@ import 'package:UBT/screens/profile_screen/profile_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:UBT/screens/progress_screens/user_entry.dart';
 import 'package:UBT/screens/progress_screens/week_progress.dart';
-import 'package:UBT/screens/progress_screens/graph_screen.dart';
-import 'package:UBT/screens/progress_screens/user_data1.dart';
+
+import 'package:UBT/screens/progress_screens/user_data.dart';
 
 class HomeScreen extends StatefulWidget {
   @override

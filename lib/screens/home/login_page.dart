@@ -61,14 +61,6 @@ class SignInPage extends StatelessWidget {
                         borderRadius: BorderRadius.circular(32.0)),
                   ),
                 ),
-
-                // RoundedInputField(
-                //   hintText: "Your Email",
-                //   onChanged: (value) {},
-                // ),
-                // RoundedPasswordField(
-                //   onChanged: (value) {},
-                // ),
                 SizedBox(height: size.height * 0.03),
                 MaterialButton(
                   minWidth: MediaQuery.of(context).size.width,
@@ -91,42 +83,6 @@ class SignInPage extends StatelessWidget {
                   height: 100.0,
                   child: Image.asset('assets/images/ubt.png'),
                 ),
-
-                // AlreadyHaveAnAccountCheck(
-                //   login: true,
-                //   press: () {
-                //     Navigator.push(
-                //       context,
-                //       MaterialPageRoute(
-                //         builder: (context) {
-                //           return SignUpScreen();
-                //         },
-                //       ),
-                //     );
-                //   },
-                // ),
-                // RoundedButton(
-                //   text: "SIGN UP",
-                //   textColor: Colors.black,
-                //   press: () {
-                //     Navigator.push(
-                //       context,
-                //       MaterialPageRoute(
-                //         builder: (context) {
-                //           return SignUpScreen();
-                //         },
-                //       ),
-                //     );
-                //   },
-                // ),
-                // Positioned(
-                //   bottom: 0,
-                //   right: 0,
-                //   child: Image.asset(
-                //     "assets/ubt.png",
-                //     width: size.width * 0.4,
-                //   ),
-                // ),
               ],
             ),
           ),

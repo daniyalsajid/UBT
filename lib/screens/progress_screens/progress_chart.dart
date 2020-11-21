@@ -1,7 +1,7 @@
 /// Line chart example
 import 'package:charts_flutter/flutter.dart' as charts;
 import 'package:flutter/material.dart';
-import 'package:UBT/screens/progress_screens/user_data1.dart';
+import 'package:UBT/screens/progress_screens/user_data.dart';
 
 class PointsLineChart extends StatelessWidget {
   final List<charts.Series<LinearSales, int>> seriesList;
@@ -29,7 +29,7 @@ class PointsLineChart extends StatelessWidget {
         behaviors: [
           new charts.RangeAnnotation([
             new charts.LineAnnotationSegment(
-                150, charts.RangeAnnotationAxisType.measure,
+                30, charts.RangeAnnotationAxisType.measure,
                 startLabel: 'Goal To Achieve',
                 // endLabel: 'Measure 1 End',
                 color: charts.MaterialPalette.gray.shade400),

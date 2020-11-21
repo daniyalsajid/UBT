@@ -1,12 +1,9 @@
-// import 'package:UBT/Utils/CaloriesCalculator.dart';
-import 'package:UBT/screens/progress_screens/user_data1.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+
 import 'package:firebase_auth/firebase_auth.dart';
-import 'dart:async';
-import 'dart:collection';
+
 import 'package:intl/intl.dart';
 
 import 'package:flutter/foundation.dart';
@@ -104,63 +101,64 @@ class _WeekprogressState extends State<Weekprogress> {
     return Container(
       height: 50,
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Row(
-            children: [
-              SizedBox(
-                width: 05,
-                height: 30,
-              ),
-              Text(
-                userdata['DateString'].substring(5, 10),
-                style: TextStyle(
-                    color: Colors.green[900],
-                    fontSize: 22,
-                    fontWeight: FontWeight.w800),
-              ),
-              SizedBox(
-                width: 40,
-              ),
-              Text(
-                userdata['Distance'.toString()].substring(0, 1),
-                style: TextStyle(
-                    color: Colors.green[900],
-                    fontSize: 22,
-                    fontWeight: FontWeight.w800),
-              ),
-              SizedBox(
-                width: 60,
-              ),
-              Text(
-                userdata['Minutes'.toString()],
-                style: TextStyle(
-                    color: Colors.green[900],
-                    fontSize: 22,
-                    fontWeight: FontWeight.w800),
-              ),
-              SizedBox(
-                width: 55,
-              ),
-              Text(
-                userdata['Pace'].toString().substring(0, 1),
-                style: TextStyle(
-                    color: Colors.green[900],
-                    fontSize: 22,
-                    fontWeight: FontWeight.w800),
-              ),
-              SizedBox(
-                width: 45,
-              ),
-              Text(
-                userdata['Score'].toString().substring(0, 2),
-                style: TextStyle(
-                    color: Colors.green[900],
-                    fontSize: 22,
-                    fontWeight: FontWeight.w800),
-              ),
-            ],
+          Flexible(
+            child: Row(
+              children: [
+                SizedBox(
+                  height: 30,
+                ),
+                Text(
+                  userdata['DateString'].substring(5, 10),
+                  style: TextStyle(
+                      color: Colors.green[900],
+                      fontSize: 22,
+                      fontWeight: FontWeight.w800),
+                ),
+                SizedBox(
+                  width: 40,
+                ),
+                Text(
+                  userdata['Distance'].toString().substring(0, 1),
+                  style: TextStyle(
+                      color: Colors.green[900],
+                      fontSize: 22,
+                      fontWeight: FontWeight.w800),
+                ),
+                SizedBox(
+                  width: 60,
+                ),
+                Text(
+                  userdata['Minutes'.toString()],
+                  style: TextStyle(
+                      color: Colors.green[900],
+                      fontSize: 22,
+                      fontWeight: FontWeight.w800),
+                ),
+                SizedBox(
+                  width: 55,
+                ),
+                Text(
+                  userdata['Pace'].toString().substring(0, 1),
+                  style: TextStyle(
+                      color: Colors.green[900],
+                      fontSize: 22,
+                      fontWeight: FontWeight.w800),
+                ),
+                SizedBox(
+                  width: 45,
+                ),
+                Text(
+                  userdata['Score'].toString().substring(0, 2),
+                  style: TextStyle(
+                      color: Colors.green[900],
+                      fontSize: 22,
+                      fontWeight: FontWeight.w800),
+                ),
+              ],
+            ),
           ), //ROw
         ],
       ),

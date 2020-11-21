@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'package:flutter/material.dart';
@@ -272,15 +274,23 @@ class UserdataState extends State<Userdata> {
         var date = [];
         var score = [];
         try {
-          snapshot.value.forEach((x) => {
-                if (x != null)
-                  {
-                    date.add(
-                        x["DateString"].substring(x["DateString"].length - 2)),
-                    score.add(x["Score"].truncate())
-                  }
+          Map snapshotData = snapshot.value;
+          snapshotData.forEach((key, value) => {
+                date.add(value["DateString"]
+                    .substring(value["DateString"].length - 2)),
+                score.add(value["Score"].truncate())
               });
+
+          // snapshot.value.forEach((x,i) => {
+          //       if (x != null)
+          //         {
+          //           date.add(
+          //               x["DateString"].substring(x["DateString"].length - 2)),
+          //           score.add(x["Score"].truncate())
+          //         }
+          //     });
         } catch (_) {
+          print(_);
           date = ["0"];
           score = [0];
         }

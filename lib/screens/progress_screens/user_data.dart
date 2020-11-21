@@ -84,7 +84,7 @@ class UserdataState extends State<Userdata> {
 
     vo2 = ((-4.60 +
             0.182258 *
-                (distance *
+                (totaldistance *
 
                     // (int.parse(totaldistance.toString()) *
                     1000 /
@@ -95,8 +95,10 @@ class UserdataState extends State<Userdata> {
                     1000 /
                     int.parse(totalminuites.toString()),
                 2));
+    setState(() {
+      score = vo2 / percentmax;
+    });
 
-    score = vo2 / percentmax;
     // print(score);
     return score;
   }
@@ -128,11 +130,12 @@ class UserdataState extends State<Userdata> {
         Duration _duration = Duration(
           hours: picker.getSelectedValues()[0],
         );
-
-        totaldistance = num.parse(hours1.toString().substring(0, 1));
+        setState(() {
+          totaldistance = num.parse(hours1.toString().substring(0, 1));
+          print(totaldistance);
+        });
       },
     ).showDialog(context);
-    return Container();
   }
 
   Widget onTap() {
@@ -161,25 +164,22 @@ class UserdataState extends State<Userdata> {
       onConfirm: (Picker picker, List<int> value) {
         Duration hours1 = Duration(hours: picker.getSelectedValues()[0]);
         Duration minutes1 = Duration(minutes: picker.getSelectedValues()[1]);
-        Duration seconds1 = Duration(seconds: picker.getSelectedValues()[2]);
 
         // You get your duration here
         Duration _duration = Duration(
           hours: picker.getSelectedValues()[0],
           minutes: picker.getSelectedValues()[1],
-          seconds: picker.getSelectedValues()[2],
         );
 
         int hoursnew = num.parse(hours1.toString().substring(0, 1)) * 60;
 
         int minutesnew = num.parse(minutes1.toString().substring(2, 4));
-
-        totalminuites = hoursnew + minutesnew;
-
-        return totalminuites;
+        setState(() {
+          totalminuites = hoursnew + minutesnew;
+          print(totalminuites);
+        });
       },
     ).showDialog(context);
-    return Container();
   }
 
   chart(String month) {
@@ -473,14 +473,16 @@ class UserdataState extends State<Userdata> {
                                     borderRadius: BorderRadius.circular(18.0),
                                   ),
                                   child: Text(
-                                    "Distance".toUpperCase(),
+                                    "Distance $totaldistance".toUpperCase(),
                                     style: TextStyle(
                                       fontSize: 14.0,
                                       color: Colors.green,
                                     ),
                                   ),
                                   onPressed: () {
-                                    onTab();
+                                    setState(() {
+                                      onTab();
+                                    });
                                   },
                                 ),
                               ),
@@ -492,14 +494,16 @@ class UserdataState extends State<Userdata> {
                                     borderRadius: BorderRadius.circular(18.0),
                                   ),
                                   child: Text(
-                                    "Minutes".toUpperCase(),
+                                    "Minutes $totalminuites".toUpperCase(),
                                     style: TextStyle(
                                       fontSize: 14.0,
                                       color: Colors.green,
                                     ),
                                   ),
                                   onPressed: () {
-                                    onTap();
+                                    setState(() {
+                                      onTap();
+                                    });
                                   },
                                 ),
                               ),

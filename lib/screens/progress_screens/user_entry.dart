@@ -15,10 +15,10 @@ class UserEntry extends StatefulWidget {
 
 class UserEntryState extends State<UserEntry> {
   String calories, heartrate;
-  double pace, percentmax, vo2, score, distance;
+  double pace, percentmax, vo2, score, distance, height;
 
   String minutes;
-  int totalminuites, height;
+  int totalminuites;
 
   DateTime mydate = DateTime.now();
   // String userDistance;
@@ -230,7 +230,7 @@ class UserEntryState extends State<UserEntry> {
                   focusedBorder: OutlineInputBorder(
                       borderSide: BorderSide(color: Colors.green, width: 2.0))),
               onChanged: (String hight) {
-                height = int.parse(hight);
+                height = double.parse(hight);
               },
             ),
           ),

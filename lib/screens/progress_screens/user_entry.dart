@@ -1,4 +1,6 @@
 import 'package:firebase_database/firebase_database.dart';
+import 'package:UBT/states/progress_screen_provider.dart';
+import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_picker/flutter_picker.dart';
 import 'package:date_field/date_field.dart';
@@ -15,10 +17,11 @@ class UserEntry extends StatefulWidget {
 
 class UserEntryState extends State<UserEntry> {
   String calories, heartrate;
+  var providerProgressScreen;
   double pace, percentmax, vo2, score, distance, height;
 
   String minutes;
-  int totalminuites;
+  double totalminuites;
 
   DateTime mydate = DateTime.now();
   // String userDistance;
@@ -30,6 +33,14 @@ class UserEntryState extends State<UserEntry> {
     this.userUID = firebaseAuth.UserUID;
   }
 
+  @override
+  void initState() {
+    super.initState();
+    // readData();
+    providerProgressScreen =
+        Provider.of<ProgressScreenProvider>(context, listen: false);
+  }
+
 //RealtimeDatabase
   createData1() {
     String formattedDate = DateFormat('yyyy-MM-dd').format(mydate);
@@ -37,11 +48,11 @@ class UserEntryState extends State<UserEntry> {
     int month = int.parse(DateFormat('M').format(mydate));
     int year = int.parse(DateFormat('y').format(mydate));
     // double pace, percentmax, vo2, score, distance;
-    pace = (int.parse(totalminuites.toString()) / distance);
+    pace = (totalminuites / distance);
     // int.parse(distance.toString()));
     percentmax = (0.8 +
-        0.1894393 * (exp(-0.012778 * int.parse(totalminuites.toString()))) +
-        0.2989558 * (exp(-0.1932605 * int.parse(totalminuites.toString()))));
+        0.1894393 * (exp(-0.012778 * totalminuites)) +
+        0.2989558 * (exp(-0.1932605 * totalminuites)));
 
     vo2 = ((-4.60 +
             0.182258 *
@@ -49,14 +60,14 @@ class UserEntryState extends State<UserEntry> {
 
                     // (int.parse(distance.toString()) *
                     1000 /
-                    int.parse(totalminuites.toString()))) +
+                    totalminuites)) +
         0.000104 *
             pow(
                 distance *
 
                     // int.parse(distance.toString()) *
                     1000 /
-                    int.parse(totalminuites.toString()),
+                    totalminuites,
                 2));
     score = vo2 / percentmax;
 
@@ -92,7 +103,7 @@ class UserEntryState extends State<UserEntry> {
       delimiter: <PickerDelimiter>[
         PickerDelimiter(
           child: Container(
-            width: 30.0,
+            // width: 30.0,
             alignment: Alignment.center,
             child: Icon(Icons.more_vert),
           ),
@@ -102,51 +113,43 @@ class UserEntryState extends State<UserEntry> {
       confirmText: 'OK',
       confirmTextStyle:
           TextStyle(inherit: false, color: Colors.red, fontSize: 22),
-      title: const Text('Select duration'),
-      selectedTextStyle: TextStyle(color: Colors.blue),
+      title: const Text('Select Minutes'),
+      selectedTextStyle: TextStyle(color: Colors.green),
       onConfirm: (Picker picker, List<int> value) {
         Duration hours1 = Duration(hours: picker.getSelectedValues()[0]);
         Duration minutes1 = Duration(minutes: picker.getSelectedValues()[1]);
         Duration seconds1 = Duration(seconds: picker.getSelectedValues()[2]);
 
-        // You get your duration here
-        // Duration _duration = Duration(
-        //   hours: picker.getSelectedValues()[0],
-        //   minutes: picker.getSelectedValues()[1],
-        //   // seconds: picker.getSelectedValues()[2],
-        // );
-
+        // // You get your duration here
+        Duration _duration = Duration(
+          hours: picker.getSelectedValues()[0],
+          minutes: picker.getSelectedValues()[1],
+        );
         int hoursnew = num.parse(hours1.toString().substring(0, 1)) * 60;
 
         int minutesnew = num.parse(minutes1.toString().substring(2, 4));
-        int secondsnew = num.parse(seconds1.toString().substring(5, 6)) ~/ 60;
+        // int secondsnew = num.parse(seconds1.toString().substring(5, 6)) ~/ 60;
 
-        // print(_duration);
-        // print(hoursnew);
-        // print(minutesnew);
+        String timeForShow =
+            "0${picker.getSelectedValues()[0]}:${picker.getSelectedValues()[1].toString().length > 1 ? picker.getSelectedValues()[1] : (0.toString() + picker.getSelectedValues()[1].toString())}:${picker.getSelectedValues()[2].toString().length > 1 ? picker.getSelectedValues()[2] : (0.toString() + picker.getSelectedValues()[2].toString())}";
+        // int hoursnew =
+        //     num.parse((picker.getSelectedValues()[1] * 60).toString());
+
+        // int minutesnew = num.parse(picker.getSelectedValues()[1].toString());
+
+        double seconds =
+            num.parse((picker.getSelectedValues()[2] / 60).toStringAsFixed(2));
+
         setState(() {
-          totalminuites = hoursnew + minutesnew + secondsnew;
+          totalminuites = (hoursnew + minutesnew).toDouble() + seconds;
         });
 
-        // print(totalminuites);
+        // totalminuites = (hoursnew + minutesnew + seconds).toDouble();
 
-        // + int.parse(secondsnew.toString());
-        // print(_duration.toString().substring(0));
-
-        // minutesnew = _duration.toString().substring(0);
-        print(secondsnew);
-
-        return totalminuites;
+        providerProgressScreen.setTotalHourAndMinutes(timeForShow);
       },
     ).showDialog(context);
-    // return Container();
   }
-
-  // isvalue() {
-  //   return pace = (distance * minutes.toInt());
-  // }
-
-  // readData() {}
 
   @override
   Widget build(BuildContext context) {
@@ -159,30 +162,45 @@ class UserEntryState extends State<UserEntry> {
       body: SingleChildScrollView(
         child: Column(
           children: <Widget>[
-            Padding(
-              padding: EdgeInsets.all(8.0),
-              child: RaisedButton(
-                color: Colors.white,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(18.0),
-                ),
-                child: Text(
-                  "Select Duration".toUpperCase(),
-                  style: TextStyle(
-                    fontSize: 14.0,
-                    color: Colors.green,
+            // Padding(
+            //   padding: EdgeInsets.all(8.0),
+            //   child: Text('Total Minutes: $totalminuites'),
+            // ),
+
+            Consumer<ProgressScreenProvider>(
+                builder: (context, consumer, childWidget) {
+              return Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Padding(
+                    padding: EdgeInsets.all(8.0),
+                    child: RaisedButton(
+                      color: Colors.white,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(18.0),
+                      ),
+                      child: Text(
+                        consumer.totalHourWithMinutes == null
+                            ? "SELECT Minutes ".toUpperCase()
+                            : consumer.totalHourWithMinutes,
+                        style: TextStyle(
+                          fontSize: 14.0,
+                          color: Colors.green,
+                        ),
+                      ),
+                      onPressed: () {
+                        setState(() {
+                          onTap();
+                          // print(totalminuites);
+                        });
+                      },
+                    ),
                   ),
-                ),
-                onPressed: () {
-                  onTap();
-                },
-              ),
-            ),
-            Padding(
-              padding: EdgeInsets.all(8.0),
-              child: Text('Total Minutes: $totalminuites'),
-            ),
+                ],
+              );
+            }),
             DateTimeField(
+              label: 'Datum',
               selectedDate: mydate,
               onDateSelected: (DateTime date) {
                 setState(() {
@@ -192,43 +210,12 @@ class UserEntryState extends State<UserEntry> {
               },
               lastDate: DateTime(2025),
             ),
-
             Padding(
               padding: EdgeInsets.all(8.0),
               child: TextFormField(
                 keyboardType: TextInputType.number,
                 decoration: InputDecoration(
-                    labelText: 'Heart-Rate',
-                    fillColor: Colors.white,
-                    focusedBorder: OutlineInputBorder(
-                        borderSide:
-                            BorderSide(color: Colors.green, width: 2.0))),
-                onChanged: (String ht) {
-                  heartrate = ht;
-                },
-              ),
-
-          ),
-          Padding(
-            padding: EdgeInsets.all(8.0),
-            child: TextFormField(
-              keyboardType: TextInputType.number,
-              decoration: InputDecoration(
-                  labelText: 'Höhenunterschied  ',
-                  fillColor: Colors.white,
-                  focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.green, width: 2.0))),
-              onChanged: (String hight) {
-                height = double.parse(hight);
-              },
-
-            ),
-            Padding(
-              padding: EdgeInsets.all(8.0),
-              child: TextFormField(
-                keyboardType: TextInputType.number,
-                decoration: InputDecoration(
-                    labelText: 'Distance',
+                    labelText: 'Distanz',
                     fillColor: Colors.white,
                     focusedBorder: OutlineInputBorder(
                         borderSide:
@@ -244,13 +231,13 @@ class UserEntryState extends State<UserEntry> {
               child: TextFormField(
                 keyboardType: TextInputType.number,
                 decoration: InputDecoration(
-                    labelText: 'Höhenunterschied  ',
+                    labelText: 'Höhenunterschied',
                     fillColor: Colors.white,
                     focusedBorder: OutlineInputBorder(
                         borderSide:
                             BorderSide(color: Colors.green, width: 2.0))),
                 onChanged: (String hight) {
-                  height = int.parse(hight);
+                  height = double.parse(hight);
                 },
               ),
             ),
@@ -259,7 +246,7 @@ class UserEntryState extends State<UserEntry> {
               child: TextFormField(
                 keyboardType: TextInputType.number,
                 decoration: InputDecoration(
-                    labelText: 'Calories',
+                    labelText: 'Kalorien',
                     fillColor: Colors.white,
                     focusedBorder: OutlineInputBorder(
                         borderSide:
@@ -273,6 +260,21 @@ class UserEntryState extends State<UserEntry> {
                 },
               ),
             ),
+            Padding(
+              padding: EdgeInsets.all(8.0),
+              child: TextFormField(
+                keyboardType: TextInputType.number,
+                decoration: InputDecoration(
+                    labelText: 'Herzfrequenz',
+                    fillColor: Colors.white,
+                    focusedBorder: OutlineInputBorder(
+                        borderSide:
+                            BorderSide(color: Colors.green, width: 2.0))),
+                onChanged: (String ht) {
+                  heartrate = ht;
+                },
+              ),
+            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[
@@ -280,7 +282,7 @@ class UserEntryState extends State<UserEntry> {
                   color: Colors.green,
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(16)),
-                  child: Text("Create"),
+                  child: Text("erstellen"),
                   textColor: Colors.white,
                   onPressed: () {
                     // createData();

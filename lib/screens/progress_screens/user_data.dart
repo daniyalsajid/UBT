@@ -82,8 +82,8 @@ class UserdataState extends State<Userdata> {
     double percentmax, vo2;
 
     percentmax = (0.8 +
-        0.1894393 * (exp(-0.012778 * double.parse(totalminuites.toString()))) +
-        0.2989558 * (exp(-0.1932605 * double.parse(totalminuites.toString()))));
+        0.1894393 * (exp(-0.012778 * totalminuites)) +
+        0.2989558 * (exp(-0.1932605 * totalminuites)));
 
     vo2 = ((-4.60 +
             0.182258 *
@@ -91,18 +91,12 @@ class UserdataState extends State<Userdata> {
 
                     // (int.parse(totaldistance.toString()) *
                     1000 /
-                    double.parse(totalminuites.toString()))) +
-        0.000104 *
-            pow(
-                int.parse(totaldistance.toString()) *
-                    1000 /
-                    double.parse(totalminuites.toString()),
-                2));
+                    totalminuites)) +
+        0.000104 * pow(totaldistance * 1000 / totalminuites, 2));
 
     setState(() {
       score = vo2 / percentmax;
     });
-
 
     providerProgressScreen.setScoreAndGoalToAchieve(score);
     // return score;
@@ -139,8 +133,6 @@ class UserdataState extends State<Userdata> {
         // String a = picker.getSelectedValues()[0].toString();
         totaldistance = num.parse(picker.getSelectedValues()[0].toString());
         providerProgressScreen.setTotalDistance(totaldistance);
-
-       
       },
     ).showDialog(context);
   }
@@ -169,30 +161,37 @@ class UserdataState extends State<Userdata> {
       title: const Text('Select Minutes'),
       selectedTextStyle: TextStyle(color: Colors.green),
       onConfirm: (Picker picker, List<int> value) {
-
-        // Duration hours1 = Duration(hours: picker.getSelectedValues()[0]);
-        // Duration minutes1 = Duration(minutes: picker.getSelectedValues()[1]);
-        // Duration seconds1 = Duration(seconds: picker.getSelectedValues()[2]);
-
+        Duration hours1 = Duration(hours: picker.getSelectedValues()[0]);
+        Duration minutes1 = Duration(minutes: picker.getSelectedValues()[1]);
+        Duration seconds1 = Duration(seconds: picker.getSelectedValues()[2]);
 
         // // You get your duration here
         Duration _duration = Duration(
           hours: picker.getSelectedValues()[0],
           minutes: picker.getSelectedValues()[1],
         );
+        int hoursnew = num.parse(hours1.toString().substring(0, 1)) * 60;
+
+        int minutesnew = num.parse(minutes1.toString().substring(2, 4));
+        // int secondsnew = num.parse(seconds1.toString().substring(5, 6)) ~/ 60;
 
         String timeForShow =
             "0${picker.getSelectedValues()[0]}:${picker.getSelectedValues()[1].toString().length > 1 ? picker.getSelectedValues()[1] : (0.toString() + picker.getSelectedValues()[1].toString())}:${picker.getSelectedValues()[2].toString().length > 1 ? picker.getSelectedValues()[2] : (0.toString() + picker.getSelectedValues()[2].toString())}";
-        int hoursnew =
-            num.parse((picker.getSelectedValues()[1] * 60).toString());
+        // int hoursnew =
+        //     num.parse((picker.getSelectedValues()[1] * 60).toString());
 
-        int minutesnew = num.parse(picker.getSelectedValues()[1].toString());
+        // int minutesnew = num.parse(picker.getSelectedValues()[1].toString());
+
         double seconds =
             num.parse((picker.getSelectedValues()[2] / 60).toStringAsFixed(2));
-        totalminuites = (hoursnew + minutesnew + seconds).toDouble();
-        providerProgressScreen.setTotalHourAndMinutes(timeForShow);
-        return totalminuites;
 
+        setState(() {
+          totalminuites = (hoursnew + minutesnew).toDouble() + seconds;
+        });
+
+        // totalminuites = (hoursnew + minutesnew + seconds).toDouble();
+
+        providerProgressScreen.setTotalHourAndMinutes(timeForShow);
       },
     ).showDialog(context);
   }
@@ -256,6 +255,27 @@ class UserdataState extends State<Userdata> {
     ];
   }
 
+  Future<void> OpenDialog() async {
+    switch (await showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return SimpleDialog(title: const Text('Hi'), children: [
+          Text(
+            'Think of a certain distance that you \n would \n like to run in a certain time, \n in one or two months fom now?',
+            textAlign: TextAlign.center,
+            overflow: TextOverflow.ellipsis,
+            style: TextStyle(
+                height: 1,
+                // fontWeight: FontWeight.bold,
+                fontSize: 18),
+          ),
+          Text("Hi")
+        ]);
+      },
+    )) {
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -266,7 +286,7 @@ class UserdataState extends State<Userdata> {
         ),
         body: Column(
           // mainAxisAlignment: MainAxisAlignment.center,
-          children: [
+          children: <Widget>[
             Flexible(
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -431,21 +451,42 @@ class UserdataState extends State<Userdata> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        Text(
-                          'What is your goal?',
-                          style: TextStyle(
-                              height: 1.5,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 22),
-                        ),
-                        Text(
-                          'Think of a certain distance that you would \n like to run in a certain time, \n in one or two months fom now?',
-                          textAlign: TextAlign.center,
-                          overflow: TextOverflow.ellipsis,
-                          style: TextStyle(
-                              height: 1,
-                              // fontWeight: FontWeight.bold,
-                              fontSize: 18),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              'What is your goal?',
+                              style: TextStyle(
+                                  height: 1.5,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 22),
+                            ),
+                            IconButton(
+                              icon: Icon(Icons.info_outline_rounded),
+                              color: Colors.green,
+                              tooltip: 'Increase volume by 10',
+                              onPressed: () {
+                                OpenDialog();
+                              },
+
+                              //   return SimpleDialog(
+                              //     title: const Text('Select assignment'),
+                              //     children: [
+                              //       Text(
+                              //         'Think of a certain distance that you would \n like to run in a certain time, \n in one or two months fom now?',
+                              //         textAlign: TextAlign.center,
+                              //         overflow: TextOverflow.ellipsis,
+                              //         style: TextStyle(
+                              //             height: 1,
+                              //             // fontWeight: FontWeight.bold,
+                              //             fontSize: 18),
+                              //       ),
+                              //     ],
+                              //   );
+                              // },
+                            ),
+                            // Text('Volume : $_volume')
+                          ],
                         ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -477,12 +518,10 @@ class UserdataState extends State<Userdata> {
                                     borderRadius: BorderRadius.circular(18.0),
                                   ),
                                   child: Text(
-
                                     consumer.totaldistance == null
                                         ? "SELECT  Distance".toUpperCase()
                                         : consumer.totaldistance.toString() +
                                             " Km",
-
                                     style: TextStyle(
                                       fontSize: 14.0,
                                       color: Colors.green,
@@ -503,11 +542,10 @@ class UserdataState extends State<Userdata> {
                                     borderRadius: BorderRadius.circular(18.0),
                                   ),
                                   child: Text(
-
                                     consumer.totalHourWithMinutes == null
-                                        ? "SELECT Minutes".toUpperCase()
+                                        ? "SELECT Minutes $totalminuites"
+                                            .toUpperCase()
                                         : consumer.totalHourWithMinutes,
-
                                     style: TextStyle(
                                       fontSize: 14.0,
                                       color: Colors.green,

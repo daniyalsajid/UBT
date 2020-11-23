@@ -40,7 +40,7 @@ class _HomeScreenState extends State<HomeScreen> {
         selectedItemColor: Colors.green,
         unselectedItemColor: Colors.green,
 
-        selectedFontSize: 20,
+        selectedFontSize: 15,
         // backgroundColor: Colors.green[300],
         items: [
           BottomNavigationBarItem(
@@ -49,15 +49,15 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.highlight),
-            title: Text('Verlauf'),
+            title: Text('Aktivitäten'),
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.directions_run),
-            title: Text('Activity'),
+            title: Text('Neu'),
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.person),
-            title: Text('Profile'),
+            title: Text('Profil'),
           ),
         ],
       ),

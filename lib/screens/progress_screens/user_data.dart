@@ -284,319 +284,333 @@ class UserdataState extends State<Userdata> {
           centerTitle: true,
           backgroundColor: Colors.green,
         ),
-        body: Column(
-          // mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Flexible(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Flexible(
-                    child: DropdownButton(
-                      hint: Text('Select Month'),
-                      value: userSelectedValue,
-                      onChanged: (value) {
-                        setState(
-                          () {
-                            userSelectedValue = value;
-
-                            // String m = selectedUser.name;
-                            // String n = selectedUser.name;
-                            // // print(n);
-                            // print(n);
-                            // switch (n) {
-                            //   case '1':
-                            //     {
-                            //       n = '1';
-                            //     }
-                            //     break;
-                            //   case '2':
-                            //     {
-                            //       n = '2';
-                            //     }
-                            // }
-
-                            switch (userSelectedValue) {
-                              case 'Jan':
-                                {
-                                  // Chart('1');
-
-                                  userentry = chart('1');
-
-                                  // Fluttertoast.showToast(
-                                  //     msg: "This is Center Short Toast",
-                                  //     toastLength: Toast.LENGTH_SHORT,
-                                  //     gravity: ToastGravity.CENTER,
-                                  //     timeInSecForIosWeb: 1,
-                                  //     backgroundColor: Colors.red,
-                                  //     textColor: Colors.white,
-                                  //     fontSize: 16.0);
-                                }
-                                break;
-                              case 'Feb':
-                                {
-                                  userentry = chart('2');
-
-                                  // print(monthnow);
-                                }
-                                // return Expanded(child: Container(child: userentry));
-
-                                break;
-
-                              case 'Mar':
-                                {
-                                  userentry = chart('3');
-                                  // print(n);
-                                }
-                                break;
-                              case 'Apr':
-                                {
-                                  userentry = chart('4');
-                                }
-                                break;
-                              case 'May':
-                                {
-                                  userentry = chart('5');
-                                }
-                                break;
-                              case 'Jun':
-                                {
-                                  userentry = chart('6');
-                                }
-                                break;
-                              case 'Jul':
-                                {
-                                  userentry = chart('7');
-                                }
-                                break;
-                              case 'Aug':
-                                {
-                                  userentry = chart('8');
-                                }
-                                break;
-                              case 'Sep':
-                                {
-                                  userentry = chart('9');
-                                }
-                                break;
-                              case 'Oct':
-                                {
-                                  userentry = chart('10');
-                                }
-                                break;
-                              case 'Nov':
-                                {
-                                  userentry = chart('11');
-                                }
-                                break;
-                              case 'Dec':
-                                {
-                                  userentry = chart('12');
-                                }
-                                break;
-                            }
-                          },
-                        );
-                      },
-                      items: users.map((String month) {
-                        return DropdownMenuItem<String>(
-                          value: month,
-
-                          // Row to Cloumn
-                          child: Row(
-                            children: <Widget>[
-                              Icon(Icons.calendar_today,
-                                  color: Color(0xFF167F67)),
-                              SizedBox(
-                                width: 10,
-                              ),
-                              Text(
-                                month,
-                                style: TextStyle(color: Colors.black),
-                              ),
-                              //
-                            ],
-                          ),
-                        );
-                      }).toList(),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
+        body: SingleChildScrollView(
+          child: Container(
+            height: MediaQuery.of(context).size.height,
+            child: Column(
+              // mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
                 Flexible(
-                    child: Container(
-                  width: 380,
-                  height: 280,
-                  decoration:
-                      BoxDecoration(border: Border.all(color: Colors.green)),
-                  child: PointsLineChart(_createSampleData(
-                    graphlists,
-                    d,
-                  )),
-                ))
-              ],
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                Flexible(
-                  child: Container(
-                    decoration:
-                        BoxDecoration(border: Border.all(color: Colors.green)),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              'What is your goal?',
-                              style: TextStyle(
-                                  height: 1.5,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 22),
-                            ),
-                            IconButton(
-                              icon: Icon(Icons.info_outline_rounded),
-                              color: Colors.green,
-                              tooltip: 'Increase volume by 10',
-                              onPressed: () {
-                                OpenDialog();
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Flexible(
+                        child: DropdownButton(
+                          hint: Text('Select Month'),
+                          value: userSelectedValue,
+                          onChanged: (value) {
+                            setState(
+                              () {
+                                userSelectedValue = value;
+
+                                // String m = selectedUser.name;
+                                // String n = selectedUser.name;
+                                // // print(n);
+                                // print(n);
+                                // switch (n) {
+                                //   case '1':
+                                //     {
+                                //       n = '1';
+                                //     }
+                                //     break;
+                                //   case '2':
+                                //     {
+                                //       n = '2';
+                                //     }
+                                // }
+
+                                switch (userSelectedValue) {
+                                  case 'Jan':
+                                    {
+                                      // Chart('1');
+
+                                      userentry = chart('1');
+
+                                      // Fluttertoast.showToast(
+                                      //     msg: "This is Center Short Toast",
+                                      //     toastLength: Toast.LENGTH_SHORT,
+                                      //     gravity: ToastGravity.CENTER,
+                                      //     timeInSecForIosWeb: 1,
+                                      //     backgroundColor: Colors.red,
+                                      //     textColor: Colors.white,
+                                      //     fontSize: 16.0);
+                                    }
+                                    break;
+                                  case 'Feb':
+                                    {
+                                      userentry = chart('2');
+
+                                      // print(monthnow);
+                                    }
+                                    // return Expanded(child: Container(child: userentry));
+
+                                    break;
+
+                                  case 'Mar':
+                                    {
+                                      userentry = chart('3');
+                                      // print(n);
+                                    }
+                                    break;
+                                  case 'Apr':
+                                    {
+                                      userentry = chart('4');
+                                    }
+                                    break;
+                                  case 'May':
+                                    {
+                                      userentry = chart('5');
+                                    }
+                                    break;
+                                  case 'Jun':
+                                    {
+                                      userentry = chart('6');
+                                    }
+                                    break;
+                                  case 'Jul':
+                                    {
+                                      userentry = chart('7');
+                                    }
+                                    break;
+                                  case 'Aug':
+                                    {
+                                      userentry = chart('8');
+                                    }
+                                    break;
+                                  case 'Sep':
+                                    {
+                                      userentry = chart('9');
+                                    }
+                                    break;
+                                  case 'Oct':
+                                    {
+                                      userentry = chart('10');
+                                    }
+                                    break;
+                                  case 'Nov':
+                                    {
+                                      userentry = chart('11');
+                                    }
+                                    break;
+                                  case 'Dec':
+                                    {
+                                      userentry = chart('12');
+                                    }
+                                    break;
+                                }
                               },
+                            );
+                          },
+                          items: users.map((String month) {
+                            return DropdownMenuItem<String>(
+                              value: month,
 
-                              //   return SimpleDialog(
-                              //     title: const Text('Select assignment'),
-                              //     children: [
-                              //       Text(
-                              //         'Think of a certain distance that you would \n like to run in a certain time, \n in one or two months fom now?',
-                              //         textAlign: TextAlign.center,
-                              //         overflow: TextOverflow.ellipsis,
-                              //         style: TextStyle(
-                              //             height: 1,
-                              //             // fontWeight: FontWeight.bold,
-                              //             fontSize: 18),
-                              //       ),
-                              //     ],
-                              //   );
-                              // },
-                            ),
-                            // Text('Volume : $_volume')
-                          ],
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: <Widget>[
-                            Icon(
-                              Icons.trending_up,
-                              color: Colors.black,
-                              size: 36.0,
-                              semanticLabel:
-                                  'Text to announce in accessibility modes',
-                            ),
-                            Icon(
-                              Icons.access_time,
-                              color: Colors.blue,
-                              size: 36.0,
-                            ),
-                          ],
-                        ),
-                        Consumer<ProgressScreenProvider>(
-                            builder: (context, consumer, childWidget) {
-                          return Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              Padding(
-                                padding: EdgeInsets.all(8.0),
-                                child: RaisedButton(
-                                  color: Colors.white,
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(18.0),
+                              // Row to Cloumn
+                              child: Row(
+                                children: <Widget>[
+                                  Icon(Icons.calendar_today,
+                                      color: Color(0xFF167F67)),
+                                  SizedBox(
+                                    width: 10,
                                   ),
-                                  child: Text(
-                                    consumer.totaldistance == null
-                                        ? "SELECT  Distance".toUpperCase()
-                                        : consumer.totaldistance.toString() +
-                                            " Km",
-                                    style: TextStyle(
-                                      fontSize: 14.0,
-                                      color: Colors.green,
-                                    ),
+                                  Text(
+                                    month,
+                                    style: TextStyle(color: Colors.black),
                                   ),
-                                  onPressed: () {
-                                    setState(() {
-                                      onTab();
-                                    });
-                                  },
-                                ),
+                                  //
+                                ],
                               ),
-                              Padding(
-                                padding: EdgeInsets.all(8.0),
-                                child: RaisedButton(
-                                  color: Colors.white,
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(18.0),
-                                  ),
-                                  child: Text(
-                                    consumer.totalHourWithMinutes == null
-                                        ? "SELECT Minutes $totalminuites"
-                                            .toUpperCase()
-                                        : consumer.totalHourWithMinutes,
-                                    style: TextStyle(
-                                      fontSize: 14.0,
-                                      color: Colors.green,
-                                    ),
-                                  ),
-                                  onPressed: () {
-                                    setState(() {
-                                      onTap();
-                                    });
-                                  },
-                                ),
-                              ),
-                            ],
-                          );
-                        }),
-                        Row(
+                            );
+                          }).toList(),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    Flexible(
+                        child: Container(
+                      width: 380,
+                      height: 280,
+                      decoration: BoxDecoration(
+                          border: Border.all(color: Colors.green)),
+                      child: PointsLineChart(_createSampleData(
+                        graphlists,
+                        d,
+                      )),
+                    ))
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    Flexible(
+                      child: Container(
+                        decoration: BoxDecoration(
+                            border: Border.all(color: Colors.green)),
+                        child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            RaisedButton(
-                              color: Colors.white,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(8.0),
-                              ),
-                              child: Consumer<ProgressScreenProvider>(
-                                  builder: (context, consumer, childWidget) {
-                                return Text(
-                                  consumer.score != null &&
-                                          consumer.score.isFinite
-                                      ? "Score: ${consumer.score.toStringAsFixed(2)}"
-                                          .toUpperCase()
-                                      : "Calculate Score",
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(
+                                  'What is your goal?',
                                   style: TextStyle(
-                                    fontSize: 14.0,
-                                    color: Colors.green,
-                                  ),
-                                );
-                              }),
-                              onPressed: () {
-                                createData1();
-                              },
+                                      height: 1.5,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 22),
+                                ),
+                                IconButton(
+                                  icon: Icon(Icons.info_outline),
+                                  color: Colors.green,
+                                  tooltip: 'Increase volume by 10',
+                                  onPressed: () {
+                                    OpenDialog();
+                                  },
+
+                                  //   return SimpleDialog(
+                                  //     title: const Text('Select assignment'),
+                                  //     children: [
+                                  //       Text(
+                                  //         'Think of a certain distance that you would \n like to run in a certain time, \n in one or two months fom now?',
+                                  //         textAlign: TextAlign.center,
+                                  //         overflow: TextOverflow.ellipsis,
+                                  //         style: TextStyle(
+                                  //             height: 1,
+                                  //             // fontWeight: FontWeight.bold,
+                                  //             fontSize: 18),
+                                  //       ),
+                                  //     ],
+                                  //   );
+                                  // },
+                                ),
+                                // Text('Volume : $_volume')
+                              ],
                             ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: <Widget>[
+                                Icon(
+                                  Icons.trending_up,
+                                  color: Colors.black,
+                                  size: 36.0,
+                                  semanticLabel:
+                                      'Text to announce in accessibility modes',
+                                ),
+                                Icon(
+                                  Icons.access_time,
+                                  color: Colors.blue,
+                                  size: 36.0,
+                                ),
+                              ],
+                            ),
+                            Consumer<ProgressScreenProvider>(
+                                builder: (context, consumer, childWidget) {
+                              return Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                children: [
+                                  Flexible(
+                                    child: Padding(
+                                      padding: EdgeInsets.all(8.0),
+                                      child: RaisedButton(
+                                        color: Colors.white,
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(18.0),
+                                        ),
+                                        child: Text(
+                                          consumer.totaldistance == null
+                                              ? "SELECT  Distance".toUpperCase()
+                                              : consumer.totaldistance
+                                                      .toString() +
+                                                  " Km",
+                                          style: TextStyle(
+                                            fontSize: 14.0,
+                                            color: Colors.green,
+                                          ),
+                                        ),
+                                        onPressed: () {
+                                          setState(() {
+                                            onTab();
+                                          });
+                                        },
+                                      ),
+                                    ),
+                                  ),
+                                  Flexible(
+                                    child: Padding(
+                                      padding: EdgeInsets.all(8.0),
+                                      child: RaisedButton(
+                                        color: Colors.white,
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(18.0),
+                                        ),
+                                        child: Text(
+                                          consumer.totalHourWithMinutes == null
+                                              ? "SELECT Minutes $totalminuites"
+                                                  .toUpperCase()
+                                              : consumer.totalHourWithMinutes,
+                                          style: TextStyle(
+                                            fontSize: 14.0,
+                                            color: Colors.green,
+                                          ),
+                                        ),
+                                        onPressed: () {
+                                          setState(() {
+                                            onTap();
+                                          });
+                                        },
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              );
+                            }),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                RaisedButton(
+                                  color: Colors.white,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(8.0),
+                                  ),
+                                  child: Consumer<ProgressScreenProvider>(
+                                      builder:
+                                          (context, consumer, childWidget) {
+                                    return Text(
+                                      consumer.score != null &&
+                                              consumer.score.isFinite
+                                          ? "Score: ${consumer.score.toStringAsFixed(2)}"
+                                              .toUpperCase()
+                                          : "Calculate Score",
+                                      style: TextStyle(
+                                        fontSize: 14.0,
+                                        color: Colors.green,
+                                      ),
+                                    );
+                                  }),
+                                  onPressed: () {
+                                    createData1();
+                                  },
+                                ),
+                              ],
+                            )
                           ],
-                        )
-                      ],
+                        ),
+                      ),
                     ),
-                  ),
-                ),
+                  ],
+                )
               ],
-            )
-          ],
+            ),
+          ),
         ));
   }
 }

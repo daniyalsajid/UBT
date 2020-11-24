@@ -47,14 +47,18 @@ class PointsLineChart extends StatelessWidget {
                   // endLabel: 'Measure 1 End',
                   color: charts.MaterialPalette.gray.shade100),
               new charts.LineAnnotationSegment(
-                  0.0, charts.RangeAnnotationAxisType.domain,
+                  0, charts.RangeAnnotationAxisType.domain,
                   startLabel: 'Score',
                   // endLabel: 'Measure 1 End',
                   color: charts.MaterialPalette.gray.shade100),
             ])
           ],
           defaultRenderer: new charts.LineRendererConfig(
-              includePoints: true, includeArea: true, includeLine: true));
+            includePoints: true,
+            includeArea: true,
+            includeLine: false,
+            radiusPx: 6.0,
+          ));
     });
   }
 

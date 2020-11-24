@@ -29,7 +29,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               child: Column(
                 children: [
                   Text(
-                    'Wir wollen dich dabei unterstützen \n regelmäßig körperlich aktiv zu sein.\n Indem wir deine Lauf-Aktivitätsdaten in \n einer für dich interessanten \n und wertvollen Weise darstellen \n und dir  nützliche Features bieten, hoffen wir dir \n eine kleine Motivationshilfe sein zu \n können.',
+                    'Egal ob Du ein ambitioniertes Ziel verfolgst\n oder läufst, um einen Ausgleich zu haben sowie\n aktiv zu sein, wir wollen Dir zeigen,\n dass es sich lohnt regelmäßig laufen zu gehen\n.Wie? Indem wir dir zeigen, \ndass dein Körper sich an deine Anstrengungen anpasst und mit dir wächst\n - ganz egal ob Du ans Limit gehst oder nach\n einem stressigen Tag den Kopf frei kriegen willst.',
                     textAlign: TextAlign.center,
                     // overflow: TextOverflow.ellipsis,
                     style: TextStyle(

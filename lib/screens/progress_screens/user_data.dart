@@ -105,7 +105,7 @@ class UserdataState extends State<Userdata> {
   Widget onTab() {
     Picker(
       adapter: NumberPickerAdapter(data: <NumberPickerColumn>[
-        const NumberPickerColumn(begin: 1, end: 10, suffix: Text(' Km')),
+        const NumberPickerColumn(begin: 1, end: 42, suffix: Text(' Km')),
       ]),
       delimiter: <PickerDelimiter>[
         PickerDelimiter(
@@ -255,22 +255,157 @@ class UserdataState extends State<Userdata> {
     ];
   }
 
-  Future<void> OpenDialog() async {
+  Future<void> openDialog() async {
     switch (await showDialog(
       context: context,
       builder: (BuildContext context) {
-        return SimpleDialog(title: const Text('Hi'), children: [
-          Text(
-            'Think of a certain distance that you \n would \n like to run in a certain time, \n in one or two months fom now?',
-            textAlign: TextAlign.center,
-            overflow: TextOverflow.ellipsis,
-            style: TextStyle(
-                height: 1,
-                // fontWeight: FontWeight.bold,
-                fontSize: 18),
-          ),
-          Text("Hi")
-        ]);
+        return SimpleDialog(
+            // title: const Text(
+            //   'Hi',
+            //   textAlign: TextAlign.center,
+            // ),
+            children: [
+              Text(
+                'Willst Du in absehbarer Zeit \n eine konkrete Strecke in einer \n bestimmten Zeit laufen?',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                    height: 1.5, fontWeight: FontWeight.w400, fontSize: 18),
+              ),
+              Text(
+                "Hast du kein konkretes Ziel eine \n bestimmte Zeit laufen zu wollen,\n aber eine Idee über eine persönliche\n virtuelle Marke (Distanz / Zeit),\n die Du ab und an herausfordern willst?",
+                textAlign: TextAlign.center,
+                overflow: TextOverflow.ellipsis,
+                style: TextStyle(
+                    height: 1.5,
+                    // fontWeight: FontWeight.bold,
+                    fontSize: 18),
+              )
+            ]);
+      },
+    )) {
+    }
+  }
+
+  Future<void> openDialog1() async {
+    switch (await showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return SimpleDialog(
+            // title: const Text(
+            //   'Hi',
+            //   textAlign: TextAlign.center,
+            // ),
+            children: [
+              Text(
+                'Egal ob Du ein ambitioniertes Ziel \n verfolgst oder läufst, um einen\n Ausgleich zu haben sowie \naktiv zu sein, wir wollen Dir zeigen,\n dass es sich lohnt regelmäßig laufen\n zu gehen.  ',
+                textAlign: TextAlign.center,
+                overflow: TextOverflow.ellipsis,
+                style: TextStyle(
+                    height: 1.2,
+                    // fontWeight: FontWeight.bold,
+                    fontSize: 18),
+              ),
+              // Text(
+              //   "Hast du kein konkretes Ziel\n eine bestimmte Zeit laufen zu wollen,\n aber eine Idee über eine persönliche\n virtuelle Marke (Distanz / Zeit), die Du ab und\n an herausfordern willst?",
+              //   textAlign: TextAlign.center,
+              //   style: TextStyle(
+              //       height: 1,
+              //       // fontWeight: FontWeight.bold,
+              //       fontSize: 18),
+              // ),
+            ]);
+      },
+    )) {
+    }
+  }
+
+  Future<void> openDialog2() async {
+    switch (await showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return SimpleDialog(
+            // title: const Text(
+            //   'Hi',
+            //   textAlign: TextAlign.center,
+            // ),
+            children: [
+              Text(
+                'In Abhängigkeit von der Distanz \nund der Dauer variiert dein Score\n je Aktivität. Wenn Du eine gleiche\n Strecke in kürzerer Zeit läufst,\n steigt der Score. Zum Beispiel\n wäre der Score für 10 km\n in 55 Minuten 35,7 - für 10 km\n in 50 Minuten 40. ',
+                textAlign: TextAlign.center,
+                overflow: TextOverflow.ellipsis,
+                style: TextStyle(
+                    height: 1.2,
+                    // fontWeight: FontWeight.bold,
+                    fontSize: 18),
+              ),
+              Text(
+                "Die Berechnung berücksichtigt aber auch, dass es für eine längere Strecke schwieriger ist die gleiche Pace zu laufen. Für 5 km in 27:30 Minuten (gleiche Pace wie 55 Minuten in 10 km) wäre der Score 34,2 - der Score steigt also um 1,5 Punkte, weil Du die Pace über einen längeren Zeitraum halten konntest.",
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                    height: 1.2,
+                    // fontWeight: FontWeight.bold,
+                    fontSize: 18),
+              ),
+            ]);
+      },
+    )) {
+    }
+  }
+
+  Future<void> openDialog3() async {
+    switch (await showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return SimpleDialog(
+            // title: const Text(
+            //   'Hi',
+            //   textAlign: TextAlign.center,
+            // ),
+            children: [
+              Text(
+                'Mit deinem Zielwert kannst \nDu überprüfen, wie Du dich \n bezüglich einer gewünschten Leistung\n oder virtuellen Marke entwickelst\n und Du kannst dich für einzelne\n Aktivitäten herausfordern diese Marke\n zu erreichen.',
+                textAlign: TextAlign.center,
+                overflow: TextOverflow.ellipsis,
+                style: TextStyle(
+                    height: 1.2,
+                    // fontWeight: FontWeight.bold,
+                    fontSize: 18),
+              ),
+            ]);
+      },
+    )) {
+    }
+  }
+
+  Future<void> openDialog4() async {
+    switch (await showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return SimpleDialog(
+            // title: const Text(
+            //   'Hi',
+            //   textAlign: TextAlign.center,
+            // ),
+            children: [
+              Text(
+                'Der Score ermöglicht es dir, Aktivitäten\n mit unterschiedlichen Distanzen und\n Geschwindigkeiten zu vergleichen\n und deine Entwicklung zu verfolgen\n. Oft ist es dir vielleicht gar nicht\n bewusst, welche Auswirkungen\n das regelmäßige Laufen\n gehen auf deinen Körper hat und\n welche großartigen Scores Du\n bereits erzielt hast.\n Ziel es nicht, in jeder Aktivität einen\n besseren Score zu erzielen.',
+                textAlign: TextAlign.center,
+                overflow: TextOverflow.ellipsis,
+                style: TextStyle(
+                    height: 1.2,
+                    // fontWeight: FontWeight.bold,
+                    fontSize: 18),
+              ),
+              Text(
+                'Ganz wie im Spitzensport auch\n kannst Du nicht in jedem Training\n einen neuen Weltrekord aufstellen.\n Aber gelegentliche\n individuelle Spitzenleistungen\n (hohe Scores) zeigen dir, dass sich\n dein Körper mit dir entwickelt\n und langfristig zahlen sich deine\n Anstrengungen aus.',
+                textAlign: TextAlign.center,
+                overflow: TextOverflow.ellipsis,
+                style: TextStyle(
+                    height: 1.2,
+                    // fontWeight: FontWeight.bold,
+                    fontSize: 18),
+              ),
+            ]);
       },
     )) {
     }
@@ -290,7 +425,7 @@ class UserdataState extends State<Userdata> {
             child: Column(
               // mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                Flexible(
+                Container(
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -424,6 +559,14 @@ class UserdataState extends State<Userdata> {
                           }).toList(),
                         ),
                       ),
+                      IconButton(
+                        icon: Icon(Icons.info_outline),
+                        color: Colors.green,
+                        tooltip: 'More Info',
+                        onPressed: () {
+                          openDialog3();
+                        },
+                      ),
                     ],
                   ),
                 ),
@@ -458,18 +601,18 @@ class UserdataState extends State<Userdata> {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Text(
-                                  'What is your goal?',
+                                  ' Setze eine virtuelle Marke',
                                   style: TextStyle(
                                       height: 1.5,
                                       fontWeight: FontWeight.bold,
-                                      fontSize: 22),
+                                      fontSize: 24),
                                 ),
                                 IconButton(
                                   icon: Icon(Icons.info_outline),
                                   color: Colors.green,
-                                  tooltip: 'Increase volume by 10',
+                                  tooltip: 'More Info',
                                   onPressed: () {
-                                    OpenDialog();
+                                    openDialog();
                                   },
 
                                   //   return SimpleDialog(
@@ -488,11 +631,25 @@ class UserdataState extends State<Userdata> {
                                   //   );
                                   // },
                                 ),
+
                                 // Text('Volume : $_volume')
                               ],
                             ),
+                            // Row(
+                            //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            //   crossAxisAlignment: CrossAxisAlignment.center,
+                            //   children: [
+                            //     Text(
+                            //       '  ',
+                            //       style: TextStyle(
+                            //           height: 1.5,
+                            //           fontWeight: FontWeight.normal,
+                            //           fontSize: 18),
+                            //     ),
+                            //   ],
+                            // ),
                             Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
                               children: <Widget>[
                                 Icon(
                                   Icons.trending_up,
@@ -525,7 +682,8 @@ class UserdataState extends State<Userdata> {
                                         ),
                                         child: Text(
                                           consumer.totaldistance == null
-                                              ? "SELECT  Distance".toUpperCase()
+                                              ? "Distanz auswählen"
+                                                  .toUpperCase()
                                               : consumer.totaldistance
                                                       .toString() +
                                                   " Km",
@@ -553,7 +711,7 @@ class UserdataState extends State<Userdata> {
                                         ),
                                         child: Text(
                                           consumer.totalHourWithMinutes == null
-                                              ? "SELECT Minutes $totalminuites"
+                                              ? "Zeit auswählen $totalminuites"
                                                   .toUpperCase()
                                               : consumer.totalHourWithMinutes,
                                           style: TextStyle(
@@ -584,20 +742,32 @@ class UserdataState extends State<Userdata> {
                                   child: Consumer<ProgressScreenProvider>(
                                       builder:
                                           (context, consumer, childWidget) {
-                                    return Text(
-                                      consumer.score != null &&
-                                              consumer.score.isFinite
-                                          ? "Score: ${consumer.score.toStringAsFixed(2)}"
-                                              .toUpperCase()
-                                          : "Calculate Score",
-                                      style: TextStyle(
-                                        fontSize: 14.0,
-                                        color: Colors.green,
-                                      ),
+                                    return Row(
+                                      children: [
+                                        Text(
+                                          consumer.score != null &&
+                                                  consumer.score.isFinite
+                                              ? "Score: ${consumer.score.toStringAsFixed(2)}"
+                                                  .toUpperCase()
+                                              : "Score berechnen",
+                                          style: TextStyle(
+                                            fontSize: 14.0,
+                                            color: Colors.green,
+                                          ),
+                                        ),
+                                      ],
                                     );
                                   }),
                                   onPressed: () {
                                     createData1();
+                                  },
+                                ),
+                                IconButton(
+                                  icon: Icon(Icons.info_outline),
+                                  color: Colors.green,
+                                  tooltip: 'More Info',
+                                  onPressed: () {
+                                    openDialog2();
                                   },
                                 ),
                               ],
@@ -607,7 +777,73 @@ class UserdataState extends State<Userdata> {
                       ),
                     ),
                   ],
-                )
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    // Text(
+                    //   ' Egal ob Du ein ambitioniertes Ziel verfolgst\n oder läufst, um einen Ausgleich zu haben \nsowie aktiv zu sein, wir wollen Dir zeigen,\n dass es sich lohnt regelmäßig laufen zu gehen.  ',
+                    //   textAlign: TextAlign.center,
+                    //   style: TextStyle(
+                    //       height: 1.2,
+                    //       fontWeight: FontWeight.normal,
+                    //       fontSize: 18),
+                    // ),
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    // Text(
+                    //   ' Wie? Indem wir dir zeigen, dass dein Körper \n sich an deine Anstrengungen anpasst \nund mit dir wächst - ganz egal\n ob Du ans Limit gehst oder nach einem\n stressigen Tag den Kopf frei kriegen willst.',
+                    //   textAlign: TextAlign.center,
+                    //   style: TextStyle(
+                    //       height: 1.2,
+                    //       fontWeight: FontWeight.w300,
+                    //       fontSize: 18),
+                    // ),
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      ' Unsere Vision',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                          height: 1, fontWeight: FontWeight.bold, fontSize: 20),
+                    ),
+                    IconButton(
+                      icon: Icon(Icons.info_outline),
+                      color: Colors.green,
+                      tooltip: 'More Info',
+                      onPressed: () {
+                        openDialog1();
+                      },
+                    ),
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      'Wie kannst Du den Score nutzen',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                          height: 1, fontWeight: FontWeight.bold, fontSize: 20),
+                    ),
+                    IconButton(
+                      icon: Icon(Icons.info_outline),
+                      color: Colors.green,
+                      tooltip: 'More Info',
+                      onPressed: () {
+                        openDialog4();
+                      },
+                    ),
+                  ],
+                ),
               ],
             ),
           ),

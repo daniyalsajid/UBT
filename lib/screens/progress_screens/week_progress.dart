@@ -109,22 +109,23 @@ class _WeekprogressState extends State<Weekprogress> {
               children: [
                 SizedBox(
                   height: 30,
+                  width: 0.0,
                 ),
                 Text(
                   userdata['DateString'].substring(5, 10),
                   style: TextStyle(
                       color: Colors.green[900],
-                      fontSize: 22,
+                      fontSize: 18,
                       fontWeight: FontWeight.w800),
                 ),
                 SizedBox(
-                  width: 40,
+                  width: 20,
                 ),
                 Text(
-                  userdata['Distance'].toString().substring(0, 1),
+                  userdata['Distance'].toString().substring(0, 3),
                   style: TextStyle(
                       color: Colors.green[900],
-                      fontSize: 22,
+                      fontSize: 18,
                       fontWeight: FontWeight.w800),
                 ),
                 SizedBox(
@@ -134,27 +135,27 @@ class _WeekprogressState extends State<Weekprogress> {
                   userdata['Minutes'].toString().substring(0, 2),
                   style: TextStyle(
                       color: Colors.green[900],
-                      fontSize: 22,
+                      fontSize: 18,
                       fontWeight: FontWeight.w800),
                 ),
                 SizedBox(
-                  width: 55,
+                  width: 60,
                 ),
                 Text(
-                  userdata['Pace'].toString().substring(0, 1),
+                  userdata['Pace'].toString().substring(0, 3),
                   style: TextStyle(
                       color: Colors.green[900],
-                      fontSize: 22,
+                      fontSize: 18,
                       fontWeight: FontWeight.w800),
                 ),
                 SizedBox(
                   width: 45,
                 ),
                 Text(
-                  userdata['Score'].toString().substring(0, 2),
+                  userdata['Score'].toString().substring(0, 4),
                   style: TextStyle(
                       color: Colors.green[900],
-                      fontSize: 22,
+                      fontSize: 18,
                       fontWeight: FontWeight.w800),
                 ),
               ],

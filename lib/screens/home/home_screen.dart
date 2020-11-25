@@ -48,7 +48,7 @@ class _HomeScreenState extends State<HomeScreen> {
             title: Text('Fortschritt'),
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.highlight),
+            icon: Icon(Icons.list),
             title: Text('Aktivitäten'),
           ),
           BottomNavigationBarItem(

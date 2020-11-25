@@ -39,6 +39,17 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         fontStyle: FontStyle.italic,
                         fontWeight: FontWeight.w800),
                   ),
+                  Text(
+                    'Wie? Indem wir dir zeigen dass dein\n Körper sich an deine Anstrengungen\n anpasst und mit dir wächst - ganz\n egal ob Du ans Limit gehst oder\n nach einem stressigen Tag den\n Kopf frei kriegen willst.',
+                    textAlign: TextAlign.center,
+                    // overflow: TextOverflow.ellipsis,
+                    style: TextStyle(
+                        height: 1,
+                        fontSize: 18,
+                        color: Colors.black,
+                        fontStyle: FontStyle.italic,
+                        fontWeight: FontWeight.w800),
+                  ),
                 ],
               ),
             ),

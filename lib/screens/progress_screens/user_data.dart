@@ -297,7 +297,7 @@ class UserdataState extends State<Userdata> {
             // ),
             children: [
               Text(
-                'Egal ob Du ein ambitioniertes Ziel \n verfolgst oder läufst, um einen\n Ausgleich zu haben sowie \naktiv zu sein, wir wollen Dir zeigen,\n dass es sich lohnt regelmäßig laufen\n zu gehen.  ',
+                'Egal ob Du ein ambitioniertes \nZiel verfolgst oder läufst,\n um einen Ausgleich zu haben\n sowie aktiv zu sein,\n wir wollen Dir zeigen,\n dass es sich lohnt regelmäßig\n laufen zu gehen.',
                 textAlign: TextAlign.center,
                 overflow: TextOverflow.ellipsis,
                 style: TextStyle(
@@ -305,14 +305,14 @@ class UserdataState extends State<Userdata> {
                     // fontWeight: FontWeight.bold,
                     fontSize: 18),
               ),
-              // Text(
-              //   "Hast du kein konkretes Ziel\n eine bestimmte Zeit laufen zu wollen,\n aber eine Idee über eine persönliche\n virtuelle Marke (Distanz / Zeit), die Du ab und\n an herausfordern willst?",
-              //   textAlign: TextAlign.center,
-              //   style: TextStyle(
-              //       height: 1,
-              //       // fontWeight: FontWeight.bold,
-              //       fontSize: 18),
-              // ),
+              Text(
+                "Wie? Indem wir dir zeigen\ndass dein Körper sich an deine\n Anstrengungen anpasst und\n mit dir wächst - ganz egal ob\n Du ans Limit gehst oder nach\n einem stressigen Tag den\n Kopf frei kriegen willst.",
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                    height: 1,
+                    // fontWeight: FontWeight.bold,
+                    fontSize: 18),
+              ),
             ]);
       },
     )) {
@@ -388,7 +388,7 @@ class UserdataState extends State<Userdata> {
             // ),
             children: [
               Text(
-                'Der Score ermöglicht es dir, Aktivitäten\n mit unterschiedlichen Distanzen und\n Geschwindigkeiten zu vergleichen\n und deine Entwicklung zu verfolgen\n. Oft ist es dir vielleicht gar nicht\n bewusst, welche Auswirkungen\n das regelmäßige Laufen\n gehen auf deinen Körper hat und\n welche großartigen Scores Du\n bereits erzielt hast.\n Ziel es nicht, in jeder Aktivität einen\n besseren Score zu erzielen.',
+                'Der Score ermöglicht es dir\nAktivitäten mit unterschiedlichen\n Distanzen und Geschwindigkeiten\n zu vergleichen\ und\n deine Entwicklung zu \nverfolgen. Oft ist es dir \nvielleicht gar nicht bewusst,\n welche Auswirkungen das regelmäßige\n Laufen gehen auf deinen Körper\n hat und welche großartigen Scores Du\n bereits erzielt hast.\n Ziel es nicht, in jeder Aktivität einen\n besseren Score zu erzielen.',
                 textAlign: TextAlign.center,
                 overflow: TextOverflow.ellipsis,
                 style: TextStyle(
@@ -397,7 +397,7 @@ class UserdataState extends State<Userdata> {
                     fontSize: 18),
               ),
               Text(
-                'Ganz wie im Spitzensport auch\n kannst Du nicht in jedem Training\n einen neuen Weltrekord aufstellen.\n Aber gelegentliche\n individuelle Spitzenleistungen\n (hohe Scores) zeigen dir, dass sich\n dein Körper mit dir entwickelt\n und langfristig zahlen sich deine\n Anstrengungen aus.',
+                'Ganz wie im Spitzensport auch\n kannst Du nicht in jedem Training\n einen neuen Weltrekord aufstellen.\n Aber gelegentliche\n individuelle Spitzenleistungen\n (hohe Scores) zeigen dir,\n dass sich dein Körper mit\n dir entwickelt\n und langfristig zahlen sich\n deine Anstrengungen aus.',
                 textAlign: TextAlign.center,
                 overflow: TextOverflow.ellipsis,
                 style: TextStyle(
@@ -560,9 +560,10 @@ class UserdataState extends State<Userdata> {
                         ),
                       ),
                       IconButton(
+                        alignment: Alignment.topRight,
                         icon: Icon(Icons.info_outline),
                         color: Colors.green,
-                        tooltip: 'More Info',
+                        tooltip: 'Graph Info',
                         onPressed: () {
                           openDialog3();
                         },

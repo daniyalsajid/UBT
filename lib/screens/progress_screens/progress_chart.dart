@@ -55,7 +55,7 @@ class PointsLineChart extends StatelessWidget {
           ],
           defaultRenderer: new charts.LineRendererConfig(
             includePoints: true,
-            includeArea: true,
+            includeArea: false,
             includeLine: false,
             radiusPx: 6.0,
           ));

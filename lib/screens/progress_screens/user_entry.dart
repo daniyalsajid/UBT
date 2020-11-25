@@ -155,7 +155,7 @@ class UserEntryState extends State<UserEntry> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Deine Aktivitate aufnehmen'),
+        title: Text('Aktivität eintragen'),
         centerTitle: true,
         backgroundColor: Colors.green,
       ),
@@ -181,7 +181,7 @@ class UserEntryState extends State<UserEntry> {
                       ),
                       child: Text(
                         consumer.totalHourWithMinutes == null
-                            ? "SELECT Minutes ".toUpperCase()
+                            ? "Dauer auswählen ".toUpperCase()
                             : consumer.totalHourWithMinutes,
                         style: TextStyle(
                           fontSize: 14.0,
@@ -215,7 +215,7 @@ class UserEntryState extends State<UserEntry> {
               child: TextFormField(
                 keyboardType: TextInputType.number,
                 decoration: InputDecoration(
-                    labelText: 'Distanz',
+                    labelText: 'Distanz in Km(z.B. 5.45)',
                     fillColor: Colors.white,
                     focusedBorder: OutlineInputBorder(
                         borderSide:

@@ -83,7 +83,7 @@ class UserEntryState extends State<UserEntry> {
       'Heartrate': heartrate,
       'Calories': calories,
       'DateString': formattedDate,
-      'Distance': distance,
+      'Distance': distance.toStringAsFixed(2),
       'Höhenunterschied': height,
       'Pace': pace,
       'Percent_max': percentmax,
@@ -225,15 +225,22 @@ class UserEntryState extends State<UserEntry> {
               padding: EdgeInsets.all(8.0),
               child: TextFormField(
                 keyboardType: TextInputType.number,
+                inputFormatters: <TextInputFormatter>[
+                  FilteringTextInputFormatter(RegExp(r'(^\d*\.?\d*)'),
+                      allow: true)
+                ],
                 decoration: InputDecoration(
                     labelText: 'Distanz in Km (z.B. 5.45)',
                     fillColor: Colors.white,
                     focusedBorder: OutlineInputBorder(
                         borderSide:
                             BorderSide(color: Colors.green, width: 2.0))),
-                onChanged: (String dist) {
-                  distance = double.parse(dist);
-                  // distance = double.parse(dist);
+                onChanged: (value) {
+                  if (value.isNotEmpty) {
+                    // String dist = value.toStringAsFixed(2);
+                    distance = double.parse(value);
+                    // distance = double.parse(dist);
+                  }
                 },
               ),
             ),

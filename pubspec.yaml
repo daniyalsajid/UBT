@@ -37,7 +37,7 @@ dependencies:
   flutter_picker: ^1.1.5
   duration: ^2.0.15
   fluttertoast: ^7.1.1
-  
+  owesome_validator: ^0.0.5
 
   #Firebase
   firebase_database: "^4.1.1"

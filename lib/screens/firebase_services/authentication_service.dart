@@ -50,21 +50,20 @@ class AuthenticationService {
   //   return _status;
   // }
 
-  Future<String> signIn({String email, String password}) async {
+  Future<dynamic> signIn({String email, String password}) async {
     try {
       await _firebaseAuth.signInWithEmailAndPassword(
           email: email, password: password);
-      //return "Signed in";
+      return {"status": true, "message": "Welcome to UBT"};
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
-        print('No user found for that email.');
+        return {"status": false, "message": "No user found."};
       } else if (e.code == 'wrong-password') {
-        print('Wrong password provided for that user.');
+        return {"status": false, "message": "Invalid email or password."};
       }
     } catch (e) {
-      return e.message;
+       return {"status": false, "message": "Something went worng."};
     }
-    return null;
   }
 
   /// There are a lot of different ways on how you can do exception handling.

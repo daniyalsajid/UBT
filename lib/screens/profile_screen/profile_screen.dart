@@ -20,7 +20,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         centerTitle: true,
         backgroundColor: Colors.green,
       ),
-      body: Container(
+      body: SingleChildScrollView(
         child: Center(
             child: Column(
           children: [
@@ -50,28 +50,43 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         fontStyle: FontStyle.italic,
                         fontWeight: FontWeight.w800),
                   ),
+                  Padding(
+                    padding: EdgeInsets.fromLTRB(150, 150, 100, 0),
+                    child: RaisedButton(
+                      color: Colors.green,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(16)),
+                      onPressed: () {
+                        context.read<AuthenticationService>().signOut();
+                      },
+                      child: Text(
+                        "Sign out",
+                        style: TextStyle(color: Colors.white),
+                      ),
+                    ),
+                  ),
                 ],
               ),
             ),
-            Row(
-              children: [
-                Padding(
-                  padding: EdgeInsets.fromLTRB(150, 150, 0, 0),
-                  child: RaisedButton(
-                    color: Colors.green,
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(16)),
-                    onPressed: () {
-                      context.read<AuthenticationService>().signOut();
-                    },
-                    child: Text(
-                      "Sign out",
-                      style: TextStyle(color: Colors.white),
-                    ),
-                  ),
-                ),
-              ],
-            ),
+            // Row(
+            //   children: [
+            //     Padding(
+            //       padding: EdgeInsets.fromLTRB(150, 150, 0, 0),
+            //       child: RaisedButton(
+            //         color: Colors.green,
+            //         shape: RoundedRectangleBorder(
+            //             borderRadius: BorderRadius.circular(16)),
+            //         onPressed: () {
+            //           context.read<AuthenticationService>().signOut();
+            //         },
+            //         child: Text(
+            //           "Sign out",
+            //           style: TextStyle(color: Colors.white),
+            //         ),
+            //       ),
+            //     ),
+            //   ],
+            // ),
           ],
         )),
       ),

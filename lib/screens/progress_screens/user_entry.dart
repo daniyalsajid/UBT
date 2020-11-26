@@ -212,10 +212,21 @@ class UserEntryState extends State<UserEntry> {
             ),
             Padding(
               padding: EdgeInsets.all(8.0),
+              child: Text(
+                "Wichtig: Die Trennung zwischen Km und Meter\n muss mit einem . erfolgen. Wenn die Distanz 4 - 5 - 6 \nbzw. eine glatte Zahl beträgt, trage bitte 4.001 - 5.001\n - etc. ein.",
+                textAlign: TextAlign.center,
+                // style: TextStyle(
+
+                //     // fontWeight: FontWeight.bold,
+                //     fontSize: 18),
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.all(8.0),
               child: TextFormField(
                 keyboardType: TextInputType.number,
                 decoration: InputDecoration(
-                    labelText: 'Distanz in Km(z.B. 5.45)',
+                    labelText: 'Distanz in Km (z.B. 5.45)',
                     fillColor: Colors.white,
                     focusedBorder: OutlineInputBorder(
                         borderSide:
@@ -231,7 +242,7 @@ class UserEntryState extends State<UserEntry> {
               child: TextFormField(
                 keyboardType: TextInputType.number,
                 decoration: InputDecoration(
-                    labelText: 'Höhenunterschied',
+                    labelText: 'Höhenunterschied (aufwärts)',
                     fillColor: Colors.white,
                     focusedBorder: OutlineInputBorder(
                         borderSide:
@@ -265,7 +276,7 @@ class UserEntryState extends State<UserEntry> {
               child: TextFormField(
                 keyboardType: TextInputType.number,
                 decoration: InputDecoration(
-                    labelText: 'Herzfrequenz',
+                    labelText: 'Herzfrequenz (Durchschnitt)',
                     fillColor: Colors.white,
                     focusedBorder: OutlineInputBorder(
                         borderSide:

@@ -122,7 +122,7 @@ class _WeekprogressState extends State<Weekprogress> {
                   width: 20,
                 ),
                 Text(
-                  userdata['Distance'].toString().substring(0, 1),
+                  userdata['Distance'].toString().substring(0, 3),
                   style: TextStyle(
                       color: Colors.green[900],
                       fontSize: 18,

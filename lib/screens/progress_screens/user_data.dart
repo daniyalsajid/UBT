@@ -272,7 +272,7 @@ class UserdataState extends State<Userdata> {
                     height: 1.5, fontWeight: FontWeight.w400, fontSize: 18),
               ),
               Text(
-                "Hast du kein konkretes Ziel eine \n bestimmte Zeit laufen zu wollen,\n aber eine Idee über eine persönliche\n virtuelle Marke (Distanz / Zeit),\n die Du ab und an herausfordern willst?",
+                "Hast du kein konkretes Ziel eine \n bestimmte Zeit laufen zu \nwollen aber eine Idee über\n eine persönliche virtuelle\n Marke (Distanz / Zeit),\ndie Du ab und \nan herausfordern willst?",
                 textAlign: TextAlign.center,
                 overflow: TextOverflow.ellipsis,
                 style: TextStyle(
@@ -363,7 +363,7 @@ class UserdataState extends State<Userdata> {
             // ),
             children: [
               Text(
-                'Mit deinem Zielwert kannst \nDu überprüfen, wie Du dich \n bezüglich einer gewünschten Leistung\n oder virtuellen Marke entwickelst\n und Du kannst dich für einzelne\n Aktivitäten herausfordern diese Marke\n zu erreichen.',
+                'Mit deinem Zielwert kannst \nDu überprüfen, wie Du dich \n bezüglich einer gewünschten\n Leistung oder virtuellen Marke\n entwickelst und Du kannst\n dich für einzelne\n Aktivitäten herausfordern\n diese Marke\n zu erreichen.',
                 textAlign: TextAlign.center,
                 overflow: TextOverflow.ellipsis,
                 style: TextStyle(
@@ -388,7 +388,7 @@ class UserdataState extends State<Userdata> {
             // ),
             children: [
               Text(
-                'Der Score ermöglicht es dir\nAktivitäten mit unterschiedlichen\n Distanzen und Geschwindigkeiten\n zu vergleichen\ und\n deine Entwicklung zu \nverfolgen. Oft ist es dir \nvielleicht gar nicht bewusst,\n welche Auswirkungen das regelmäßige\n Laufen gehen auf deinen Körper\n hat und welche großartigen Scores Du\n bereits erzielt hast.\n Ziel es nicht, in jeder Aktivität einen\n besseren Score zu erzielen.',
+                'Der Score ermöglicht es dir\nAktivitäten mit unterschiedlichen\n Distanzen und Geschwindigkeiten\n zu vergleichen\ und\n deine Entwicklung zu \nverfolgen. Oft ist es dir \nvielleicht gar nicht bewusst,\n welche Auswirkungen\n das regelmäßige Laufen \ngehen auf deinen Körper\n hat und welche großartigen\n Scores Du bereits erzielt hast.\n Ziel es nicht, in jeder\n Aktivität einen besseren Score\n zu erzielen.',
                 textAlign: TextAlign.center,
                 overflow: TextOverflow.ellipsis,
                 style: TextStyle(
@@ -397,7 +397,7 @@ class UserdataState extends State<Userdata> {
                     fontSize: 18),
               ),
               Text(
-                'Ganz wie im Spitzensport auch\n kannst Du nicht in jedem Training\n einen neuen Weltrekord aufstellen.\n Aber gelegentliche\n individuelle Spitzenleistungen\n (hohe Scores) zeigen dir,\n dass sich dein Körper mit\n dir entwickelt\n und langfristig zahlen sich\n deine Anstrengungen aus.',
+                'Ganz wie im Spitzensport auch\n kannst Du nicht in jedem Training\n einen neuen Weltrekord\n aufstellen.Aber gelegentliche\n individuelle Spitzenleistungen\n (hohe Scores) zeigen dir,\n dass sich dein Körper mit\n dir entwickelt\n und langfristig zahlen sich\n deine Anstrengungen aus.',
                 textAlign: TextAlign.center,
                 overflow: TextOverflow.ellipsis,
                 style: TextStyle(
@@ -661,7 +661,7 @@ class UserdataState extends State<Userdata> {
                                 ),
                                 Icon(
                                   Icons.access_time,
-                                  color: Colors.blue,
+                                  color: Colors.black,
                                   size: 36.0,
                                 ),
                               ],
@@ -688,6 +688,7 @@ class UserdataState extends State<Userdata> {
                                               : consumer.totaldistance
                                                       .toString() +
                                                   " Km",
+                                          textAlign: TextAlign.center,
                                           style: TextStyle(
                                             fontSize: 14.0,
                                             color: Colors.green,
@@ -715,6 +716,7 @@ class UserdataState extends State<Userdata> {
                                               ? "Zeit auswählen $totalminuites"
                                                   .toUpperCase()
                                               : consumer.totalHourWithMinutes,
+                                          textAlign: TextAlign.center,
                                           style: TextStyle(
                                             fontSize: 14.0,
                                             color: Colors.green,

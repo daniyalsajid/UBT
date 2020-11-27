@@ -68,9 +68,7 @@ class _SignInPageState extends State<SignInPage> {
                     // key: formKey,
                     validator: (value) {
                       if (!OwesomeValidator.password(
-                          value,
-                          OwesomeValidator
-                              .passwordMinLen8withLowerCaseAndSpecialChar)) {
+                          value, OwesomeValidator.patternNameOnlyChar)) {
                         return "The password must contain letters, \n numbers and special characters and must be \n at least 8 characters and at most 20.";
                       } else {
                         return null;

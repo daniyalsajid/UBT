@@ -16,7 +16,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Profile Screen'),
+        title: Text('Dein Profil'),
         centerTitle: true,
         backgroundColor: Colors.green,
       ),
@@ -29,7 +29,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               child: Column(
                 children: [
                   Text(
-                    'Egal ob Du ein ambitioniertes Ziel verfolgst\n oder läufst, um einen Ausgleich zu haben sowie\n aktiv zu sein, wir wollen Dir zeigen,\n dass es sich lohnt regelmäßig laufen zu gehen\n.Wie? Indem wir dir zeigen, \ndass dein Körper sich an deine Anstrengungen anpasst und mit dir wächst\n - ganz egal ob Du ans Limit gehst oder nach\n einem stressigen Tag den Kopf frei kriegen willst.',
+                    'Egal ob Du ein ambitioniertes Ziel\n verfolgst oder läufst, um einen \nAusgleich zu haben sowie aktiv\n zu sein, wir wollen Dir zeigen,\n dass es sich lohnt regelmäßig\n laufen zu gehen.',
                     textAlign: TextAlign.center,
                     // overflow: TextOverflow.ellipsis,
                     style: TextStyle(
@@ -40,7 +40,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         fontWeight: FontWeight.w800),
                   ),
                   Text(
-                    'Wie? Indem wir dir zeigen dass dein\n Körper sich an deine Anstrengungen\n anpasst und mit dir wächst - ganz\n egal ob Du ans Limit gehst oder\n nach einem stressigen Tag den\n Kopf frei kriegen willst.',
+                    'Wie? Indem wir dir zeigen, dass dein\n Körper sich an deine Anstrengungen\n anpasst und mit dir wächst - ganz\n egal ob Du ans Limit gehst oder\n nach einem stressigen Tag den\n Kopf frei kriegen willst.',
                     textAlign: TextAlign.center,
                     // overflow: TextOverflow.ellipsis,
                     style: TextStyle(
@@ -51,7 +51,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         fontWeight: FontWeight.w800),
                   ),
                   Padding(
-                    padding: EdgeInsets.fromLTRB(150, 150, 100, 0),
+                    padding: EdgeInsets.fromLTRB(100, 50, 100, 0),
                     child: RaisedButton(
                       color: Colors.green,
                       shape: RoundedRectangleBorder(

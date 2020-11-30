@@ -122,24 +122,24 @@ class _WeekprogressState extends State<Weekprogress> {
                   width: 20,
                 ),
                 Text(
-                  userdata['Distance'].toString().substring(0, 3),
+                  userdata['Distance'].toString().substring(0, 4),
                   style: TextStyle(
                       color: Colors.green[900],
                       fontSize: 18,
                       fontWeight: FontWeight.w800),
                 ),
                 SizedBox(
-                  width: 60,
+                  width: 42,
                 ),
                 Text(
-                  userdata['Minutes'].toString().substring(0, 2),
+                  userdata['Minutes'].toString().substring(0, 4),
                   style: TextStyle(
                       color: Colors.green[900],
                       fontSize: 18,
                       fontWeight: FontWeight.w800),
                 ),
                 SizedBox(
-                  width: 60,
+                  width: 40,
                 ),
                 Text(
                   userdata['Pace'].toStringAsFixed(2),
@@ -170,7 +170,7 @@ class _WeekprogressState extends State<Weekprogress> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text('Deine Aktivitaten'),
+          title: Text('Deine Aktivitäten'),
           backgroundColor: Colors.green,
           centerTitle: true,
         ),

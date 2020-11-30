@@ -363,7 +363,7 @@ class UserdataState extends State<Userdata> {
             // ),
             children: [
               Text(
-                'Mit deinem Zielwert kannst \nDu überprüfen, wie Du dich \n bezüglich einer gewünschten\n Leistung oder virtuellen Marke\n entwickelst und Du kannst\n dich für einzelne\n Aktivitäten herausfordern\n diese Marke\n zu erreichen.',
+                'Mit deinem Zielwert kannst \nDu überprüfen, wie Du dich \n bezüglich einer \ngewünschten Leistung oder\n virtuellen Marke entwickelst \nund Du kannst dich für\n einzelne Aktivitäten \nherausfordern\n diese Marke zu erreichen.',
                 textAlign: TextAlign.center,
                 overflow: TextOverflow.ellipsis,
                 style: TextStyle(
@@ -397,7 +397,7 @@ class UserdataState extends State<Userdata> {
                     fontSize: 18),
               ),
               Text(
-                'Ganz wie im Spitzensport auch\n kannst Du nicht in jedem Training\n einen neuen Weltrekord\n aufstellen.Aber gelegentliche\n individuelle Spitzenleistungen\n (hohe Scores) zeigen dir,\n dass sich dein Körper mit\n dir entwickelt\n und langfristig zahlen sich\n deine Anstrengungen aus.',
+                'Ganz wie im Spitzensport auch\n kannst Du nicht in jedem Training\n einen neuen Weltrekord\n aufstellen. Aber gelegentliche\n individuelle Spitzenleistungen\n (hohe Scores) zeigen dir,\n dass sich dein Körper mit\n dir entwickelt\n und langfristig zahlen sich\n deine Anstrengungen aus.',
                 textAlign: TextAlign.center,
                 overflow: TextOverflow.ellipsis,
                 style: TextStyle(
@@ -415,7 +415,7 @@ class UserdataState extends State<Userdata> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text('Progress Screen'),
+          title: Text('Dein Fortschritt'),
           centerTitle: true,
           backgroundColor: Colors.green,
         ),

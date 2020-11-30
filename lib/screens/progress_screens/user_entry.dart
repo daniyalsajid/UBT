@@ -213,7 +213,7 @@ class UserEntryState extends State<UserEntry> {
             Padding(
               padding: EdgeInsets.all(8.0),
               child: Text(
-                "Wichtig: Die Trennung zwischen Km und Meter\n muss mit einem . erfolgen. Wenn die Distanz 4 - 5 - 6 \nbzw. eine glatte Zahl beträgt, trage bitte 4.001 - 5.001\n - etc. ein.",
+                "Wichtig: Die Trennung zwischen Km und Meter muss mit einem . erfolgen und es müssen mindestens zwei Zahlen (keine Null am Ende) nach dem Komma eingetragen werden. Wenn die Distanz 4, 5 oder z.B. 6 km beträgt, trage bitte 4.01, 5.01 oder 6.01 ein.",
                 textAlign: TextAlign.center,
                 // style: TextStyle(
 

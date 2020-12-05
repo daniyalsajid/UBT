@@ -7,11 +7,10 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:UBT/screens/home/login_page.dart';
 import 'package:UBT/screens/home/home_screen.dart';
 
-Future<void> main() async {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
-
-  runApp(MyApp());
+  await Firebase.initializeApp().then((value) => runApp(MyApp()));
+  
 }
 
 class MyApp extends StatelessWidget {

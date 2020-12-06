@@ -1,3 +1,5 @@
+import 'dart:io' show Platform;
+
 import 'package:UBT/states/progress_screen_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -9,8 +11,19 @@ import 'package:UBT/screens/home/home_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp().then((value) => runApp(MyApp()));
-  
+  // print(Platform.isWindows);
+  await Firebase.initializeApp(
+          name: "ubt",
+          options: FirebaseOptions(
+              apiKey: "AIzaSyAxpUpSzD0ROvWiZ3i0Bj1UiPszklhB9g4",
+              authDomain: "ubt-running.firebaseapp.com",
+              databaseURL: "https://ubt-running.firebaseio.com",
+              projectId: "ubt-running",
+              storageBucket: "ubt-running.appspot.com",
+              messagingSenderId: "538243409391",
+              appId: "1:538243409391:web:3d97947d99e59b7411c21a",
+              measurementId: "G-K5JB1BYW35"))
+      .then((value) => runApp(MyApp()));
 }
 
 class MyApp extends StatelessWidget {

@@ -67,11 +67,8 @@ class _SignInPageState extends State<SignInPage> {
                   TextFormField(
                     // key: formKey,
                     validator: (value) {
-                      if (OwesomeValidator.password(
-                          value,
-                          OwesomeValidator
-                              .passwordMinLen8withLowerCaseAndSpecialChar)) {
-                        return "The password must contain letters, \n numbers and special characters and must be \n at least 8 characters and at most 20.";
+                      if (value == "") {
+                        return "Password field can't be empty.";
                       } else {
                         return null;
                       }
@@ -95,7 +92,10 @@ class _SignInPageState extends State<SignInPage> {
                           // color: Colors.green,
                           elevation: 5.0,
                           onPressed: () async {
+                            emailController.text = "daniyalsajid1@gmail.com";
+                            passwordController.text = "abc12345.";
                             final FormState form = formKeyLogin.currentState;
+
                             if (form.validate()) {
                               setState(() {
                                 loader = true;

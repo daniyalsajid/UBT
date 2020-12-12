@@ -11,6 +11,7 @@ import 'package:UBT/screens/home/home_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   // print(Platform.isWindows);
   // await Firebase.initializeApp(
   //         name: "ubt",

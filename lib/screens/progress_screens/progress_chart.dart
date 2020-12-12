@@ -1,4 +1,5 @@
 import 'package:UBT/states/progress_screen_provider.dart';
+import '../../uiUtils/toast.dart';
 
 /// Line chart example
 import 'package:charts_flutter/flutter.dart' as charts;
@@ -31,27 +32,36 @@ class PointsLineChart extends StatelessWidget {
           //     tickFormatterSpec: charts.AutoDateTimeTickFormatterSpec(
           //         day: charts.TimeFormatterSpec(
           //             format: 'dd', transitionFormat: 'dd MMM YYYY'))),
-
+          selectionModels: [
+            charts.SelectionModelConfig(
+                changedListener: (charts.SelectionModel model) {
+              if (model.hasDatumSelection) {
+                showToast(message: '${model.selectedDatum[0].datum.year},${model.selectedDatum[0].datum.sales}');
+              }
+            })
+          ],
           animate: animate,
           behaviors: [
-            new charts.RangeAnnotation([
-              new charts.LineAnnotationSegment(
-                  consumer.score != null ? consumer.score.abs() : 20,
-                  charts.RangeAnnotationAxisType.measure,
-                  startLabel: 'Goal To Achieve',
-                  // endLabel: 'Measure 1 End',
-                  color: charts.MaterialPalette.black),
-              new charts.LineAnnotationSegment(
-                  02, charts.RangeAnnotationAxisType.measure,
-                  startLabel: 'Date',
-                  // endLabel: 'Measure 1 End',
-                  color: charts.MaterialPalette.gray.shade100),
-              new charts.LineAnnotationSegment(
-                  0, charts.RangeAnnotationAxisType.domain,
-                  startLabel: 'Score',
-                  // endLabel: 'Measure 1 End',
-                  color: charts.MaterialPalette.gray.shade100),
-            ])
+            new charts.RangeAnnotation(
+              [
+                new charts.LineAnnotationSegment(
+                    consumer.score != null ? consumer.score.abs() : 20,
+                    charts.RangeAnnotationAxisType.measure,
+                    startLabel: 'Goal To Achieve',
+                    // endLabel: 'Measure 1 End',
+                    color: charts.MaterialPalette.black),
+                new charts.LineAnnotationSegment(
+                    02, charts.RangeAnnotationAxisType.measure,
+                    startLabel: 'Date',
+                    // endLabel: 'Measure 1 End',
+                    color: charts.MaterialPalette.gray.shade100),
+                new charts.LineAnnotationSegment(
+                    0, charts.RangeAnnotationAxisType.domain,
+                    startLabel: 'Score',
+                    // endLabel: 'Measure 1 End',
+                    color: charts.MaterialPalette.gray.shade100),
+              ],
+            ),
           ],
           defaultRenderer: new charts.LineRendererConfig(
             includePoints: true,

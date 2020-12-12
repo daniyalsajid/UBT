@@ -1,3 +1,5 @@
+import 'dart:io' show Platform;
+
 import 'package:UBT/states/progress_screen_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -9,8 +11,24 @@ import 'package:UBT/screens/home/home_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp().then((value) => runApp(MyApp()));
-  
+  await Firebase.initializeApp();
+  // print(Platform.isWindows);
+  // await Firebase.initializeApp(
+  //         name: "ubt",
+  //         options: FirebaseOptions(
+  //             apiKey: "AIzaSyAxpUpSzD0ROvWiZ3i0Bj1UiPszklhB9g4",
+  //             authDomain: "ubt-running.firebaseapp.com",
+  //             databaseURL: "https://ubt-running.firebaseio.com",
+  //             projectId: "ubt-running",
+  //             storageBucket: "ubt-running.appspot.com",
+  //             messagingSenderId: "538243409391",
+  //             appId: "1:538243409391:web:3d97947d99e59b7411c21a",
+  //             measurementId: "G-K5JB1BYW35"))
+  //     .then((value) {
+  //   print(value);
+  //   return
+  runApp(MyApp());
+  // });
 }
 
 class MyApp extends StatelessWidget {
@@ -44,13 +62,26 @@ class MyApp extends StatelessWidget {
 }
 
 class AuthenticationWrapper extends StatelessWidget {
+  final Future<FirebaseApp> _initialization = Firebase.initializeApp();
   @override
   Widget build(BuildContext context) {
     final firebaseUser = context.watch<User>();
-
-    if (firebaseUser != null) {
-      return HomeScreen();
-    }
-    return SignInPage();
+    return FutureBuilder(
+      // Initialize FlutterFire:
+      future: _initialization,
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.done &&
+            firebaseUser != null) {
+          return HomeScreen();
+        } else if (snapshot.hasError) {
+          return SignInPage();
+        } else if (snapshot.connectionState == ConnectionState.waiting) {
+          return CircularProgressIndicator();
+        } else if (firebaseUser == null &&
+            snapshot.connectionState == ConnectionState.done) {
+          return SignInPage();
+        }
+      },
+    );
   }
 }

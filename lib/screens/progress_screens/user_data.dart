@@ -1,3 +1,5 @@
+import 'package:UBT/constants/shared_preference_constants.dart';
+import 'package:UBT/services/shared_preference.dart';
 import 'package:UBT/states/progress_screen_provider.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_database/ui/firebase_animated_list.dart';
@@ -70,6 +72,13 @@ class UserdataState extends State<Userdata> {
     // readData();
     providerProgressScreen =
         Provider.of<ProgressScreenProvider>(context, listen: false);
+    SharedPreferenceServiceClass()
+        .getStringInSF(SharedPreferencesConstant.scoreValue)
+        .then((value) {
+      if (value != null && providerProgressScreen.score == null) {
+        providerProgressScreen.setScoreAndGoalToAchieve(double.parse(value));
+      }
+    });
     _ref = FirebaseDatabase.instance.reference().child(uploadAuth);
 
     var now = new DateTime.now();
@@ -226,7 +235,11 @@ class UserdataState extends State<Userdata> {
           d = score;
         });
 
-        return PointsLineChart(_createSampleData(d, graphlists));
+        return InkWell(
+            onTap: () {
+              print(graphlists);
+            },
+            child: PointsLineChart(_createSampleData(d, graphlists)));
       });
   }
 

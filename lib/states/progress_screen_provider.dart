@@ -1,3 +1,5 @@
+import 'package:UBT/constants/shared_preference_constants.dart';
+import 'package:UBT/services/shared_preference.dart';
 import 'package:flutter/material.dart';
 
 class ProgressScreenProvider extends ChangeNotifier {
@@ -6,6 +8,8 @@ class ProgressScreenProvider extends ChangeNotifier {
   String totalHourWithMinutes;
 
   setScoreAndGoalToAchieve(double score) {
+    SharedPreferenceServiceClass()
+        .addStringInSF(SharedPreferencesConstant.scoreValue, score.toString());
     this.score = score;
     notifyListeners();
   }

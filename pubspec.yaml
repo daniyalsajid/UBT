@@ -38,12 +38,13 @@ dependencies:
   duration: ^2.0.15
   fluttertoast: ^7.1.1
   owesome_validator: ^0.0.5
-
+  bezier_chart: ^1.0.17+1
   #Firebase
-  firebase_database: "^4.1.1"
-  firebase_core: ^0.5.0+1
-  # cloud_firestore: ^0.14.1+2
-  firebase_auth: ^0.18.1+2
+  firebase_database: ^4.4.0
+  firebase: ^7.3.3
+  firebase_core: ^0.5.3
+  cloud_firestore: ^0.14.4
+  firebase_auth: ^0.18.4+1
 
 dev_dependencies:
   flutter_test:

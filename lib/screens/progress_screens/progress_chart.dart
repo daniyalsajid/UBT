@@ -65,8 +65,9 @@ class PointsLineChart extends StatelessWidget {
           ],
           defaultRenderer: new charts.LineRendererConfig(
             includePoints: true,
+            stacked: true,
             includeArea: false,
-            includeLine: false,
+            includeLine: true,
             radiusPx: 6.0,
           ));
     });
@@ -77,10 +78,10 @@ class PointsLineChart extends StatelessWidget {
     final data = [
       new LinearSales(1, 5),
       new LinearSales(2, 10),
-      // new LinearSales(3, 29),
-      // new LinearSales(4, 25),
-      // new LinearSales(5, 30),
-      // new LinearSales(6, 75),
+      new LinearSales(3, 29),
+      new LinearSales(4, 25),
+      new LinearSales(5, 30),
+      new LinearSales(6, 75),
     ];
 
     return [

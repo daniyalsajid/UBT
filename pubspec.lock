@@ -7,7 +7,9 @@ packages:
       name: async
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.5.0-nullsafety.3"
+
+    version: "2.5.0-nullsafety.1"
+
   bezier_chart:
     dependency: "direct main"
     description:
@@ -56,7 +58,9 @@ packages:
       name: clock
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.1.0-nullsafety.3"
+
+    version: "1.1.0-nullsafety.1"
+
   cloud_firestore:
     dependency: "direct main"
     description:
@@ -98,7 +102,7 @@ packages:
       name: date_field
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.3.2"
+    version: "0.3.3"
   duration:
     dependency: "direct main"
     description:
@@ -218,7 +222,7 @@ packages:
       name: fluttertoast
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "7.1.1"
+    version: "7.1.5"
   http:
     dependency: transitive
     description:
@@ -323,7 +327,7 @@ packages:
       name: pedantic
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.9.0"
+    version: "1.9.2"
   platform:
     dependency: transitive
     description:
@@ -351,7 +355,7 @@ packages:
       name: provider
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "4.3.2+2"
+    version: "4.3.2+3"
   quiver:
     dependency: transitive
     description:
@@ -440,14 +444,14 @@ packages:
       name: syncfusion_flutter_charts
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "18.3.47"
+    version: "18.3.53"
   syncfusion_flutter_core:
     dependency: transitive
     description:
       name: syncfusion_flutter_core
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "18.3.47"
+    version: "18.3.53"
   term_glyph:
     dependency: transitive
     description:
@@ -482,14 +486,14 @@ packages:
       name: win32
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.7.3"
+    version: "1.7.4"
   xdg_directories:
     dependency: transitive
     description:
       name: xdg_directories
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.1.0"
+    version: "0.1.2"
 sdks:
   dart: ">=2.12.0-0.0 <3.0.0"
   flutter: ">=1.16.0 <2.0.0"

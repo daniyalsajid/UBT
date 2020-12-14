@@ -1,4 +1,6 @@
 import 'package:UBT/constants/shared_preference_constants.dart';
+import 'package:UBT/screens/components/alert_dialog.dart';
+import 'package:UBT/screens/components/trend_cards.dart';
 import 'package:UBT/services/shared_preference.dart';
 import 'package:UBT/states/progress_screen_provider.dart';
 import 'package:firebase_database/firebase_database.dart';
@@ -268,162 +270,6 @@ class UserdataState extends State<Userdata> {
     ];
   }
 
-  Future<void> openDialog() async {
-    switch (await showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return SimpleDialog(
-            // title: const Text(
-            //   'Hi',
-            //   textAlign: TextAlign.center,
-            // ),
-            children: [
-              Text(
-                'Willst Du in absehbarer Zeit \n eine konkrete Strecke in einer \n bestimmten Zeit laufen?',
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                    height: 1.5, fontWeight: FontWeight.w400, fontSize: 18),
-              ),
-              Text(
-                "Hast du kein konkretes Ziel eine \n bestimmte Zeit laufen zu \nwollen aber eine Idee über\n eine persönliche virtuelle\n Marke (Distanz / Zeit),\ndie Du ab und \nan herausfordern willst?",
-                textAlign: TextAlign.center,
-                overflow: TextOverflow.ellipsis,
-                style: TextStyle(
-                    height: 1.5,
-                    // fontWeight: FontWeight.bold,
-                    fontSize: 18),
-              )
-            ]);
-      },
-    )) {
-    }
-  }
-
-  Future<void> openDialog1() async {
-    switch (await showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return SimpleDialog(
-            // title: const Text(
-            //   'Hi',
-            //   textAlign: TextAlign.center,
-            // ),
-            children: [
-              Text(
-                'Egal ob Du ein ambitioniertes \nZiel verfolgst oder läufst,\n um einen Ausgleich zu haben\n sowie aktiv zu sein,\n wir wollen Dir zeigen,\n dass es sich lohnt regelmäßig\n laufen zu gehen.',
-                textAlign: TextAlign.center,
-                overflow: TextOverflow.ellipsis,
-                style: TextStyle(
-                    height: 1.2,
-                    // fontWeight: FontWeight.bold,
-                    fontSize: 18),
-              ),
-              Text(
-                "Wie? Indem wir dir zeigen\ndass dein Körper sich an deine\n Anstrengungen anpasst und\n mit dir wächst - ganz egal ob\n Du ans Limit gehst oder nach\n einem stressigen Tag den\n Kopf frei kriegen willst.",
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                    height: 1,
-                    // fontWeight: FontWeight.bold,
-                    fontSize: 18),
-              ),
-            ]);
-      },
-    )) {
-    }
-  }
-
-  Future<void> openDialog2() async {
-    switch (await showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return SimpleDialog(
-            // title: const Text(
-            //   'Hi',
-            //   textAlign: TextAlign.center,
-            // ),
-            children: [
-              Text(
-                'In Abhängigkeit von der Distanz \nund der Dauer variiert dein Score\n je Aktivität. Wenn Du eine gleiche\n Strecke in kürzerer Zeit läufst,\n steigt der Score. Zum Beispiel\n wäre der Score für 10 km\n in 55 Minuten 35,7 - für 10 km\n in 50 Minuten 40. ',
-                textAlign: TextAlign.center,
-                overflow: TextOverflow.ellipsis,
-                style: TextStyle(
-                    height: 1.2,
-                    // fontWeight: FontWeight.bold,
-                    fontSize: 18),
-              ),
-              Text(
-                "Die Berechnung berücksichtigt aber auch, dass es für eine längere Strecke schwieriger ist die gleiche Pace zu laufen. Für 5 km in 27:30 Minuten (gleiche Pace wie 55 Minuten in 10 km) wäre der Score 34,2 - der Score steigt also um 1,5 Punkte, weil Du die Pace über einen längeren Zeitraum halten konntest.",
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                    height: 1.2,
-                    // fontWeight: FontWeight.bold,
-                    fontSize: 18),
-              ),
-            ]);
-      },
-    )) {
-    }
-  }
-
-  Future<void> openDialog3() async {
-    switch (await showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return SimpleDialog(
-            // title: const Text(
-            //   'Hi',
-            //   textAlign: TextAlign.center,
-            // ),
-            children: [
-              Text(
-                'Mit deinem Zielwert kannst \nDu überprüfen, wie Du dich \n bezüglich einer \ngewünschten Leistung oder\n virtuellen Marke entwickelst \nund Du kannst dich für\n einzelne Aktivitäten \nherausfordern\n diese Marke zu erreichen.',
-                textAlign: TextAlign.center,
-                overflow: TextOverflow.ellipsis,
-                style: TextStyle(
-                    height: 1.2,
-                    // fontWeight: FontWeight.bold,
-                    fontSize: 18),
-              ),
-            ]);
-      },
-    )) {
-    }
-  }
-
-  Future<void> openDialog4() async {
-    switch (await showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return SimpleDialog(
-            // title: const Text(
-            //   'Hi',
-            //   textAlign: TextAlign.center,
-            // ),
-            children: [
-              Text(
-                'Der Score ermöglicht es dir\nAktivitäten mit unterschiedlichen\n Distanzen und Geschwindigkeiten\n zu vergleichen\ und\n deine Entwicklung zu \nverfolgen. Oft ist es dir \nvielleicht gar nicht bewusst,\n welche Auswirkungen\n das regelmäßige Laufen \ngehen auf deinen Körper\n hat und welche großartigen\n Scores Du bereits erzielt hast.\n Ziel es nicht, in jeder\n Aktivität einen besseren Score\n zu erzielen.',
-                textAlign: TextAlign.center,
-                overflow: TextOverflow.ellipsis,
-                style: TextStyle(
-                    height: 1.2,
-                    // fontWeight: FontWeight.bold,
-                    fontSize: 18),
-              ),
-              Text(
-                'Ganz wie im Spitzensport auch\n kannst Du nicht in jedem Training\n einen neuen Weltrekord\n aufstellen. Aber gelegentliche\n individuelle Spitzenleistungen\n (hohe Scores) zeigen dir,\n dass sich dein Körper mit\n dir entwickelt\n und langfristig zahlen sich\n deine Anstrengungen aus.',
-                textAlign: TextAlign.center,
-                overflow: TextOverflow.ellipsis,
-                style: TextStyle(
-                    height: 1.2,
-                    // fontWeight: FontWeight.bold,
-                    fontSize: 18),
-              ),
-            ]);
-      },
-    )) {
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -432,9 +278,10 @@ class UserdataState extends State<Userdata> {
           centerTitle: true,
           backgroundColor: Colors.green,
         ),
-        body: SingleChildScrollView(
-          child: Container(
-            height: MediaQuery.of(context).size.height,
+        body: Container(
+          height: double.infinity,
+          child: SingleChildScrollView(
+            physics: BouncingScrollPhysics(),
             child: Column(
               // mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
@@ -450,54 +297,22 @@ class UserdataState extends State<Userdata> {
                             setState(
                               () {
                                 userSelectedValue = value;
-
-                                // String m = selectedUser.name;
-                                // String n = selectedUser.name;
-                                // // print(n);
-                                // print(n);
-                                // switch (n) {
-                                //   case '1':
-                                //     {
-                                //       n = '1';
-                                //     }
-                                //     break;
-                                //   case '2':
-                                //     {
-                                //       n = '2';
-                                //     }
-                                // }
-
                                 switch (userSelectedValue) {
                                   case 'Jan':
                                     {
-                                      // Chart('1');
-
                                       userentry = chart('1');
-
-                                      // Fluttertoast.showToast(
-                                      //     msg: "This is Center Short Toast",
-                                      //     toastLength: Toast.LENGTH_SHORT,
-                                      //     gravity: ToastGravity.CENTER,
-                                      //     timeInSecForIosWeb: 1,
-                                      //     backgroundColor: Colors.red,
-                                      //     textColor: Colors.white,
-                                      //     fontSize: 16.0);
                                     }
                                     break;
                                   case 'Feb':
                                     {
                                       userentry = chart('2');
-
-                                      // print(monthnow);
                                     }
-                                    // return Expanded(child: Container(child: userentry));
 
                                     break;
 
                                   case 'Mar':
                                     {
                                       userentry = chart('3');
-                                      // print(n);
                                     }
                                     break;
                                   case 'Apr':
@@ -578,7 +393,11 @@ class UserdataState extends State<Userdata> {
                         color: Colors.green,
                         tooltip: 'Graph Info',
                         onPressed: () {
-                          openDialog3();
+                          CustomAlertDialog.showDialogPopup(
+                            context: context,
+                            text:
+                                'Mit deinem Zielwert kannst \nDu überprüfen, wie Du dich \n bezüglich einer \ngewünschten Leistung oder\n virtuellen Marke entwickelst \nund Du kannst dich für\n einzelne Aktivitäten \nherausfordern\n diese Marke zu erreichen.',
+                          );
                         },
                       ),
                     ],
@@ -626,42 +445,16 @@ class UserdataState extends State<Userdata> {
                                   color: Colors.green,
                                   tooltip: 'More Info',
                                   onPressed: () {
-                                    openDialog();
+                                    CustomAlertDialog.showDialogPopup(
+                                        context: context,
+                                        text:
+                                            'Willst Du in absehbarer Zeit \n eine konkrete Strecke in einer \n bestimmten Zeit laufen?',
+                                        text2:
+                                            "Hast du kein konkretes Ziel eine \n bestimmte Zeit laufen zu \nwollen aber eine Idee über\n eine persönliche virtuelle\n Marke (Distanz / Zeit),\ndie Du ab und \nan herausfordern willst?");
                                   },
-
-                                  //   return SimpleDialog(
-                                  //     title: const Text('Select assignment'),
-                                  //     children: [
-                                  //       Text(
-                                  //         'Think of a certain distance that you would \n like to run in a certain time, \n in one or two months fom now?',
-                                  //         textAlign: TextAlign.center,
-                                  //         overflow: TextOverflow.ellipsis,
-                                  //         style: TextStyle(
-                                  //             height: 1,
-                                  //             // fontWeight: FontWeight.bold,
-                                  //             fontSize: 18),
-                                  //       ),
-                                  //     ],
-                                  //   );
-                                  // },
                                 ),
-
-                                // Text('Volume : $_volume')
                               ],
                             ),
-                            // Row(
-                            //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            //   crossAxisAlignment: CrossAxisAlignment.center,
-                            //   children: [
-                            //     Text(
-                            //       '  ',
-                            //       style: TextStyle(
-                            //           height: 1.5,
-                            //           fontWeight: FontWeight.normal,
-                            //           fontSize: 18),
-                            //     ),
-                            //   ],
-                            // ),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceAround,
                               children: <Widget>[
@@ -783,7 +576,12 @@ class UserdataState extends State<Userdata> {
                                   color: Colors.green,
                                   tooltip: 'More Info',
                                   onPressed: () {
-                                    openDialog2();
+                                    CustomAlertDialog.showDialogPopup(
+                                        context: context,
+                                        text:
+                                            'In Abhängigkeit von der Distanz \nund der Dauer variiert dein Score\n je Aktivität. Wenn Du eine gleiche\n Strecke in kürzerer Zeit läufst,\n steigt der Score. Zum Beispiel\n wäre der Score für 10 km\n in 55 Minuten 35,7 - für 10 km\n in 50 Minuten 40. ',
+                                        text2:
+                                            "Die Berechnung berücksichtigt aber auch, dass es für eine längere Strecke schwieriger ist die gleiche Pace zu laufen. Für 5 km in 27:30 Minuten (gleiche Pace wie 55 Minuten in 10 km) wäre der Score 34,2 - der Score steigt also um 1,5 Punkte, weil Du die Pace über einen längeren Zeitraum halten konntest.");
                                   },
                                 ),
                               ],
@@ -836,7 +634,12 @@ class UserdataState extends State<Userdata> {
                       color: Colors.green,
                       tooltip: 'More Info',
                       onPressed: () {
-                        openDialog1();
+                        CustomAlertDialog.showDialogPopup(
+                            context: context,
+                            text:
+                                'Egal ob Du ein ambitioniertes \nZiel verfolgst oder läufst,\n um einen Ausgleich zu haben\n sowie aktiv zu sein,\n wir wollen Dir zeigen,\n dass es sich lohnt regelmäßig\n laufen zu gehen.',
+                            text2:
+                                "Wie? Indem wir dir zeigen\ndass dein Körper sich an deine\n Anstrengungen anpasst und\n mit dir wächst - ganz egal ob\n Du ans Limit gehst oder nach\n einem stressigen Tag den\n Kopf frei kriegen willst.");
                       },
                     ),
                   ],
@@ -855,11 +658,51 @@ class UserdataState extends State<Userdata> {
                       color: Colors.green,
                       tooltip: 'More Info',
                       onPressed: () {
-                        openDialog4();
+                        CustomAlertDialog.showDialogPopup(
+                            context: context,
+                            text:
+                                'Der Score ermöglicht es dir\nAktivitäten mit unterschiedlichen\n Distanzen und Geschwindigkeiten\n zu vergleichen\ und\n deine Entwicklung zu \nverfolgen. Oft ist es dir \nvielleicht gar nicht bewusst,\n welche Auswirkungen\n das regelmäßige Laufen \ngehen auf deinen Körper\n hat und welche großartigen\n Scores Du bereits erzielt hast.\n Ziel es nicht, in jeder\n Aktivität einen besseren Score\n zu erzielen.',
+                            text2:
+                                'Ganz wie im Spitzensport auch\n kannst Du nicht in jedem Training\n einen neuen Weltrekord\n aufstellen. Aber gelegentliche\n individuelle Spitzenleistungen\n (hohe Scores) zeigen dir,\n dass sich dein Körper mit\n dir entwickelt\n und langfristig zahlen sich\n deine Anstrengungen aus.');
                       },
                     ),
                   ],
                 ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    SizedBox(),
+                    SizedBox(
+                      width: MediaQuery.of(context).size.width / 2,
+                      child: SingleChildScrollView(
+                        scrollDirection: Axis.horizontal,
+                        physics: BouncingScrollPhysics(),
+                        child: Row(
+                          children: [
+                            for (int i = 0; i < 4; i++)
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: TrendCards(),
+                              ),
+                          ],
+                        ),
+                      ),
+                    ),
+                    Column(
+                      children: [
+                        Icon(Icons.navigate_next_sharp),
+                        Text(
+                          'Your \ntext here',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                              height: 1,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 14),
+                        ),
+                      ],
+                    )
+                  ],
+                )
               ],
             ),
           ),

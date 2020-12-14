@@ -1,5 +1,5 @@
 import 'package:UBT/screens/profile_screen/profile_screen.dart';
-import 'package:UBT/screens/progress_screens/score_chart.dart';
+// import 'package:UBT/screens/progress_screens/score_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:UBT/screens/progress_screens/user_entry.dart';
 import 'package:UBT/screens/progress_screens/week_progress.dart';

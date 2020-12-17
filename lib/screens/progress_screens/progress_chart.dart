@@ -36,7 +36,9 @@ class PointsLineChart extends StatelessWidget {
             charts.SelectionModelConfig(
                 changedListener: (charts.SelectionModel model) {
               if (model.hasDatumSelection) {
-                showToast(message: '${model.selectedDatum[0].datum.year},${model.selectedDatum[0].datum.sales}');
+                showToast(
+                    message:
+                        '${model.selectedDatum[0].datum.year},${model.selectedDatum[0].datum.sales}');
               }
             })
           ],
@@ -67,7 +69,7 @@ class PointsLineChart extends StatelessWidget {
             includePoints: true,
             stacked: true,
             includeArea: false,
-            includeLine: true,
+            includeLine: false,
             radiusPx: 6.0,
           ));
     });

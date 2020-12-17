@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class TrendCards extends StatelessWidget {
+class TrendCardpace extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -14,18 +14,18 @@ class TrendCards extends StatelessWidget {
           children: [
             Padding(
               padding: const EdgeInsets.all(8.0),
-              child: Icon(Icons.navigation),
+              child: Icon(Icons.watch),
             ),
             Text(
-              "Distanz",
+              "Pace",
               style: TextStyle(
                   height: 1, fontWeight: FontWeight.bold, fontSize: 14),
             ),
-            Icon(Icons.trending_flat),
+            Icon(Icons.trending_up),
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Text(
-                  "Hervorragend! Du bist bei deiner letzten Aktivität eine weitere Strecke als sonst gelaufen!"),
+                  "Hervorragend! Du bist bei deiner letzten Aktivität im Durchschnitt schneller als sonst gelaufen."),
             ),
           ],
         ));

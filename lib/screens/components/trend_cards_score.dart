@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
 
-class TrendCards extends StatelessWidget {
+class TrendCardscore extends StatefulWidget {
+  @override
+  _TrendCardscoreState createState() => _TrendCardscoreState();
+}
+
+class _TrendCardscoreState extends State<TrendCardscore> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -16,16 +21,13 @@ class TrendCards extends StatelessWidget {
               padding: const EdgeInsets.all(8.0),
               child: Icon(Icons.navigation),
             ),
-            Text(
-              "Distanz",
-              style: TextStyle(
-                  height: 1, fontWeight: FontWeight.bold, fontSize: 14),
-            ),
-            Icon(Icons.trending_flat),
+            Text("Score",style: TextStyle(
+                  height: 1, fontWeight: FontWeight.bold, fontSize: 14),),
+            Icon(Icons.trending_up),
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Text(
-                  "Hervorragend! Du bist bei deiner letzten Aktivität eine weitere Strecke als sonst gelaufen!"),
+                  "Hervorragend! Du hattest bei deiner letzten Aktivität einen höheren Score als sonst."),
             ),
           ],
         ));

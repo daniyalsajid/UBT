@@ -1,6 +1,8 @@
 import 'package:UBT/constants/shared_preference_constants.dart';
 import 'package:UBT/screens/components/alert_dialog.dart';
 import 'package:UBT/screens/components/trend_cards.dart';
+import 'package:UBT/screens/components/trend_cards_pace.dart';
+import 'package:UBT/screens/components/trend_cards_score.dart';
 import 'package:UBT/services/shared_preference.dart';
 import 'package:UBT/states/progress_screen_provider.dart';
 import 'package:firebase_database/firebase_database.dart';
@@ -669,6 +671,30 @@ class UserdataState extends State<Userdata> {
                   ],
                 ),
                 Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      'Deine Trend Card',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                          height: 1, fontWeight: FontWeight.bold, fontSize: 20),
+                    ),
+                    IconButton(
+                      icon: Icon(Icons.info_outline),
+                      color: Colors.green,
+                      tooltip: 'More Info',
+                      onPressed: () {
+                        CustomAlertDialog.showDialogPopup(
+                            context: context,
+                            text:
+                                'Der Score ermöglicht es dir\nAktivitäten mit unterschiedlichen\n Distanzen und Geschwindigkeiten\n zu vergleichen\ und\n deine Entwicklung zu \nverfolgen. Oft ist es dir \nvielleicht gar nicht bewusst,\n welche Auswirkungen\n das regelmäßige Laufen \ngehen auf deinen Körper\n hat und welche großartigen\n Scores Du bereits erzielt hast.\n Ziel es nicht, in jeder\n Aktivität einen besseren Score\n zu erzielen.',
+                            text2:
+                                'Ganz wie im Spitzensport auch\n kannst Du nicht in jedem Training\n einen neuen Weltrekord\n aufstellen. Aber gelegentliche\n individuelle Spitzenleistungen\n (hohe Scores) zeigen dir,\n dass sich dein Körper mit\n dir entwickelt\n und langfristig zahlen sich\n deine Anstrengungen aus.');
+                      },
+                    ),
+                  ],
+                ),
+                Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     SizedBox(),
@@ -679,11 +705,19 @@ class UserdataState extends State<Userdata> {
                         physics: BouncingScrollPhysics(),
                         child: Row(
                           children: [
-                            for (int i = 0; i < 4; i++)
-                              Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: TrendCards(),
-                              ),
+                            // for (int i = 0; i < 4; i++)
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: TrendCards(),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: TrendCardpace(),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: TrendCardscore(),
+                            ),
                           ],
                         ),
                       ),
@@ -692,7 +726,7 @@ class UserdataState extends State<Userdata> {
                       children: [
                         Icon(Icons.navigate_next_sharp),
                         Text(
-                          'Your \ntext here',
+                          'Swipe die \nBox weiter',
                           textAlign: TextAlign.center,
                           style: TextStyle(
                               height: 1,

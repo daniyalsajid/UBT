@@ -1,6 +1,7 @@
 import 'package:UBT/constants/shared_preference_constants.dart';
 import 'package:UBT/screens/components/alert_dialog.dart';
 import 'package:UBT/screens/components/trend_cards.dart';
+import 'package:UBT/screens/components/trend_cards_minutes.dart';
 import 'package:UBT/screens/components/trend_cards_pace.dart';
 import 'package:UBT/screens/components/trend_cards_score.dart';
 import 'package:UBT/services/shared_preference.dart';
@@ -717,6 +718,10 @@ class UserdataState extends State<Userdata> {
                             Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: TrendCardscore(),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: TrendCardMinutes(),
                             ),
                           ],
                         ),

@@ -73,6 +73,7 @@ class UserdataState extends State<Userdata> {
   @override
   void initState() {
     super.initState();
+    var date = new DateTime.now();
     // readData();
     providerProgressScreen =
         Provider.of<ProgressScreenProvider>(context, listen: false);
@@ -84,7 +85,33 @@ class UserdataState extends State<Userdata> {
       }
     });
     _ref = FirebaseDatabase.instance.reference().child(uploadAuth);
-
+    databaseReference
+      ..child(uploadAuth)
+          .child(date.year.toString())
+          .child(date.month.toString())
+          .once()
+          .then((DataSnapshot snapshot) {
+        var date = [];
+        var score = [];
+        try {
+          Map snapshotData = snapshot.value;
+          final currentDate = DateTime.now();
+          snapshotData.forEach((key, value) {
+            var formatedDate = DateTime.parse(value["DateString"]);
+            final forGettingDifference = DateTime(
+                formatedDate.year, formatedDate.month, formatedDate.day);
+                final difference = currentDate.difference(forGettingDifference).inDays;
+            print(difference);
+            // date.add(value["DateString"]
+            //     .substring(value["DateString"].length - 2)),
+            // score.add(value["Score"].truncate())
+          });
+        } catch (_) {
+          date = ["0"];
+          score = [0];
+          print(uploadAuth);
+        }
+      });
     var now = new DateTime.now();
     var formatter = new DateFormat('MM');
     monthnow = formatter.format(now);

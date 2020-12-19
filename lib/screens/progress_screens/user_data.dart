@@ -101,7 +101,8 @@ class UserdataState extends State<Userdata> {
             var formatedDate = DateTime.parse(value["DateString"]);
             final forGettingDifference = DateTime(
                 formatedDate.year, formatedDate.month, formatedDate.day);
-                final difference = currentDate.difference(forGettingDifference).inDays;
+            final difference =
+                currentDate.difference(forGettingDifference).inDays;
             print(difference);
             // date.add(value["DateString"]
             //     .substring(value["DateString"].length - 2)),

@@ -749,8 +749,12 @@ class UserdataState extends State<Userdata> {
                                 padding: const EdgeInsets.all(8.0),
                                 child: TrendCards(
                                   title: "Distanz",
-                                  description:
-                                      "Hervorragend! Du bist bei deiner letzten Aktivität eine weitere Strecke als sonst gelaufen!",
+                                  description: double.parse(
+                                              consumer.trendCard.distance) <
+                                          double.parse(
+                                              consumer.todayTrend.distance)
+                                      ? "On lesser place your text here"
+                                      : "Hervorragend! Du bist bei deiner letzten Aktivität eine weitere Strecke als sonst gelaufen!",
                                   value: (double.parse(
                                               consumer.trendCard.distance) <
                                           double.parse(
@@ -761,11 +765,23 @@ class UserdataState extends State<Userdata> {
                               ),
                               Padding(
                                 padding: const EdgeInsets.all(8.0),
-                                child: TrendCardpace(),
+                                child: TrendCards(
+                                  title: "Pace",
+                                  icon: Icon(Icons.trending_up),
+                                  description:
+                                      "Großartig, dass Du aktiv bist. Jede Minute ist wertvoll.",
+                                  value: "Your value for pace",
+                                ),
                               ),
                               Padding(
                                 padding: const EdgeInsets.all(8.0),
-                                child: TrendCardscore(),
+                                child: TrendCards(
+                                  title: "Score",
+                                  icon: Icon(Icons.trending_up),
+                                  description:
+                                      "Großartig, dass Du aktiv bist. Jeder Aktivität bringt dich weiter.",
+                                  value: "Your value for Score",
+                                ),
                               ),
                             ],
                           ),

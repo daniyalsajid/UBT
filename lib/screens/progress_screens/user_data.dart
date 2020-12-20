@@ -106,12 +106,6 @@ class UserdataState extends State<Userdata> {
                 formatedDate.year, formatedDate.month, formatedDate.day);
             final difference =
                 currentDate.difference(forGettingDifference).inDays;
-<<<<<<< HEAD
-            print(difference);
-            // date.add(value["DateString"]
-            //     .substring(value["DateString"].length - 2)),
-            // score.add(value["Score"].truncate())
-=======
             if (difference <= 6 && difference != 0) {
               distance = distance + double.parse(value["Distance"].toString());
               print(distance);
@@ -119,7 +113,6 @@ class UserdataState extends State<Userdata> {
               trendProvider.todayTrend.distance =
                   double.parse(value["Distance"].toString()).toStringAsFixed(2);
             }
->>>>>>> ac0f3736d6a1bc811e89e0a20da7247138634322
           });
           trendProvider.setTrend((distance / 5).toStringAsFixed(2));
           // print(trendCard)

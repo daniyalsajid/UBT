@@ -1,4 +1,5 @@
 import 'package:UBT/constants/shared_preference_constants.dart';
+import 'package:UBT/models/trend_model.dart';
 import 'package:UBT/screens/components/alert_dialog.dart';
 import 'package:UBT/screens/components/trend_cards.dart';
 import 'package:UBT/screens/components/trend_cards_minutes.dart';
@@ -29,6 +30,7 @@ class UserdataState extends State<Userdata> {
   String userUID;
   Container userentry;
   String n;
+
   //y axis
   List graphlists = [];
   // x axis
@@ -74,6 +76,8 @@ class UserdataState extends State<Userdata> {
   @override
   void initState() {
     super.initState();
+    var trendProvider =
+        Provider.of<ProgressScreenProvider>(context, listen: false);
     var date = new DateTime.now();
     // readData();
     providerProgressScreen =
@@ -92,24 +96,29 @@ class UserdataState extends State<Userdata> {
           .child(date.month.toString())
           .once()
           .then((DataSnapshot snapshot) {
-        var date = [];
-        var score = [];
         try {
           Map snapshotData = snapshot.value;
           final currentDate = DateTime.now();
+          double distance = 0.0;
           snapshotData.forEach((key, value) {
             var formatedDate = DateTime.parse(value["DateString"]);
             final forGettingDifference = DateTime(
                 formatedDate.year, formatedDate.month, formatedDate.day);
-                final difference = currentDate.difference(forGettingDifference).inDays;
-            print(difference);
-            // date.add(value["DateString"]
-            //     .substring(value["DateString"].length - 2)),
-            // score.add(value["Score"].truncate())
+            final difference =
+                currentDate.difference(forGettingDifference).inDays;
+            if (difference <= 6 && difference != 0) {
+              distance = distance + double.parse(value["Distance"].toString());
+              print(distance);
+            } else if (difference == 0) {
+              trendProvider.todayTrend.distance =
+                  double.parse(value["Distance"].toString()).toStringAsFixed(2);
+            }
           });
+          trendProvider.setTrend((distance / 5).toStringAsFixed(2));
+          // print(trendCard)
         } catch (_) {
-          date = ["0"];
-          score = [0];
+          // date = ["0"];
+          // score = [0];
           print(uploadAuth);
         }
       });
@@ -722,53 +731,62 @@ class UserdataState extends State<Userdata> {
                     ),
                   ],
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    SizedBox(),
-                    SizedBox(
-                      width: MediaQuery.of(context).size.width / 2,
-                      child: SingleChildScrollView(
-                        scrollDirection: Axis.horizontal,
-                        physics: BouncingScrollPhysics(),
-                        child: Row(
-                          children: [
-                            // for (int i = 0; i < 4; i++)
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: TrendCards(),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: TrendCardpace(),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: TrendCardscore(),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: TrendCardMinutes(),
-                            ),
-                          ],
+                Consumer<ProgressScreenProvider>(
+                    builder: (context, consumer, childWidget) {
+                  return Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      SizedBox(),
+                      SizedBox(
+                        width: MediaQuery.of(context).size.width / 2,
+                        child: SingleChildScrollView(
+                          scrollDirection: Axis.horizontal,
+                          physics: BouncingScrollPhysics(),
+                          child: Row(
+                            children: [
+                              // for (int i = 0; i < 4; i++)
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: TrendCards(
+                                  title: "Distanz",
+                                  description:
+                                      "Hervorragend! Du bist bei deiner letzten Aktivität eine weitere Strecke als sonst gelaufen!",
+                                  value: (double.parse(
+                                              consumer.trendCard.distance) <
+                                          double.parse(
+                                              consumer.todayTrend.distance)
+                                      ? "${consumer.trendCard.distance} < ${consumer.todayTrend.distance}"
+                                      : "${consumer.trendCard.distance} > ${consumer.todayTrend.distance}"),
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: TrendCardpace(),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: TrendCardscore(),
+                              ),
+                            ],
+                          ),
                         ),
                       ),
-                    ),
-                    Column(
-                      children: [
-                        Icon(Icons.navigate_next_sharp),
-                        Text(
-                          'Swipe die \nBox weiter',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                              height: 1,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 14),
-                        ),
-                      ],
-                    )
-                  ],
-                )
+                      Column(
+                        children: [
+                          Icon(Icons.navigate_next_sharp),
+                          Text(
+                            'Swipe die \nBox weiter',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                                height: 1,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 14),
+                          ),
+                        ],
+                      )
+                    ],
+                  );
+                })
               ],
             ),
           ),

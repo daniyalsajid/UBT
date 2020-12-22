@@ -92,8 +92,8 @@ class _SignInPageState extends State<SignInPage> {
                           // color: Colors.green,
                           elevation: 5.0,
                           onPressed: () async {
-                            emailController.text = "daniysajid1@gmail.com";
-                            passwordController.text = "abc12345.";
+                            // emailController.text = "daniysajid1@gmail.com";
+                            // passwordController.text = "abc12345.";
                             final FormState form = formKeyLogin.currentState;
 
                             if (form.validate()) {

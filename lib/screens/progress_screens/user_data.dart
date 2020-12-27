@@ -99,7 +99,9 @@ class UserdataState extends State<Userdata> {
         try {
           Map snapshotData = snapshot.value;
           final currentDate = DateTime.now();
-          double distance = 0.0;
+          double distance_trend = 0.0;
+          double score_trend = 0.0;
+          double pace = 0.0;
           snapshotData.forEach((key, value) {
             var formatedDate = DateTime.parse(value["DateString"]);
             final forGettingDifference = DateTime(
@@ -107,14 +109,36 @@ class UserdataState extends State<Userdata> {
             final difference =
                 currentDate.difference(forGettingDifference).inDays;
             if (difference <= 6 && difference != 0) {
-              distance = distance + double.parse(value["Distance"].toString());
-              print(distance);
+              distance_trend =
+                  distance_trend + double.parse(value["Distance"].toString());
+              print(distance_trend);
             } else if (difference == 0) {
               trendProvider.todayTrend.distance =
                   double.parse(value["Distance"].toString()).toStringAsFixed(2);
             }
+            final difference1 =
+                currentDate.difference(forGettingDifference).inDays;
+            if (difference1 <= 6 && difference1 != 0) {
+              score_trend =
+                  score_trend + double.parse(value["Score"].toString());
+              print(score_trend);
+            } else if (difference1 == 0) {
+              trendProvider.todayTrend.score =
+                  double.parse(value["Score"].toString()).toStringAsFixed(2);
+            }
+            final difference2 =
+                currentDate.difference(forGettingDifference).inDays;
+            if (difference2 <= 6 && difference2 != 0) {
+              pace = pace + double.parse(value["Pace"].toString());
+              print(pace);
+            } else if (difference2 == 0) {
+              trendProvider.todayTrend.pace =
+                  double.parse(value["Pace"].toString()).toStringAsFixed(2);
+            }
           });
-          trendProvider.setTrend((distance / 5).toStringAsFixed(2));
+          trendProvider.setTrend((distance_trend / 5).toStringAsFixed(2));
+          trendProvider.setTrend((score_trend / 5).toStringAsFixed(2));
+          trendProvider.setTrend((pace / 5).toStringAsFixed(2));
           // print(trendCard)
         } catch (_) {
           // date = ["0"];
@@ -724,9 +748,9 @@ class UserdataState extends State<Userdata> {
                         CustomAlertDialog.showDialogPopup(
                             context: context,
                             text:
-                                'Der Score ermöglicht es dir\nAktivitäten mit unterschiedlichen\n Distanzen und Geschwindigkeiten\n zu vergleichen\ und\n deine Entwicklung zu \nverfolgen. Oft ist es dir \nvielleicht gar nicht bewusst,\n welche Auswirkungen\n das regelmäßige Laufen \ngehen auf deinen Körper\n hat und welche großartigen\n Scores Du bereits erzielt hast.\n Ziel es nicht, in jeder\n Aktivität einen besseren Score\n zu erzielen.',
+                                'Dein Trend zeigt Dir,\n wie sich bestimmte Parameter\n deiner Aktivität im Vergleich\n zum Durchschnitt der letzten\n sechs Aktivitäten entwickeln. ',
                             text2:
-                                'Ganz wie im Spitzensport auch\n kannst Du nicht in jedem Training\n einen neuen Weltrekord\n aufstellen. Aber gelegentliche\n individuelle Spitzenleistungen\n (hohe Scores) zeigen dir,\n dass sich dein Körper mit\n dir entwickelt\n und langfristig zahlen sich\n deine Anstrengungen aus.');
+                                'Außerdem siehst Du wie\n viele intensive Aktivitätsminuten\n Du in den letzten sieben\n Tagen absolviert hast.\n Wenn Du mehr als 75\n intensive Aktivitätsminuten\n erreichst, wirkt sich\n deine körperliche Aktivität\n laut der WHO optimal\n auf deine Gesundheit aus.');
                       },
                     ),
                   ],
@@ -753,16 +777,53 @@ class UserdataState extends State<Userdata> {
                                               consumer.trendCard.distance) <
                                           double.parse(
                                               consumer.todayTrend.distance)
-                                      ? "On lesser place your text here"
-                                      : "Hervorragend! Du bist bei deiner letzten Aktivität eine weitere Strecke als sonst gelaufen!",
+                                      ? "Hervorragend! Du bist bei deiner letzten Aktivität eine weitere Strecke als sonst gelaufen!"
+                                      : "Großartig, dass Du aktiv bist. Jeder Kilometer tut Dir gut.",
                                   value: (double.parse(
                                               consumer.trendCard.distance) <
                                           double.parse(
                                               consumer.todayTrend.distance)
                                       ? "${consumer.trendCard.distance} < ${consumer.todayTrend.distance}"
                                       : "${consumer.trendCard.distance} > ${consumer.todayTrend.distance}"),
+                                  icon: Icon(Icons.trending_up_rounded),
                                 ),
                               ),
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: TrendCards(
+                                  title: "Score",
+                                  description: double.parse(
+                                              consumer.trendCard.score) <
+                                          double.parse(
+                                              consumer.todayTrend.score)
+                                      ? "Hervorragend! Du hattest bei deiner letzten Aktivität einen höheren Score als sonst."
+                                      : "Großartig, dass Du aktiv bist. Jeder Aktivität bringt dich weiter.",
+                                  icon: Icon(Icons.trending_flat_rounded),
+                                  value: (double.parse(
+                                              consumer.trendCard.score) <
+                                          double.parse(
+                                              consumer.todayTrend.score)
+                                      ? "${consumer.trendCard.score} < ${consumer.todayTrend.score}"
+                                      : "${consumer.trendCard.score} > ${consumer.todayTrend.score}"),
+                                  // icon: Icon(Icons.trending_flat_rounded),
+                                ),
+                              ),
+                              // Padding(
+                              //   padding: const EdgeInsets.all(8.0),
+                              //   child: TrendCards(
+                              //     title: "Pace",
+                              //     description: double.parse(
+                              //                 consumer.trendCard.pace) <
+                              //             double.parse(consumer.todayTrend.pace)
+                              //         ? "Hervorragend! Du bist bei deiner letzten Aktivität im Durchschnitt schneller als sonst gelaufen"
+                              //         : "Großartig, dass Du aktiv bist. Jede Minute ist wertvoll.",
+                              //     value: (double.parse(
+                              //                 consumer.trendCard.pace) <
+                              //             double.parse(consumer.todayTrend.pace)
+                              //         ? "${consumer.trendCard.pace} < ${consumer.todayTrend.pace}"
+                              //         : "${consumer.trendCard.pace} > ${consumer.todayTrend.pace}"),
+                              //   ),
+                              // ),
                               Padding(
                                 padding: const EdgeInsets.all(8.0),
                                 child: TrendCards(
@@ -770,19 +831,19 @@ class UserdataState extends State<Userdata> {
                                   icon: Icon(Icons.trending_up),
                                   description:
                                       "Großartig, dass Du aktiv bist. Jede Minute ist wertvoll.",
-                                  value: "Your value for pace",
+                                  value: "In Progress",
                                 ),
                               ),
-                              Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: TrendCards(
-                                  title: "Score",
-                                  icon: Icon(Icons.trending_up),
-                                  description:
-                                      "Großartig, dass Du aktiv bist. Jeder Aktivität bringt dich weiter.",
-                                  value: "Your value for Score",
-                                ),
-                              ),
+                              // Padding(
+                              //   padding: const EdgeInsets.all(8.0),
+                              //   child: TrendCards(
+                              //     title: "Score",
+                              //     icon: Icon(Icons.trending_up),
+                              //     description:
+                              //         "Großartig, dass Du aktiv bist. Jeder Aktivität bringt dich weiter.",
+                              //     value: "Your value for Score",
+                              //   ),
+                              // ),
                             ],
                           ),
                         ),

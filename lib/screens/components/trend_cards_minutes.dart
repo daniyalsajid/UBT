@@ -11,6 +11,7 @@ class _TrendCardMinutesState extends State<TrendCardMinutes> {
   Widget build(BuildContext context) {
     return Container(
         width: 150,
+        height: 150,
         decoration: new BoxDecoration(
             color: Colors.green,
             borderRadius: BorderRadius.all(Radius.circular(10))),
@@ -19,10 +20,11 @@ class _TrendCardMinutesState extends State<TrendCardMinutes> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
             CircularPorogress(
-              percentage: 10000 / 1000 * 100.toInt(),
+              percentage: 10 / 100 * 100.toInt(),
 
               // percentage: this.totalSteps / this.goalSteps * 100.toInt(),
               height: 70,
+              // child: Icon(),
               // child: Icon(
               //   CustomIcons
               //       .Pedometer.footsteps_silhouette_variant,

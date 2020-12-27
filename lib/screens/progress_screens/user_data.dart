@@ -123,7 +123,7 @@ class UserdataState extends State<Userdata> {
                   score_trend + double.parse(value["Score"].toString());
               print(score_trend);
             } else if (difference1 == 0) {
-              trendProvider.todayTrend.score =
+              trendProvider.todayScore.score =
                   double.parse(value["Score"].toString()).toStringAsFixed(2);
             }
             final difference2 =
@@ -132,13 +132,14 @@ class UserdataState extends State<Userdata> {
               pace = pace + double.parse(value["Pace"].toString());
               print(pace);
             } else if (difference2 == 0) {
-              trendProvider.todayTrend.pace =
+              trendProvider.todayPace.pace =
                   double.parse(value["Pace"].toString()).toStringAsFixed(2);
             }
           });
-          trendProvider.setTrend((distance_trend / 5).toStringAsFixed(2));
-          trendProvider.setTrend((score_trend / 5).toStringAsFixed(2));
-          trendProvider.setTrend((pace / 5).toStringAsFixed(2));
+          trendProvider
+              .setTrendDistance((distance_trend / 5).toStringAsFixed(2));
+          trendProvider.setTrendScore((score_trend / 5).toStringAsFixed(2));
+          trendProvider.setTrendPace((pace / 5).toStringAsFixed(2));
           // print(trendCard)
         } catch (_) {
           // date = ["0"];
@@ -777,15 +778,20 @@ class UserdataState extends State<Userdata> {
                                               consumer.trendCard.distance) <
                                           double.parse(
                                               consumer.todayTrend.distance)
-                                      ? "Hervorragend! Du bist bei deiner letzten Aktivität eine weitere Strecke als sonst gelaufen!"
-                                      : "Großartig, dass Du aktiv bist. Jeder Kilometer tut Dir gut.",
+                                      ? "Großartig, dass Du aktiv bist. Jeder Kilometer tut Dir gut."
+                                      : "Hervorragend! Du bist bei deiner letzten Aktivität eine weitere Strecke als sonst gelaufen!",
                                   value: (double.parse(
                                               consumer.trendCard.distance) <
                                           double.parse(
                                               consumer.todayTrend.distance)
                                       ? "${consumer.trendCard.distance} < ${consumer.todayTrend.distance}"
                                       : "${consumer.trendCard.distance} > ${consumer.todayTrend.distance}"),
-                                  icon: Icon(Icons.trending_up_rounded),
+                                  icon: double.parse(
+                                              consumer.trendCard.distance) <
+                                          double.parse(
+                                              consumer.todayTrend.distance)
+                                      ? Icon(Icons.trending_down_rounded)
+                                      : Icon(Icons.trending_up_rounded),
                                 ),
                               ),
                               Padding(
@@ -793,57 +799,42 @@ class UserdataState extends State<Userdata> {
                                 child: TrendCards(
                                   title: "Score",
                                   description: double.parse(
-                                              consumer.trendCard.score) <
+                                              consumer.trendScore.score) <
                                           double.parse(
-                                              consumer.todayTrend.score)
+                                              consumer.todayScore.score)
                                       ? "Hervorragend! Du hattest bei deiner letzten Aktivität einen höheren Score als sonst."
                                       : "Großartig, dass Du aktiv bist. Jeder Aktivität bringt dich weiter.",
-                                  icon: Icon(Icons.trending_flat_rounded),
+                                  icon:
+                                      double.parse(consumer.trendScore.score) <
+                                              double.parse(
+                                                  consumer.todayScore.score)
+                                          ? Icon(Icons.trending_flat_rounded)
+                                          : Icon(Icons.trending_flat),
                                   value: (double.parse(
                                               consumer.trendCard.score) <
                                           double.parse(
                                               consumer.todayTrend.score)
-                                      ? "${consumer.trendCard.score} < ${consumer.todayTrend.score}"
-                                      : "${consumer.trendCard.score} > ${consumer.todayTrend.score}"),
+                                      ? "${consumer.trendScore.score} < ${consumer.todayScore.score}"
+                                      : "${consumer.trendScore.score} > ${consumer.todayScore.score}"),
                                   // icon: Icon(Icons.trending_flat_rounded),
                                 ),
                               ),
-                              // Padding(
-                              //   padding: const EdgeInsets.all(8.0),
-                              //   child: TrendCards(
-                              //     title: "Pace",
-                              //     description: double.parse(
-                              //                 consumer.trendCard.pace) <
-                              //             double.parse(consumer.todayTrend.pace)
-                              //         ? "Hervorragend! Du bist bei deiner letzten Aktivität im Durchschnitt schneller als sonst gelaufen"
-                              //         : "Großartig, dass Du aktiv bist. Jede Minute ist wertvoll.",
-                              //     value: (double.parse(
-                              //                 consumer.trendCard.pace) <
-                              //             double.parse(consumer.todayTrend.pace)
-                              //         ? "${consumer.trendCard.pace} < ${consumer.todayTrend.pace}"
-                              //         : "${consumer.trendCard.pace} > ${consumer.todayTrend.pace}"),
-                              //   ),
-                              // ),
                               Padding(
                                 padding: const EdgeInsets.all(8.0),
                                 child: TrendCards(
                                   title: "Pace",
-                                  icon: Icon(Icons.trending_up),
-                                  description:
-                                      "Großartig, dass Du aktiv bist. Jede Minute ist wertvoll.",
-                                  value: "In Progress",
+                                  description: double.parse(
+                                              consumer.trendPace.pace) <
+                                          double.parse(consumer.todayPace.pace)
+                                      ? "Hervorragend! Du bist bei deiner letzten Aktivität im Durchschnitt schneller als sonst gelaufen"
+                                      : "Großartig, dass Du aktiv bist. Jede Minute ist wertvoll.",
+                                  value: (double.parse(
+                                              consumer.trendPace.pace) <
+                                          double.parse(consumer.todayPace.pace)
+                                      ? "${consumer.trendPace.pace} < ${consumer.todayPace.pace}"
+                                      : "${consumer.trendPace.pace} > ${consumer.todayPace.pace}"),
                                 ),
                               ),
-                              // Padding(
-                              //   padding: const EdgeInsets.all(8.0),
-                              //   child: TrendCards(
-                              //     title: "Score",
-                              //     icon: Icon(Icons.trending_up),
-                              //     description:
-                              //         "Großartig, dass Du aktiv bist. Jeder Aktivität bringt dich weiter.",
-                              //     value: "Your value for Score",
-                              //   ),
-                              // ),
                             ],
                           ),
                         ),

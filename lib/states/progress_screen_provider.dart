@@ -7,8 +7,12 @@ class ProgressScreenProvider extends ChangeNotifier {
   double score;
   int totaldistance;
   String totalHourWithMinutes;
-  Trend trendCard = new Trend(score: "0.0", distance: "0.0");
-  Trend todayTrend = new Trend(score: "0.0", distance: "0.0");
+  Trend trendCard = new Trend(score: "0.0", distance: "0.0", pace: "0.0");
+  Trend trendScore = new Trend(score: "0.0", distance: "0.0", pace: "0.0");
+  Trend trendPace = new Trend(score: "0.0", distance: "0.0", pace: "0.0");
+  Trend todayTrend = new Trend(score: "0.0", distance: "0.0", pace: "0.0");
+  Trend todayScore = new Trend(score: "0.0", distance: "0.0", pace: "0.0");
+  Trend todayPace = new Trend(score: "0.0", distance: "0.0", pace: "0.0");
 
   setScoreAndGoalToAchieve(double score) {
     SharedPreferenceServiceClass()
@@ -27,8 +31,18 @@ class ProgressScreenProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  setTrend(String distance) {
+  setTrendDistance(String distance) {
     this.trendCard.distance = distance;
+    notifyListeners();
+  }
+
+  setTrendScore(String score) {
+    this.trendScore.score = score;
+    notifyListeners();
+  }
+
+  setTrendPace(String pace) {
+    this.trendPace.pace = pace;
     notifyListeners();
   }
 }

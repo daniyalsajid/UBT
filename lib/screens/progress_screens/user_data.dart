@@ -804,18 +804,19 @@ class UserdataState extends State<Userdata> {
                                               consumer.todayScore.score)
                                       ? "Hervorragend! Du hattest bei deiner letzten Aktivität einen höheren Score als sonst."
                                       : "Großartig, dass Du aktiv bist. Jeder Aktivität bringt dich weiter.",
-                                  icon:
-                                      double.parse(consumer.trendScore.score) <
-                                              double.parse(
-                                                  consumer.todayScore.score)
-                                          ? Icon(Icons.trending_up_rounded)
-                                          : Icon(Icons.trending_down_rounded),
                                   value: (double.parse(
                                               consumer.trendCard.score) <
                                           double.parse(
                                               consumer.todayTrend.score)
                                       ? "${consumer.trendScore.score} > ${consumer.todayScore.score}"
                                       : "${consumer.trendScore.score} < ${consumer.todayScore.score}"),
+                                  icon:
+                                      double.parse(consumer.trendScore.score) <
+                                              double.parse(
+                                                  consumer.todayScore.score)
+                                          ? Icon(Icons.trending_up_rounded)
+                                          : Icon(Icons.trending_down_rounded),
+
                                   // icon: Icon(Icons.trending_flat_rounded),
                                 ),
                               ),
@@ -828,15 +829,15 @@ class UserdataState extends State<Userdata> {
                                           double.parse(consumer.todayPace.pace)
                                       ? "Hervorragend! Du bist bei deiner letzten Aktivität im Durchschnitt schneller als sonst gelaufen"
                                       : "Großartig, dass Du aktiv bist. Jede Minute ist wertvoll.",
-                                  icon: double.parse(consumer.trendScore.pace) <
-                                          double.parse(consumer.todayScore.pace)
-                                      ? Icon(Icons.trending_down_rounded)
-                                      : Icon(Icons.trending_up_rounded),
                                   value: (double.parse(
                                               consumer.trendPace.pace) <
                                           double.parse(consumer.todayPace.pace)
                                       ? "${consumer.trendPace.pace} < ${consumer.todayPace.pace}"
                                       : "${consumer.trendPace.pace} > ${consumer.todayPace.pace}"),
+                                  icon: double.parse(consumer.trendPace.pace) <
+                                          double.parse(consumer.todayPace.pace)
+                                      ? Icon(Icons.trending_up_rounded)
+                                      : Icon(Icons.trending_down_rounded),
                                 ),
                               ),
                             ],

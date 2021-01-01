@@ -45,6 +45,7 @@ class UserdataState extends State<Userdata> {
   double score;
   String monthnow;
   String userSelectedValue;
+  String userSelectedYear = "2021";
   double s; //score
   // C for rounding score values
   int c;
@@ -70,6 +71,12 @@ class UserdataState extends State<Userdata> {
     'Nov',
     'Dec',
   ];
+
+  List<String> years = <String>[
+    '2021',
+    '2020',
+  ];
+
 
   Query _ref;
 
@@ -276,7 +283,7 @@ class UserdataState extends State<Userdata> {
 
     databaseReference
       ..child(uploadAuth)
-          .child('2020')
+          .child(userSelectedYear)
           .child(month)
           .once()
           .then((DataSnapshot snapshot) {
@@ -355,83 +362,18 @@ class UserdataState extends State<Userdata> {
                     children: [
                       Flexible(
                         child: DropdownButton(
-                          hint: Text('Select Month'),
-                          value: userSelectedValue,
+                          hint: Text('Select year'),
+                          value: userSelectedYear,
                           onChanged: (value) {
                             setState(
                               () {
-                                userSelectedValue = value;
-                                switch (userSelectedValue) {
-                                  case 'Jan':
-                                    {
-                                      userentry = chart('1');
-                                    }
-                                    break;
-                                  case 'Feb':
-                                    {
-                                      userentry = chart('2');
-                                    }
-
-                                    break;
-
-                                  case 'Mar':
-                                    {
-                                      userentry = chart('3');
-                                    }
-                                    break;
-                                  case 'Apr':
-                                    {
-                                      userentry = chart('4');
-                                    }
-                                    break;
-                                  case 'May':
-                                    {
-                                      userentry = chart('5');
-                                    }
-                                    break;
-                                  case 'Jun':
-                                    {
-                                      userentry = chart('6');
-                                    }
-                                    break;
-                                  case 'Jul':
-                                    {
-                                      userentry = chart('7');
-                                    }
-                                    break;
-                                  case 'Aug':
-                                    {
-                                      userentry = chart('8');
-                                    }
-                                    break;
-                                  case 'Sep':
-                                    {
-                                      userentry = chart('9');
-                                    }
-                                    break;
-                                  case 'Oct':
-                                    {
-                                      userentry = chart('10');
-                                    }
-                                    break;
-                                  case 'Nov':
-                                    {
-                                      userentry = chart('11');
-                                    }
-                                    break;
-                                  case 'Dec':
-                                    {
-                                      userentry = chart('12');
-                                    }
-                                    break;
-                                }
+                                userSelectedYear = value;
                               },
                             );
                           },
-                          items: users.map((String month) {
+                          items: years.map((String year) {
                             return DropdownMenuItem<String>(
-                              value: month,
-
+                              value: year,
                               // Row to Cloumn
                               child: Row(
                                 children: <Widget>[
@@ -441,7 +383,7 @@ class UserdataState extends State<Userdata> {
                                     width: 10,
                                   ),
                                   Text(
-                                    month,
+                                    year,
                                     style: TextStyle(color: Colors.black),
                                   ),
                                   //
@@ -451,6 +393,8 @@ class UserdataState extends State<Userdata> {
                           }).toList(),
                         ),
                       ),
+                      SizedBox(width: 5,),
+                      _monthSelection(),
                       IconButton(
                         alignment: Alignment.topRight,
                         icon: Icon(Icons.info_outline),
@@ -864,6 +808,106 @@ class UserdataState extends State<Userdata> {
             ),
           ),
         ));
+  }
+
+  Flexible _monthSelection() {
+    return Flexible(
+      child: DropdownButton(
+        hint: Text('Select Month'),
+        value: userSelectedValue,
+        onChanged: (value) {
+          setState(
+            () {
+              userSelectedValue = value;
+              switch (userSelectedValue) {
+                case 'Jan':
+                  {
+                    userentry = chart('1');
+                  }
+                  break;
+                case 'Feb':
+                  {
+                    userentry = chart('2');
+                  }
+
+                  break;
+
+                case 'Mar':
+                  {
+                    userentry = chart('3');
+                  }
+                  break;
+                case 'Apr':
+                  {
+                    userentry = chart('4');
+                  }
+                  break;
+                case 'May':
+                  {
+                    userentry = chart('5');
+                  }
+                  break;
+                case 'Jun':
+                  {
+                    userentry = chart('6');
+                  }
+                  break;
+                case 'Jul':
+                  {
+                    userentry = chart('7');
+                  }
+                  break;
+                case 'Aug':
+                  {
+                    userentry = chart('8');
+                  }
+                  break;
+                case 'Sep':
+                  {
+                    userentry = chart('9');
+                  }
+                  break;
+                case 'Oct':
+                  {
+                    userentry = chart('10');
+                  }
+                  break;
+                case 'Nov':
+                  {
+                    userentry = chart('11');
+                  }
+                  break;
+                case 'Dec':
+                  {
+                    userentry = chart('12');
+                  }
+                  break;
+              }
+            },
+          );
+        },
+        items: users.map((String month) {
+          return DropdownMenuItem<String>(
+            value: month,
+
+            // Row to Cloumn
+            child: Row(
+              children: <Widget>[
+                Icon(Icons.calendar_today, color: Color(0xFF167F67)),
+                SizedBox(
+                  width: 10,
+                ),
+                Text(
+                  month,
+                  style: TextStyle(color: Colors.black),
+                ),
+                //
+              ],
+            ),
+          );
+        }).toList(),
+      ),
+    );
   }
 }
 

@@ -22,6 +22,7 @@ class _WeekprogressState extends State<Weekprogress> {
   Item selectedUser;
   String userSelectedValue;
   String selectedMonthNumber;
+  String userSelectedYear = "2021";
   // FirebaseAnimatedList userentry;
   List<String> users = <String>[
     'Jan',
@@ -37,6 +38,12 @@ class _WeekprogressState extends State<Weekprogress> {
     'Nov',
     'Dec',
   ];
+
+  List<String> years = <String>[
+    '2021',
+    '2020',
+  ];
+
   Query _ref;
 
   @override
@@ -65,7 +72,7 @@ class _WeekprogressState extends State<Weekprogress> {
         query: FirebaseDatabase.instance
             .reference()
             .child(uploadAuth)
-            .child('2020')
+            .child(userSelectedYear)
             .child(month),
         sort: (DataSnapshot a, DataSnapshot b) => b.key.compareTo(a.key),
         itemBuilder: (BuildContext context, DataSnapshot snapshot,
@@ -179,6 +186,42 @@ class _WeekprogressState extends State<Weekprogress> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
+                Flexible(
+                  child: DropdownButton(
+                    hint: Text('Select year'),
+                    value: userSelectedYear,
+                    onChanged: (value) {
+                      setState(
+                        () {
+                          userSelectedYear = value;
+                        },
+                      );
+                    },
+                    items: years.map((String year) {
+                      return DropdownMenuItem<String>(
+                        value: year,
+                        // Row to Cloumn
+                        child: Row(
+                          children: <Widget>[
+                            Icon(Icons.calendar_today,
+                                color: Color(0xFF167F67)),
+                            SizedBox(
+                              width: 10,
+                            ),
+                            Text(
+                              year,
+                              style: TextStyle(color: Colors.black),
+                            ),
+                            //
+                          ],
+                        ),
+                      );
+                    }).toList(),
+                  ),
+                ),
+                SizedBox(
+                  width: 5,
+                ),
                 DropdownButton(
                   hint: Text('Select Month'),
                   value: userSelectedValue,

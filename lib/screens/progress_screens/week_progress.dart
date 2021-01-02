@@ -23,6 +23,8 @@ class _WeekprogressState extends State<Weekprogress> {
   String userSelectedValue;
   String selectedMonthNumber;
   String userSelectedYear = "2021";
+
+  double customFontSize = 18.0;
   // FirebaseAnimatedList userentry;
   List<String> users = <String>[
     'Jan',
@@ -108,65 +110,64 @@ class _WeekprogressState extends State<Weekprogress> {
     return Container(
       height: 50,
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Flexible(
-            child: Row(
-              children: [
-                SizedBox(
-                  height: 30,
-                  width: 0.0,
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              // SizedBox(
+              //   height: 30,
+              //   width: 0.0,
+              // ),
+              Text(
+                userdata['DateString'].substring(5, 10),
+                style: TextStyle(
+                  color: Colors.green[900],
+                  fontSize: customFontSize,
                 ),
-                Text(
-                  userdata['DateString'].substring(5, 10),
-                  style: TextStyle(
-                      color: Colors.green[900],
-                      fontSize: 18,
-                      fontWeight: FontWeight.w800),
+              ),
+              // SizedBox(
+              //   width: 20,
+              // ),
+              Text(
+                userdata['Distance'].toString().substring(0, 4),
+                style: TextStyle(
+                  color: Colors.green[900],
+                  fontSize: customFontSize,
                 ),
-                SizedBox(
-                  width: 20,
+              ),
+              // SizedBox(
+              //   width: 42,
+              // ),
+              Text(
+                userdata['Minutes'].toString().substring(0, 4),
+                style: TextStyle(
+                  color: Colors.green[900],
+                  fontSize: customFontSize,
                 ),
-                Text(
-                  userdata['Distance'].toString().substring(0, 4),
-                  style: TextStyle(
-                      color: Colors.green[900],
-                      fontSize: 18,
-                      fontWeight: FontWeight.w800),
+              ),
+              // SizedBox(
+              //   width: 40,
+              // ),
+              Text(
+                userdata['Pace'].toStringAsFixed(2),
+                style: TextStyle(
+                  color: Colors.green[900],
+                  fontSize: customFontSize,
                 ),
-                SizedBox(
-                  width: 42,
+              ),
+              // SizedBox(
+              //   width: 45,
+              // ),
+              Text(
+                userdata['Score'].toString().substring(0, 4),
+                style: TextStyle(
+                  color: Colors.green[900],
+                  fontSize: customFontSize,
                 ),
-                Text(
-                  userdata['Minutes'].toString().substring(0, 4),
-                  style: TextStyle(
-                      color: Colors.green[900],
-                      fontSize: 18,
-                      fontWeight: FontWeight.w800),
-                ),
-                SizedBox(
-                  width: 40,
-                ),
-                Text(
-                  userdata['Pace'].toStringAsFixed(2),
-                  style: TextStyle(
-                      color: Colors.green[900],
-                      fontSize: 18,
-                      fontWeight: FontWeight.w800),
-                ),
-                SizedBox(
-                  width: 45,
-                ),
-                Text(
-                  userdata['Score'].toString().substring(0, 4),
-                  style: TextStyle(
-                      color: Colors.green[900],
-                      fontSize: 18,
-                      fontWeight: FontWeight.w800),
-                ),
-              ],
-            ),
+              ),
+            ],
           ), //ROw
         ],
       ),

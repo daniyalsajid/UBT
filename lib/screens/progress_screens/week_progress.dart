@@ -51,8 +51,10 @@ class _WeekprogressState extends State<Weekprogress> {
   @override
   void initState() {
     super.initState();
-    _ref =
-        FirebaseDatabase.instance.reference().child(uploadAuth).child('2020');
+    _ref = FirebaseDatabase.instance
+        .reference()
+        .child(uploadAuth)
+        .child(userSelectedYear);
 
     var now = new DateTime.now();
     var formatter = new DateFormat('MM');

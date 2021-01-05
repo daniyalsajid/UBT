@@ -226,11 +226,11 @@ class UserEntryState extends State<UserEntry> {
               child: TextFormField(
                 keyboardType: TextInputType.numberWithOptions(decimal: true),
                 inputFormatters: <TextInputFormatter>[
-                  FilteringTextInputFormatter(RegExp(r'(^\d*\.?\d*)'),
+                  FilteringTextInputFormatter(RegExp(r'(^\d*\,?\d*)'),
                       allow: true)
                 ],
                 decoration: InputDecoration(
-                    labelText: 'Distanz in Km (z.B. 5.45)',
+                    labelText: 'Distanz in Km (z.B. 5,45)',
                     fillColor: Colors.white,
                     focusedBorder: OutlineInputBorder(
                         borderSide:

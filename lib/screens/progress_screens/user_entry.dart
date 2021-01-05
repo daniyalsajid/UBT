@@ -224,7 +224,7 @@ class UserEntryState extends State<UserEntry> {
             Padding(
               padding: EdgeInsets.all(8.0),
               child: TextFormField(
-                keyboardType: TextInputType.number,
+                keyboardType: TextInputType.numberWithOptions(decimal: true),
                 inputFormatters: <TextInputFormatter>[
                   FilteringTextInputFormatter(RegExp(r'(^\d*\.?\d*)'),
                       allow: true)

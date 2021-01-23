@@ -725,6 +725,7 @@ class UserdataState extends State<Userdata> {
                               Padding(
                                 padding: const EdgeInsets.all(8.0),
                                 child: TrendCards(
+                                  icons: Icon(Icons.assessment_outlined),
                                   title: "Distanz",
                                   description: double.parse(
                                               consumer.trendCard.distance) <
@@ -749,6 +750,8 @@ class UserdataState extends State<Userdata> {
                               Padding(
                                 padding: const EdgeInsets.all(8.0),
                                 child: TrendCards(
+                                  icons:
+                                      Icon(Icons.assignment_turned_in_outlined),
                                   title: "Score",
                                   description: double.parse(
                                               consumer.trendScore.score) <
@@ -775,6 +778,7 @@ class UserdataState extends State<Userdata> {
                               Padding(
                                 padding: const EdgeInsets.all(8.0),
                                 child: TrendCards(
+                                  icons: Icon(Icons.av_timer_outlined),
                                   title: "Pace",
                                   description: double.parse(
                                               consumer.trendPace.pace) <
@@ -792,29 +796,61 @@ class UserdataState extends State<Userdata> {
                                       : Icon(Icons.trending_down_rounded),
                                 ),
                               ),
-                              //CircularProgress Tab,
                               Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Row(
-                                  children: <Widget>[
-                                    CircularPorogress(
-                                      //instead of 35 we need a varaible with last 5 days miniutes and add them togther
-                                      percentage: 35 / 75 * 100.toInt(),
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Container(
+                                    width: 150,
+                                    decoration: new BoxDecoration(
+                                        color: Colors.green,
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(10))),
+                                    child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      children: <Widget>[
+                                        Padding(
+                                          padding: const EdgeInsets.fromLTRB(
+                                              50, 5, 50, 5),
+                                          child: Icon(
+                                            Icons.av_timer_outlined,
+                                          ),
+                                        ),
+                                        Padding(
+                                          padding: const EdgeInsets.fromLTRB(
+                                              50, 5, 50, 10),
+                                          child: Text(
+                                            '75 min\nTarget',
+                                            style: TextStyle(
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                        ),
+                                        CircularPorogress(
+                                          //instead of 35 we need a varaible with last 5 days miniutes and add them togther
+                                          percentage: 35 / 75 * 100.toInt(),
 
-                                      // percentage: this.totalSteps /
-                                      //     this.goalSteps *
-                                      //     100.toInt(),
-                                      height: 70,
-                                      child: Icon(
-                                        CustomIcons.Pedometer
-                                            .footsteps_silhouette_variant,
-                                        size: 27,
-                                        color: CustomColors.white,
-                                      ),
+                                          // percentage: this.totalSteps /
+                                          //     this.goalSteps *
+                                          //     100.toInt(),
+                                          height: 70,
+                                          child: Text(
+                                            //Minutes variable to come instead of static 75 mins
+                                            '25 min',
+                                            style: TextStyle(
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                          // child: Icon(
+                                          //   CustomIcons.Pedometer
+                                          //       .footsteps_silhouette_variant,
+                                          //   size: 35,
+                                          //   color: CustomColors.white,
+                                          // ),
+                                        ),
+                                      ],
                                     ),
-                                  ],
-                                ),
-                              ),
+                                  )),
+                              //CircularProgress Tab,
                             ],
                           ),
                         ),

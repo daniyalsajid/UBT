@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 
 class TrendCards extends StatelessWidget {
+  final Icon icons;
   final String title;
   final String value;
   final String description;
   final Icon icon;
   const TrendCards(
       {Key key,
+      this.icons,
       this.title = "",
       this.value = "",
       this.description = "",
@@ -23,10 +25,11 @@ class TrendCards extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Icon(Icons.navigation),
-            ),
+            icons != null ? icons : Icon(Icons.trending_down),
+            // Padding(
+            //   padding: const EdgeInsets.all(8.0),
+            //   child: Icon(Icons.navigation),
+            // ),
             Text(
               title,
               style: TextStyle(
@@ -40,9 +43,7 @@ class TrendCards extends StatelessWidget {
             icon != null ? icon : Icon(Icons.trending_flat),
             Padding(
               padding: const EdgeInsets.all(8.0),
-              child: Text(description
-                
-                  ),
+              child: Text(description),
             ),
           ],
         ));

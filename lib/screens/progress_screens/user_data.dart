@@ -5,10 +5,13 @@ import 'package:UBT/screens/components/trend_cards.dart';
 import 'package:UBT/screens/components/trend_cards_minutes.dart';
 import 'package:UBT/screens/components/trend_cards_pace.dart';
 import 'package:UBT/screens/components/trend_cards_score.dart';
+import 'Circular_progress.dart';
 import 'package:UBT/services/shared_preference.dart';
 import 'package:UBT/states/progress_screen_provider.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_database/ui/firebase_animated_list.dart';
+import 'package:UBT/constants/Colors.dart' as CustomColors;
+import 'package:UBT/constants/pedometer_icons.dart' as CustomIcons;
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
@@ -21,6 +24,8 @@ import 'package:intl/intl.dart';
 
 import 'dart:math';
 
+import 'Circular_progress.dart';
+
 class Userdata extends StatefulWidget {
   @override
   UserdataState createState() => UserdataState();
@@ -30,6 +35,8 @@ class UserdataState extends State<Userdata> {
   String userUID;
   Container userentry;
   String n;
+  int goalSteps = 200;
+  int totalSteps = 10000;
 
   //y axis
   List graphlists = [];
@@ -76,7 +83,6 @@ class UserdataState extends State<Userdata> {
     '2021',
     '2020',
   ];
-
 
   Query _ref;
 
@@ -393,7 +399,9 @@ class UserdataState extends State<Userdata> {
                           }).toList(),
                         ),
                       ),
-                      SizedBox(width: 5,),
+                      SizedBox(
+                        width: 5,
+                      ),
                       _monthSelection(),
                       IconButton(
                         alignment: Alignment.topRight,
@@ -782,6 +790,29 @@ class UserdataState extends State<Userdata> {
                                           double.parse(consumer.todayPace.pace)
                                       ? Icon(Icons.trending_up_rounded)
                                       : Icon(Icons.trending_down_rounded),
+                                ),
+                              ),
+                              //CircularProgress Tab,
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Row(
+                                  children: <Widget>[
+                                    CircularPorogress(
+                                      //instead of 35 we need a varaible with last 5 days miniutes and add them togther
+                                      percentage: 35 / 75 * 100.toInt(),
+
+                                      // percentage: this.totalSteps /
+                                      //     this.goalSteps *
+                                      //     100.toInt(),
+                                      height: 70,
+                                      child: Icon(
+                                        CustomIcons.Pedometer
+                                            .footsteps_silhouette_variant,
+                                        size: 27,
+                                        color: CustomColors.white,
+                                      ),
+                                    ),
+                                  ],
                                 ),
                               ),
                             ],

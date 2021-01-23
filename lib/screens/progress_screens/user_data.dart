@@ -821,7 +821,7 @@ class UserdataState extends State<Userdata> {
                                           padding: const EdgeInsets.fromLTRB(
                                               50, 5, 50, 10),
                                           child: Text(
-                                            '75 min\nTarget',
+                                            '75mins\nTarget',
                                             style: TextStyle(
                                                 fontWeight: FontWeight.bold),
                                           ),

@@ -7,6 +7,7 @@ class ProgressScreenProvider extends ChangeNotifier {
   double score;
   int totaldistance;
   String totalHourWithMinutes;
+  String totalMinutes;
   Trend trendCard = new Trend(score: "0.0", distance: "0.0", pace: "0.0");
   Trend trendScore = new Trend(score: "0.0", distance: "0.0", pace: "0.0");
   Trend trendPace = new Trend(score: "0.0", distance: "0.0", pace: "0.0");
@@ -28,6 +29,11 @@ class ProgressScreenProvider extends ChangeNotifier {
 
   setTotalHourAndMinutes(String totalHourWithMinutes) {
     this.totalHourWithMinutes = totalHourWithMinutes;
+    notifyListeners();
+  }
+
+  setTotalMinutes(String totalMinutes) {
+    this.totalMinutes = totalMinutes;
     notifyListeners();
   }
 

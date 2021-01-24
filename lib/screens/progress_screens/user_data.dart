@@ -115,44 +115,43 @@ class UserdataState extends State<Userdata> {
           double distance_trend = 0.0;
           double score_trend = 0.0;
           double pace = 0.0;
-          snapshotData.forEach((key, value) {
-            var formatedDate = DateTime.parse(value["DateString"]);
-            final forGettingDifference = DateTime(
-                formatedDate.year, formatedDate.month, formatedDate.day);
-            final difference =
-                currentDate.difference(forGettingDifference).inDays;
-            if (difference <= 6 && difference != 0) {
-              distance_trend =
-                  distance_trend + double.parse(value["Distance"].toString());
-              print(distance_trend);
-            } else if (difference == 0) {
-              trendProvider.todayTrend.distance =
-                  double.parse(value["Distance"].toString()).toStringAsFixed(2);
-            }
-            final difference1 =
-                currentDate.difference(forGettingDifference).inDays;
-            if (difference1 <= 6 && difference1 != 0) {
-              score_trend =
-                  score_trend + double.parse(value["Score"].toString());
-              print(score_trend);
-            } else if (difference1 == 0) {
-              trendProvider.todayScore.score =
-                  double.parse(value["Score"].toString()).toStringAsFixed(2);
-            }
-            final difference2 =
-                currentDate.difference(forGettingDifference).inDays;
-            if (difference2 <= 6 && difference2 != 0) {
-              pace = pace + double.parse(value["Pace"].toString());
-              print(pace);
-            } else if (difference2 == 0) {
-              trendProvider.todayPace.pace =
-                  double.parse(value["Pace"].toString()).toStringAsFixed(2);
-            }
-          });
+          int totalMinutes = 0;
+          snapshotData.forEach(
+            (key, value) {
+              var formatedDate = DateTime.parse(value["DateString"]);
+              final forGettingDifference = DateTime(
+                  formatedDate.year, formatedDate.month, formatedDate.day);
+              final difference =
+                  currentDate.difference(forGettingDifference).inDays;
+              if (difference <= 6 && difference != 0) {
+                distance_trend =
+                    distance_trend + double.parse(value["Distance"].toString());
+                score_trend =
+                    score_trend + double.parse(value["Score"].toString());
+                pace = pace + double.parse(value["Pace"].toString());
+              }
+              if (difference <= 7 && difference != 0) {
+                totalMinutes =
+                    totalMinutes + int.parse(value["Minutes"].toString());
+              }
+              if (difference == 0) {
+                trendProvider.todayTrend.distance =
+                    double.parse(value["Distance"].toString())
+                        .toStringAsFixed(2);
+                trendProvider.todayScore.score =
+                    double.parse(value["Score"].toString()).toStringAsFixed(2);
+                trendProvider.todayPace.pace =
+                    double.parse(value["Pace"].toString()).toStringAsFixed(2);
+                totalMinutes = int.parse(double.parse(value["Minutes"].toString()).toStringAsFixed(0));
+                print(totalMinutes);
+              }
+            },
+          );
           trendProvider
               .setTrendDistance((distance_trend / 5).toStringAsFixed(2));
           trendProvider.setTrendScore((score_trend / 5).toStringAsFixed(2));
           trendProvider.setTrendPace((pace / 5).toStringAsFixed(2));
+          trendProvider.setTotalMinutes((totalMinutes / 7).toStringAsFixed(0));
           // print(trendCard)
         } catch (_) {
           // date = ["0"];
@@ -828,7 +827,10 @@ class UserdataState extends State<Userdata> {
                                         ),
                                         CircularPorogress(
                                           //instead of 35 we need a varaible with last 5 days miniutes and add them togther
-                                          percentage: 35 / 75 * 100.toInt(),
+                                          percentage:
+                                              int.parse(consumer.totalMinutes) /
+                                                  75 *
+                                                  100.toInt(),
 
                                           // percentage: this.totalSteps /
                                           //     this.goalSteps *

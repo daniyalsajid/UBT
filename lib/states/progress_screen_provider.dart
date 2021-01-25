@@ -7,7 +7,7 @@ class ProgressScreenProvider extends ChangeNotifier {
   double score;
   int totaldistance;
   String totalHourWithMinutes;
-  String totalMinutes;
+  String totalMinutes = "0";
   Trend trendCard = new Trend(score: "0.0", distance: "0.0", pace: "0.0");
   Trend trendScore = new Trend(score: "0.0", distance: "0.0", pace: "0.0");
   Trend trendPace = new Trend(score: "0.0", distance: "0.0", pace: "0.0");

@@ -115,7 +115,7 @@ class UserdataState extends State<Userdata> {
           double distance_trend = 0.0;
           double score_trend = 0.0;
           double pace = 0.0;
-          int totalMinutes = 0;
+          double totalMinutes = 0;
           snapshotData.forEach(
             (key, value) {
               var formatedDate = DateTime.parse(value["DateString"]);
@@ -132,7 +132,7 @@ class UserdataState extends State<Userdata> {
               }
               if (difference <= 7 && difference != 0) {
                 totalMinutes =
-                    totalMinutes + int.parse(value["Minutes"].toString());
+                    totalMinutes + double.parse(value["Minutes"].toString());
               }
               if (difference == 0) {
                 trendProvider.todayTrend.distance =
@@ -142,7 +142,8 @@ class UserdataState extends State<Userdata> {
                     double.parse(value["Score"].toString()).toStringAsFixed(2);
                 trendProvider.todayPace.pace =
                     double.parse(value["Pace"].toString()).toStringAsFixed(2);
-                totalMinutes = int.parse(double.parse(value["Minutes"].toString()).toStringAsFixed(0));
+                trendProvider.totalMinutes =
+                   double.parse(value["Minutes"].toString()).toStringAsFixed(2);
                 print(totalMinutes);
               }
             },
@@ -154,6 +155,7 @@ class UserdataState extends State<Userdata> {
           trendProvider.setTotalMinutes((totalMinutes / 7).toStringAsFixed(0));
           // print(trendCard)
         } catch (_) {
+          print(_);
           // date = ["0"];
           // score = [0];
           print(uploadAuth);

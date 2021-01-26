@@ -452,7 +452,7 @@ class _WeekprogressState extends State<Weekprogress> {
                 ? Flexible(
                     child: Container(
                       height: 480,
-                      width: 360,
+                      width: MediaQuery.of(context).size.width,
                       child: chart(selectedMonthNumber),
                     ),
                   )

@@ -143,7 +143,8 @@ class UserdataState extends State<Userdata> {
                 trendProvider.todayPace.pace =
                     double.parse(value["Pace"].toString()).toStringAsFixed(2);
                 trendProvider.totalMinutes =
-                   double.parse(value["Minutes"].toString()).toStringAsFixed(2);
+                    double.parse(value["Minutes"].toString())
+                        .toStringAsFixed(2);
                 print(totalMinutes);
               }
             },
@@ -840,7 +841,7 @@ class UserdataState extends State<Userdata> {
                                           height: 70,
                                           child: Text(
                                             //Minutes variable to come instead of static 75 mins
-                                            '25 min',
+                                            '${(int.parse(consumer.totalMinutes) * 7)} min',
                                             style: TextStyle(
                                                 fontWeight: FontWeight.bold),
                                           ),

@@ -143,7 +143,8 @@ class UserdataState extends State<Userdata> {
                 trendProvider.todayPace.pace =
                     double.parse(value["Pace"].toString()).toStringAsFixed(2);
                 trendProvider.totalMinutes =
-                   double.parse(value["Minutes"].toString()).toStringAsFixed(2);
+                    double.parse(value["Minutes"].toString())
+                        .toStringAsFixed(2);
                 print(totalMinutes);
               }
             },
@@ -813,43 +814,47 @@ class UserdataState extends State<Userdata> {
                                       children: <Widget>[
                                         Padding(
                                           padding: const EdgeInsets.fromLTRB(
-                                              50, 5, 50, 5),
+                                              50, 5, 50, 0),
                                           child: Icon(
                                             Icons.av_timer_outlined,
                                           ),
                                         ),
                                         Padding(
                                           padding: const EdgeInsets.fromLTRB(
-                                              50, 5, 50, 10),
+                                              50, 2, 50, 5),
                                           child: Text(
                                             '75mins\nTarget',
                                             style: TextStyle(
                                                 fontWeight: FontWeight.bold),
                                           ),
                                         ),
-                                        CircularPorogress(
-                                          //instead of 35 we need a varaible with last 5 days miniutes and add them togther
-                                          percentage:
-                                              int.parse(consumer.totalMinutes) /
-                                                  75 *
-                                                  100.toInt(),
+                                        Padding(
+                                          padding: const EdgeInsets.only(
+                                              bottom: 8.0),
+                                          child: CircularPorogress(
+                                            //instead of 35 we need a varaible with last 5 days miniutes and add them togther
+                                            percentage: int.parse(
+                                                    consumer.totalMinutes) /
+                                                75 *
+                                                100.toInt(),
 
-                                          // percentage: this.totalSteps /
-                                          //     this.goalSteps *
-                                          //     100.toInt(),
-                                          height: 70,
-                                          child: Text(
-                                            //Minutes variable to come instead of static 75 mins
-                                            '25 min',
-                                            style: TextStyle(
-                                                fontWeight: FontWeight.bold),
+                                            // percentage: this.totalSteps /
+                                            //     this.goalSteps *
+                                            //     100.toInt(),
+                                            height: 80,
+                                            child: Text(
+                                              //Minutes variable to come instead of static 75 mins
+                                              '${(int.parse(consumer.totalMinutes) * 7)} min',
+                                              style: TextStyle(
+                                                  fontWeight: FontWeight.bold),
+                                            ),
+                                            // child: Icon(
+                                            //   CustomIcons.Pedometer
+                                            //       .footsteps_silhouette_variant,
+                                            //   size: 35,
+                                            //   color: CustomColors.white,
+                                            // ),
                                           ),
-                                          // child: Icon(
-                                          //   CustomIcons.Pedometer
-                                          //       .footsteps_silhouette_variant,
-                                          //   size: 35,
-                                          //   color: CustomColors.white,
-                                          // ),
                                         ),
                                       ],
                                     ),

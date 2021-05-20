@@ -9,9 +9,16 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:UBT/screens/home/login_page.dart';
 import 'package:UBT/screens/home/home_screen.dart';
 
+/// [MAIN FUNCTION] The entrance function of an application
 void main() async {
+  /// Returns an instance of the [WidgetsBinding], creating and
+  /// initializing it if necessary. If one is created, it will be a
+  /// [WidgetsFlutterBinding]. If one was previously initialized, then
+  /// it will at least implement [WidgetsBinding].
   WidgetsFlutterBinding.ensureInitialized();
+  // Firebase initialization
   await Firebase.initializeApp();
+
   // print(Platform.isWindows);
   // await Firebase.initializeApp(
   //         name: "ubt",
@@ -27,14 +34,17 @@ void main() async {
   //     .then((value) {
   //   print(value);
   //   return
+
+  ///[RunApp] its takes the root widget to create UI
   runApp(MyApp());
   // });
 }
 
+/// Root Widget
 class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    ///Wrapping up the [Material App] into [MultiProvider] for State Management
     return MultiProvider(
       providers: [
         Provider<AuthenticationService>(
@@ -61,6 +71,7 @@ class MyApp extends StatelessWidget {
   }
 }
 
+///[AuthenticationWrapper] class ensures that which screen will render
 class AuthenticationWrapper extends StatelessWidget {
   final Future<FirebaseApp> _initialization = Firebase.initializeApp();
   @override
@@ -80,6 +91,8 @@ class AuthenticationWrapper extends StatelessWidget {
         } else if (firebaseUser == null &&
             snapshot.connectionState == ConnectionState.done) {
           return SignInPage();
+        } else {
+          return SizedBox();
         }
       },
     );

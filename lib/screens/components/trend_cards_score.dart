@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+///[Trend] card [score] Component
 class TrendCardscore extends StatefulWidget {
   @override
   _TrendCardscoreState createState() => _TrendCardscoreState();

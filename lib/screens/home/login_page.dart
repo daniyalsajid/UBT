@@ -11,12 +11,12 @@ class SignInPage extends StatefulWidget {
 }
 
 class _SignInPageState extends State<SignInPage> {
+  ///Initializing [TextEditingController] for forms
   final TextEditingController emailController = TextEditingController();
-
   final TextEditingController passwordController = TextEditingController();
 
+  ///[FormState] for managing the form
   GlobalKey<FormState> formKeyLogin = GlobalKey<FormState>();
-
   bool loader = false;
 
   @override
@@ -100,6 +100,7 @@ class _SignInPageState extends State<SignInPage> {
                               setState(() {
                                 loader = true;
                               });
+                              //Create a signIn request for user authentication
                               try {
                                 var res = await context
                                     .read<AuthenticationService>()

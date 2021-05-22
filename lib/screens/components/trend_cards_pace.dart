@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+///[Trend] card [pace] Component
 class TrendCardpace extends StatelessWidget {
   @override
   Widget build(BuildContext context) {

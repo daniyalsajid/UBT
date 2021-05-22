@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+///[Trend card] minutes Component
 class TrendCards extends StatelessWidget {
   final Icon icons;
   final String title;

@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+///[TREND MODEL] class for Mapping the [JSON] from String and also convert the [Object] into [JSON]
 class Trend {
   Trend({this.score, this.distance, this.pace, this.totalMinutes});
 

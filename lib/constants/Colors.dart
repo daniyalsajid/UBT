@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+///Global Constant Colors used in all over the application
 const Color transparent = Color(0x00000000);
 const Color backgroundColor = Color(0xFFFFF3E0);
 const Color mainColor = Colors.green;

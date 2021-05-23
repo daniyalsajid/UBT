@@ -3,15 +3,18 @@ import 'package:UBT/screens/profile_screen/profile_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:UBT/screens/progress_screens/user_entry.dart';
 import 'package:UBT/screens/progress_screens/week_progress.dart';
-
 import 'package:UBT/screens/progress_screens/user_data.dart';
 
+
+///[HomeScreen] class creates the [Bottom Navigation]
+///The screen will render according to the Indexes  
 class HomeScreen extends StatefulWidget {
   @override
   _HomeScreenState createState() => _HomeScreenState();
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  //Controller for handling the pages
   PageController _pageController = PageController();
   List<Widget> _screens = [
     // ScoreChart(),
@@ -22,6 +25,8 @@ class _HomeScreenState extends State<HomeScreen> {
   ];
   // user_screen(),details_screen(),progress_screen()WeekReportSubPage(),UserEntry(),
   void _onPageChanged(int index) {}
+  //Every time user tap on the bottom tabs this function will take the index
+  //And Render the new screen
   void _onItemTapped(int selectedIndex) {
     _pageController.jumpToPage(selectedIndex);
   }
@@ -29,6 +34,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      ///[PageView] for Rendering the screens according to the index
       body: PageView(
         controller: _pageController,
         children: _screens,

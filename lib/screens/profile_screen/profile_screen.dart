@@ -1,5 +1,3 @@
-import 'package:UBT/constants/shared_preference_constants.dart';
-import 'package:UBT/services/shared_preference.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:UBT/screens/firebase_services/authentication_service.dart';
@@ -61,6 +59,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       onPressed: () async {
                         // SharedPreferenceServiceClass().removeValueFromSF(
                         //     SharedPreferencesConstant.scoreValue);
+                        //Create a signout request
                         await context.read<AuthenticationService>().signOut();
                       },
                       child: Text(

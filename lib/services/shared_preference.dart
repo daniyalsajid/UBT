@@ -1,6 +1,6 @@
-
 import 'package:shared_preferences/shared_preferences.dart';
 
+///Generic [Async Storage] Service class for managing the async storge
 class SharedPreferenceServiceClass {
   SharedPreferences _sharedPreferences;
 
@@ -20,6 +20,4 @@ class SharedPreferenceServiceClass {
     bool stringValue = await prefs.remove(key);
     return stringValue;
   }
-
-
 }

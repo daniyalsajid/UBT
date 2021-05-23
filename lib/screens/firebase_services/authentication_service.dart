@@ -1,6 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 
-
+///[Authentication] class for validating the users
 class AuthenticationService {
   final FirebaseAuth _firebaseAuth;
 
@@ -62,7 +62,7 @@ class AuthenticationService {
         return {"status": false, "message": "Invalid email or password."};
       }
     } catch (e) {
-       return {"status": false, "message": "Something went worng."};
+      return {"status": false, "message": "Something went worng."};
     }
   }
 

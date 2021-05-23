@@ -1,6 +1,6 @@
 import 'package:UBT/screens/progress_screens/Circular_progress.dart';
 import 'package:flutter/material.dart';
-
+///[Trend] card [minutes] Component
 class TrendCardMinutes extends StatefulWidget {
   @override
   _TrendCardMinutesState createState() => _TrendCardMinutesState();

@@ -1,15 +1,17 @@
 # UBT
 
-A new Flutter project.
+![ubt](ubt.png)
 
-## Getting Started
+An application that helps you to maintain your fitness activities.
 
-This project is a starting point for a Flutter application.
+## Steps to run the project
 
-A few resources to get you started if this is your first Flutter project:
+- Clone or Dowload the project from GitHub.
+- Get packages
+- Connect a real device or run an emulator or simulator
+- Run a command Flutter run
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+## Flutter Officical Documentation
 
 For help getting started with Flutter, view our
 [online documentation](https://flutter.dev/docs), which offers tutorials,

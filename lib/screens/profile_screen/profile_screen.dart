@@ -6,6 +6,7 @@ import 'package:UBT/screens/firebase_services/authentication_service.dart';
 // import 'package:UBT/screens/progress_screens/user_entry.dart';
 // import 'package:UBT/screens/progress_screens/graph_screen.dart';
 
+//User Profile maintenance screen
 class ProfileScreen extends StatefulWidget {
   @override
   _ProfileScreenState createState() => _ProfileScreenState();

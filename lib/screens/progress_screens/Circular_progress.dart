@@ -22,6 +22,7 @@ class CircularPorogress extends StatelessWidget {
           new AnimatedCircularChart(
             key: _chartKey,
             size: size,
+            // Configuring initial charts states
             initialChartData: <CircularStackEntry>[
               new CircularStackEntry(
                 <CircularSegmentEntry>[

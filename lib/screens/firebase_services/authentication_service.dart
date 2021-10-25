@@ -88,6 +88,7 @@ class AuthenticationService {
   }
 }
 
+// Email validator for email validation
 class EmailValidator {
   static String validate(String value) {
     if (value.isEmpty) {
@@ -96,7 +97,7 @@ class EmailValidator {
     return null;
   }
 }
-
+// Password validation
 class PassValidator {
   static String validate(String value) {
     if (value.isEmpty) {

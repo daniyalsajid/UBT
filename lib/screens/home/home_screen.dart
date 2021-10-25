@@ -50,6 +50,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
         selectedFontSize: 15,
         // backgroundColor: Colors.green[300],
+        //List for the bottom navigation items
         items: [
           BottomNavigationBarItem(
             icon: Icon(Icons.insert_chart),

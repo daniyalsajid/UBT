@@ -29,6 +29,7 @@ class ToolTipMgr {
   }
 }
 
+// This CustomCircleSymbolRenderer class is created for showing custom tooltip on graphs
 class CustomCircleSymbolRenderer extends CircleSymbolRenderer {
   double height = 450; //Adaptor.px(450.0);
 

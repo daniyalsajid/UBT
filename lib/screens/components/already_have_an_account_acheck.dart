@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 // import 'package:UBT/screens/constants.dart';
 
 class AlreadyHaveAnAccountCheck extends StatelessWidget {
-  final bool login;
-  final Function press;
+  final bool login; // Bool parameter for checking the state is login or signup
+  final Function press; // Passing function as per the module signup/login
   const AlreadyHaveAnAccountCheck({
     Key key,
     this.login = true,

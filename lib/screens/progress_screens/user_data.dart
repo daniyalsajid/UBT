@@ -1,20 +1,12 @@
 import 'package:UBT/constants/shared_preference_constants.dart';
-import 'package:UBT/models/trend_model.dart';
 import 'package:UBT/screens/components/alert_dialog.dart';
 import 'package:UBT/screens/components/trend_cards.dart';
-import 'package:UBT/screens/components/trend_cards_minutes.dart';
-import 'package:UBT/screens/components/trend_cards_pace.dart';
-import 'package:UBT/screens/components/trend_cards_score.dart';
 import 'Circular_progress.dart';
 import 'package:UBT/services/shared_preference.dart';
 import 'package:UBT/states/progress_screen_provider.dart';
 import 'package:firebase_database/firebase_database.dart';
-import 'package:firebase_database/ui/firebase_animated_list.dart';
-import 'package:UBT/constants/Colors.dart' as CustomColors;
-import 'package:UBT/constants/pedometer_icons.dart' as CustomIcons;
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/services.dart';
 import 'package:charts_flutter/flutter.dart' as charts;
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:UBT/screens/progress_screens/progress_chart.dart';
@@ -23,8 +15,6 @@ import 'package:provider/provider.dart';
 import 'package:intl/intl.dart';
 
 import 'dart:math';
-
-import 'Circular_progress.dart';
 
 class Userdata extends StatefulWidget {
   @override
@@ -89,6 +79,7 @@ class UserdataState extends State<Userdata> {
   @override
   void initState() {
     super.initState();
+    // Initializing states
     var trendProvider =
         Provider.of<ProgressScreenProvider>(context, listen: false);
     var date = new DateTime.now();
@@ -103,6 +94,7 @@ class UserdataState extends State<Userdata> {
       }
     });
     _ref = FirebaseDatabase.instance.reference().child(uploadAuth);
+    //Getting data from firebase for populating graphs
     databaseReference
       ..child(uploadAuth)
           .child(date.year.toString())
@@ -886,6 +878,7 @@ class UserdataState extends State<Userdata> {
         ));
   }
 
+// This function is used for selecting months and changes the states of user selected month
   Flexible _monthSelection() {
     return Flexible(
       child: DropdownButton(

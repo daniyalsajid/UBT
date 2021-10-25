@@ -1,3 +1,4 @@
+// User object parser class
 class Users {
   final String scoreVal;
   final int scoreDate;

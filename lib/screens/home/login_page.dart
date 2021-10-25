@@ -145,7 +145,7 @@ class _SignInPageState extends State<SignInPage> {
           ),
         ));
   }
-
+// Toast for showing messages
   void toast(res) {
     Fluttertoast.showToast(
         msg: res["message"],
